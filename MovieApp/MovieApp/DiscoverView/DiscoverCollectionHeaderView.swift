@@ -16,14 +16,20 @@ class DiscoverCollectionHeaderView: UICollectionReusableView {
         $0.textColor = .white
         $0.numberOfLines = 0
         $0.textAlignment = .left
-        $0.font = UIFont(name: "AvenirNext-medium", size: 32.0)!
+        $0.font = UIFont.systemFont(ofSize: 32)
+        $0.text = "Discover Movies"
     }
-    lazy var searchField = UITextField().then {
+    
+    lazy var searchField = SearchTextField().then {
         $0.layer.cornerRadius = 20
-        $0.layer.borderColor = UIColor.gray.cgColor
-        $0.layer.borderWidth = 10
-        $0.backgroundColor = .black
+        $0.backgroundColor = UIColor(named: Colors.light_background)
         $0.placeholder = "Search..."
+        
+        // Image on Left
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "magnifyingglass")
+        $0.leftView = imageView
+        $0.leftViewMode = .always
     }
 
     override init(frame: CGRect) {
@@ -44,15 +50,35 @@ extension DiscoverCollectionHeaderView {
         self.addSubview(searchField)
         
         titleLabel.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(50)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(20)
         }
         
         searchField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(50)
-            make.left.right.equalToSuperview().offset(20)
-            make.bottom.equalToSuperview().offset(50)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-20)
+            
+//            make.height.equalTo(titleLabel)
         }
         
+    }
+}
+
+
+class SearchTextField: UITextField {
+    
+    let textPadding = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        let rect = super.textRect(forBounds: bounds)
+        return rect.inset(by: textPadding)
+    }
+
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        let rect = super.editingRect(forBounds: bounds)
+        return rect.inset(by: textPadding)
     }
 }
