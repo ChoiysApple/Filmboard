@@ -37,7 +37,7 @@ extension DiscoverViewController {
     
     private func initUI() {
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DiscoverCollectionCell")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
 
         super.view.addSubview(collectionView)
         collectionView.backgroundColor = UIColor(named: ColorName.background_color)
@@ -55,7 +55,7 @@ extension DiscoverViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCollectionCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath)
         cell.backgroundColor = .blue
         
         return cell
