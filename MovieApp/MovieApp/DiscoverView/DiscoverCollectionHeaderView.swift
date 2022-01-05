@@ -40,6 +40,9 @@ class DiscoverCollectionHeaderView: UICollectionReusableView {
 extension DiscoverCollectionHeaderView {
     private func configure() {
         
+        self.addSubview(titleLabel)
+        self.addSubview(searchField)
+        
         titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(50)
