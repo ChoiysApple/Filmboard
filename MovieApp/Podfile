@@ -8,6 +8,7 @@ target 'MovieApp' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SnapKit'
+  pod 'Then'
 
   # Pods for MovieApp
 
