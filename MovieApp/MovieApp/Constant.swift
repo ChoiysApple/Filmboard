@@ -8,8 +8,10 @@
 import Foundation
 
 
-struct ColorName {
-    static let background_color = "BgColor"
+struct Colors {
+    static let background = "BgColor"
+    static let light_background = "LightBgColor"
+    static let placeholder = "PlaceholderColor"
 }
 
 struct identifiers {
