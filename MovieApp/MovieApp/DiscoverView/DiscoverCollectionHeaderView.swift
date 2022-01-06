@@ -20,16 +20,20 @@ class DiscoverCollectionHeaderView: UICollectionReusableView {
         $0.text = "Discover Movies"
     }
     
-    lazy var searchField = SearchTextField().then {
+    lazy var searchField = PaddingTextField().then {
         $0.layer.cornerRadius = 20
         $0.backgroundColor = UIColor(named: Colors.light_background)
-        $0.placeholder = "Search..."
+        let placeholderColor = UIColor(named: Colors.placeholder) ?? UIColor.lightGray
+        $0.attributedPlaceholder = NSAttributedString(
+            string: "Search...",
+            attributes: [NSAttributedString.Key.foregroundColor: placeholderColor]
+        )
         
         // Image on Left
-        var imageView = UIImageView()
-        imageView.image = UIImage(named: "magnifyingglass")
-        $0.leftView = imageView
-        $0.leftViewMode = .always
+//        var imageView = UIImageView()
+//        imageView.image = UIImage(named: "magnifyingglass")
+//        $0.leftView = imageView
+//        $0.leftViewMode = .always
     }
 
     override init(frame: CGRect) {
@@ -60,15 +64,13 @@ extension DiscoverCollectionHeaderView {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-20)
-            
-//            make.height.equalTo(titleLabel)
         }
         
     }
 }
 
-
-class SearchTextField: UITextField {
+// Text Field with textpadding
+class PaddingTextField: UITextField {
     
     let textPadding = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
 
