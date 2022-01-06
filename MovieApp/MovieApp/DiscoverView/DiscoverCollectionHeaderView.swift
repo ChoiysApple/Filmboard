@@ -16,24 +16,20 @@ class DiscoverCollectionHeaderView: UICollectionReusableView {
         $0.textColor = .white
         $0.numberOfLines = 0
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 32)
+        $0.font = UIFont.systemFont(ofSize: 40)
         $0.text = "Discover Movies"
     }
     
     lazy var searchField = PaddingTextField().then {
         $0.layer.cornerRadius = 20
         $0.backgroundColor = UIColor(named: Colors.light_background)
+        
         let placeholderColor = UIColor(named: Colors.placeholder) ?? UIColor.lightGray
         $0.attributedPlaceholder = NSAttributedString(
             string: "Search...",
             attributes: [NSAttributedString.Key.foregroundColor: placeholderColor]
         )
         
-        // Image on Left
-//        var imageView = UIImageView()
-//        imageView.image = UIImage(named: "magnifyingglass")
-//        $0.leftView = imageView
-//        $0.leftViewMode = .always
     }
 
     override init(frame: CGRect) {

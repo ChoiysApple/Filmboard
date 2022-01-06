@@ -13,6 +13,7 @@
 		7D1982F52782D77500F2E745 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D1982F32782D77500F2E745 /* Main.storyboard */; };
 		7D1982F72782D77600F2E745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1982F62782D77600F2E745 /* Assets.xcassets */; };
 		7D1982FA2782D77600F2E745 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D1982F82782D77600F2E745 /* LaunchScreen.storyboard */; };
+		7D26C14627867D8E005B122D /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */; };
 		7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */; };
 		7D8740F527841F5600E92C72 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8740F427841F5600E92C72 /* Constant.swift */; };
 		9F38C115EB6AF0EEE6B8E0C5 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1333EC5F83FAB13E0CD0D899 /* Pods_MovieApp.framework */; };
@@ -29,6 +30,7 @@
 		7D1982F62782D77600F2E745 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D1982F92782D77600F2E745 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D1982FB2782D77600F2E745 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionHeaderView.swift; sourceTree = "<group>"; };
 		7D8740F427841F5600E92C72 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		FDA2E981A792A2B7397508AB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				7D1982F12782D77500F2E745 /* DiscoverViewController.swift */,
 				7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */,
+				7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */,
 			);
 			path = DiscoverView;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D26C14627867D8E005B122D /* DiscoverCollectionViewCell.swift in Sources */,
 				7D1982F22782D77500F2E745 /* DiscoverViewController.swift in Sources */,
 				7D1982EE2782D77500F2E745 /* AppDelegate.swift in Sources */,
 				7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */,
