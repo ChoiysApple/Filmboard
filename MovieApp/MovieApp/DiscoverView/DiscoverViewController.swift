@@ -12,9 +12,14 @@ class DiscoverViewController: UIViewController {
     
     lazy var collectionView = { () -> UICollectionView in
         var flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        flowLayout.itemSize = CGSize(width: 150, height: 150)
         flowLayout.headerReferenceSize = CGSize(width: self.preferredContentSize.width, height: 180)
+
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        flowLayout.minimumInteritemSpacing = 20
+        flowLayout.minimumLineSpacing = 20
+        
+        flowLayout.itemSize = CGSize(width: 170, height: 270)
+        
         return UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
     }()
     
@@ -24,40 +29,35 @@ class DiscoverViewController: UIViewController {
         
         collectionView.dataSource = self
         
-        initUI()
+        //MARK: Draw UI
+        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
+        collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
+
+        collectionView.backgroundColor = UIColor(named: Colors.background)
+        self.view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
     }
 
 
 }
 
 //MARK: -Draw UI
-extension DiscoverViewController {
-    
-    private func initUI() {
-    
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
-        collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
-
-        collectionView.backgroundColor = UIColor(named: Colors.background)
-        self.view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
-
-    }
-    
-}
 
 //MARK: - Collection View Configuration
+//TODO: Will be deleted when RxCocoa added
 extension DiscoverViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 5
+        return 40
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Sample Cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath)
-        cell.backgroundColor = .blue
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
+                
+        cell.insertData(imageURLString: "", title: "Movie")
         
         return cell
     }
