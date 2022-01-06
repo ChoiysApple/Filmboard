@@ -11,7 +11,7 @@ import Foundation
 struct Colors {
     static let background = "BgColor"
     static let light_background = "LightBgColor"
-    static let placeholder = "PlaceholderColor"
+    static let placeholder = "PlaceholderTextColor"
 }
 
 struct identifiers {
