@@ -10,6 +10,7 @@ import SnapKit
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
+    //MARK: Create properties
     lazy var posterImage = UIImageView().then {
         $0.image = UIImage(named: "img_placeholder")
         $0.contentMode = .scaleAspectFit
@@ -19,32 +20,15 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         $0.font = UIFont.systemFont(ofSize: 20)
         $0.textColor = .white
     }
-    
-    func insertData(imageURLString: String, title: String) {
         
-        DispatchQueue.global().async {
-            guard let imageURL = URL(string: imageURLString) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.sync {
-                self.posterImage.image = UIImage(data: imageData)
-            }
-        }
-
-        movieTitle.text = title
-        
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .gray
-        
+        // add to view
         self.addSubview(posterImage)
         self.addSubview(movieTitle)
         
-        
-        
+        //MARK: Add Constraints
         posterImage.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
         }
@@ -59,4 +43,23 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: Insert data to cell
+extension DiscoverCollectionViewCell {
+    func insertData(imageURLString: String, title: String) {
+        
+        movieTitle.text = title
+        
+        DispatchQueue.global().async {
+            guard let imageURL = URL(string: imageURLString) else { return }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.sync {
+                self.posterImage.image = UIImage(data: imageData)
+            }
+        }
+
+    }
+
 }
