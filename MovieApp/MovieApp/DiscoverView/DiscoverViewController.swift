@@ -32,6 +32,9 @@ class DiscoverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Discover"
+        
+
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -60,7 +63,7 @@ extension DiscoverViewController: UICollectionViewDataSource {
         // Sample Cell
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
                 
-        cell.insertData(imageURLString: "", title: "Movie Movie Movie Movie Movie Movie")
+        cell.insertData(imageURLString: "", title: "SpiderMan: No Way Home")
         
         return cell
     }

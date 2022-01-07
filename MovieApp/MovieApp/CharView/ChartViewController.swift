@@ -11,6 +11,8 @@ class ChartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Charts"
 
         
         self.view.backgroundColor = .blue
