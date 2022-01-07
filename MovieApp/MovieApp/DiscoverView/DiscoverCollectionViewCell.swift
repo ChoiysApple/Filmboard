@@ -19,6 +19,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     lazy var movieTitle = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 20)
         $0.textColor = .white
+        $0.numberOfLines = 2
     }
         
     override init(frame: CGRect) {
@@ -34,9 +35,10 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         }
         
         movieTitle.snp.makeConstraints { make in
-            make.top.equalTo(posterImage.snp.bottom).offset(10)
+            make.top.equalTo(posterImage.snp.bottom).offset(5)
             make.bottom.greaterThanOrEqualToSuperview()
             make.leading.equalTo(posterImage.snp.leading)
+            make.trailing.equalTo(posterImage.snp.trailing)
         }
         
     }

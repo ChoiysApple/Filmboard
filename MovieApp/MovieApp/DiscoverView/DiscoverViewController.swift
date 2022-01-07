@@ -11,16 +11,21 @@ import SnapKit
 class DiscoverViewController: UIViewController {
     
     lazy var collectionView = { () -> UICollectionView in
+        
+        // FlowLayout
         var flowLayout = UICollectionViewFlowLayout()
         flowLayout.headerReferenceSize = CGSize(width: self.preferredContentSize.width, height: 180)
-
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
+
+        // Collection View
+        var collectionView =  UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = UIColor(named: Colors.background)
+        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
+        collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
         
-        flowLayout.itemSize = CGSize(width: 170, height: 270)
-        
-        return UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
+        return collectionView
     }()
     
 
@@ -28,14 +33,12 @@ class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.dataSource = self
+        collectionView.delegate = self
         
-        //MARK: Draw UI
-        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
-        collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
-
-        collectionView.backgroundColor = UIColor(named: Colors.background)
         self.view.addSubview(collectionView)
+//        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
         collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+
         
     }
 
@@ -49,7 +52,7 @@ class DiscoverViewController: UIViewController {
 extension DiscoverViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 40
+        return 41
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -57,7 +60,7 @@ extension DiscoverViewController: UICollectionViewDataSource {
         // Sample Cell
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
                 
-        cell.insertData(imageURLString: "", title: "Movie")
+        cell.insertData(imageURLString: "", title: "Movie Movie Movie Movie Movie Movie")
         
         return cell
     }
@@ -74,6 +77,13 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let itemWidth = (collectionView.frame.size.width - 60)/2
+        
+        return CGSize(width: itemWidth, height: itemWidth * 1.7)
     }
     
 }
@@ -99,7 +109,7 @@ struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
             ViewControllerRepresentable()
                 .ignoresSafeArea()
                 .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Mini"))
         }
         
     }
