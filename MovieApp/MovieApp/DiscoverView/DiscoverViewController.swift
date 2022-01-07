@@ -21,7 +21,6 @@ class DiscoverViewController: UIViewController {
 
         // Collection View
         var collectionView =  UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = UIColor(named: Colors.background)
         collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
         collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
         
@@ -38,9 +37,11 @@ class DiscoverViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        self.view.backgroundColor = UIColor(named: Colors.background)
+        
         self.view.addSubview(collectionView)
-//        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
-        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
+        
 
         
     }
@@ -93,27 +94,27 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDele
 
 
 
-#if DEBUG
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-@available(iOS 13.0.0, *)
-func makeUIViewController(context: Context) -> UIViewController{
-    DiscoverViewController()
-    }
-}
-@available(iOS 13.0, *)
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Mini"))
-        }
-        
-    }
-} #endif
+//#if DEBUG
+//import SwiftUI
+//struct ViewControllerRepresentable: UIViewControllerRepresentable {
+//    
+//func updateUIViewController(_ uiView: UIViewController,context: Context) {
+//        // leave this empty
+//}
+//@available(iOS 13.0.0, *)
+//func makeUIViewController(context: Context) -> UIViewController{
+//    DiscoverViewController()
+//    }
+//}
+//@available(iOS 13.0, *)
+//struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            ViewControllerRepresentable()
+//                .ignoresSafeArea()
+//                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
+//                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Mini"))
+//        }
+//        
+//    }
+//} #endif
