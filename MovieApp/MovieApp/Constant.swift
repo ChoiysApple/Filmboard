@@ -17,4 +17,7 @@ struct Colors {
 struct identifiers {
     static let discover_collection_cell = "DiscoverCollectionCell"
     static let discover_collection_header = "DiscoverCollectionHeader"
+    
+    static let chart_table_cell = "ChartTableCell"
+    static let chart_table_header = "ChartTableHeader"
 }
