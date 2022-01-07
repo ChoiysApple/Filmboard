@@ -16,7 +16,7 @@
 		7D26C14627867D8E005B122D /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */; };
 		7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */; };
 		7D8740F527841F5600E92C72 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8740F427841F5600E92C72 /* Constant.swift */; };
-		7DDE9C2D2787D6EE00938996 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* TabBarController.swift */; };
+		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
 		7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2F2787E0C700938996 /* ChartViewController.swift */; };
 		9F38C115EB6AF0EEE6B8E0C5 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1333EC5F83FAB13E0CD0D899 /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
@@ -35,7 +35,7 @@
 		7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionHeaderView.swift; sourceTree = "<group>"; };
 		7D8740F427841F5600E92C72 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		7DDE9C2C2787D6EE00938996 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7DDE9C2F2787E0C700938996 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		FDA2E981A792A2B7397508AB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +75,7 @@
 			children = (
 				7D1982ED2782D77500F2E745 /* AppDelegate.swift */,
 				7D1982EF2782D77500F2E745 /* SceneDelegate.swift */,
-				7DDE9C2C2787D6EE00938996 /* TabBarController.swift */,
+				7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */,
 				7DDE9C2B2787D07700938996 /* APIService */,
 				7D2DD61F278537A7000EBDE0 /* DiscoverView */,
 				7DDE9C2E2787E0A800938996 /* CharView */,
@@ -249,7 +249,7 @@
 				7D1982F22782D77500F2E745 /* DiscoverViewController.swift in Sources */,
 				7D1982EE2782D77500F2E745 /* AppDelegate.swift in Sources */,
 				7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */,
-				7DDE9C2D2787D6EE00938996 /* TabBarController.swift in Sources */,
+				7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */,
 				7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */,
 				7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */,
 				7D8740F527841F5600E92C72 /* Constant.swift in Sources */,

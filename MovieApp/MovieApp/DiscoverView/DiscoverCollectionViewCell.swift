@@ -17,7 +17,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
     
     lazy var movieTitle = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 20)
+        $0.font = UIFont.systemFont(ofSize: 10)
         $0.textColor = .white
         $0.numberOfLines = 2
     }
