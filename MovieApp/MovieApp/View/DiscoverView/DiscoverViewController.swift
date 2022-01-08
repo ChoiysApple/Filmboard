@@ -23,6 +23,7 @@ class DiscoverViewController: UIViewController {
         var collectionView =  UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
         collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
         collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
+        collectionView.backgroundColor = UIColor(named: Colors.background)
         
         return collectionView
     }()
@@ -38,7 +39,7 @@ class DiscoverViewController: UIViewController {
         collectionView.delegate = self
         
         self.view.backgroundColor = UIColor(named: Colors.background)
-        
+    
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
         
