@@ -12,7 +12,7 @@ class ChartViewController: UIViewController {
     
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
+        $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
     }
     
 
@@ -45,10 +45,9 @@ extension ChartViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // create a new cell if needed or reuse an old one
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.chart_table_cell, for: indexPath) as? UITableViewCell else { fatalError("Unable to dequeue ReminderCell") }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.chart_table_cell, for: indexPath) as? ChartTableViewCell else { fatalError("Unable to dequeue ReminderCell") }
         // set the text from the data model
-        cell.textLabel?.text = "\(indexPath.row). Movie moview "
-        cell.imageView?.image = UIImage(named: "img_placeholder")
+        cell.setSampleData(rank: indexPath.row)
         return cell
     }
     
