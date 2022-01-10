@@ -16,6 +16,7 @@
 		7D26C14627867D8E005B122D /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */; };
 		7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */; };
 		7D8740F527841F5600E92C72 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8740F427841F5600E92C72 /* Constant.swift */; };
+		7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D947CA8278C03E00031C7C9 /* CreditViewController.swift */; };
 		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
 		7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2F2787E0C700938996 /* ChartViewController.swift */; };
 		7DDE9C322788045B00938996 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C312788045B00938996 /* ChartTableViewCell.swift */; };
@@ -36,6 +37,7 @@
 		7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionHeaderView.swift; sourceTree = "<group>"; };
 		7D8740F427841F5600E92C72 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		7D947CA8278C03E00031C7C9 /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7DDE9C2F2787E0C700938996 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7DDE9C312788045B00938996 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 			path = DiscoverView;
 			sourceTree = "<group>";
 		};
+		7D947CA7278C03B70031C7C9 /* CreditView */ = {
+			isa = PBXGroup;
+			children = (
+				7D947CA8278C03E00031C7C9 /* CreditViewController.swift */,
+			);
+			path = CreditView;
+			sourceTree = "<group>";
+		};
 		7DDE9C2B2787D07700938996 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 				7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */,
 				7D2DD61F278537A7000EBDE0 /* DiscoverView */,
 				7DDE9C2E2787E0A800938996 /* CharView */,
+				7D947CA7278C03B70031C7C9 /* CreditView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +274,7 @@
 				7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */,
 				7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */,
 				7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */,
+				7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */,
 				7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */,
 				7D8740F527841F5600E92C72 /* Constant.swift in Sources */,
 			);
