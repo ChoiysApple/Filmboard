@@ -22,7 +22,7 @@ class ChartViewController: UIViewController {
         self.title = "Charts"
         self.view.backgroundColor = UIColor(named: Colors.background)
         
-//        tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         
         
@@ -36,7 +36,9 @@ class ChartViewController: UIViewController {
     
 }
 
+//MARK: -Data Source
 extension ChartViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 40
     }
@@ -54,6 +56,11 @@ extension ChartViewController: UITableViewDataSource {
     
 }
 
+extension ChartViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+}
 
 #if DEBUG
 import SwiftUI

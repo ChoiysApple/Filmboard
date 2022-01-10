@@ -11,11 +11,13 @@ import SnapKit
 import Cosmos
 
 class ChartTableViewCell: UITableViewCell {
+    
+    let margin = 10
 
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.font = UIFont.systemFont(ofSize: 30, weight: .medium)
         $0.sizeToFit()
     }
     
@@ -27,19 +29,19 @@ class ChartTableViewCell: UITableViewCell {
     lazy var titleLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)
     }
     
     lazy var genreLabel = UILabel().then {
-        $0.textColor = UIColor(named: Colors.placeholder)
+        $0.textColor = UIColor.lightGray
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     }
     
     lazy var releaseDateLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     }
     
     lazy var starRating = { () -> CosmosView in
@@ -49,6 +51,7 @@ class ChartTableViewCell: UITableViewCell {
         starView.settings.filledColor = .orange
         starView.settings.fillMode = .half
         starView.settings.updateOnTouch = false
+        starView.settings.starSize = 15
         return starView
     }()
     
@@ -58,14 +61,15 @@ class ChartTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let infoStackView = UIStackView().then {
-            $0.addSubview(titleLabel)
-            $0.addSubview(genreLabel)
-            $0.addSubview(releaseDateLabel)
-            $0.addSubview(starRating)
+            $0.addArrangedSubview(titleLabel)
+            $0.addArrangedSubview(genreLabel)
+            $0.addArrangedSubview(releaseDateLabel)
+            $0.addArrangedSubview(starRating)
             
             $0.axis = .vertical
             $0.distribution = .fill
-            $0.spacing = 150
+            $0.alignment = .fill
+            $0.spacing = 10
         }
 
         self.backgroundColor = UIColor(named: Colors.background)
@@ -76,19 +80,24 @@ class ChartTableViewCell: UITableViewCell {
         self.addSubview(infoStackView)
         
         rankLabel.snp.makeConstraints { make in
-            make.left.top.bottom.equalToSuperview().offset(0)
-            make.width.equalTo(0)
+            make.left.equalToSuperview().offset(margin)
+            make.top.equalToSuperview().offset(margin)
+            make.bottom.equalToSuperview().offset(-margin)
+            
+            make.width.equalTo(30)
         }
         
         posterImage.snp.makeConstraints { make in
-            make.left.equalTo(rankLabel.snp.right).offset(10)
-            make.top.bottom.equalToSuperview().offset(0)
+            make.left.equalTo(rankLabel.snp.right).offset(margin)
+            make.top.equalToSuperview().offset(margin)
+            make.bottom.equalToSuperview().offset(margin*(-1))
         }
         
         infoStackView.snp.makeConstraints { make in
-            make.right.equalTo(posterImage.snp.left).offset(50)
-            make.bottom.top.equalToSuperview().offset(0)
-            make.right.greaterThanOrEqualToSuperview()
+            make.left.equalTo(posterImage.snp.right).offset(margin)
+            make.top.equalToSuperview().offset(margin)
+            make.bottom.equalToSuperview().offset(margin*(-1))
+            make.right.lessThanOrEqualToSuperview().offset(margin*(-1))
         }
         
     }
