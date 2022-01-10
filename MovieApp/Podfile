@@ -8,6 +8,10 @@ target 'MovieApp' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SnapKit'
+  pod 'Then'
+  
+  # UI Related Pods
+  pod 'Cosmos'
 
   # Pods for MovieApp
 
