@@ -17,7 +17,7 @@ class ChartTableViewCell: UITableViewCell {
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        $0.font = UIFont.systemFont(ofSize: 25, weight: .medium)
         $0.sizeToFit()
     }
     
@@ -51,20 +51,40 @@ class ChartTableViewCell: UITableViewCell {
         starView.settings.filledColor = .orange
         starView.settings.fillMode = .half
         starView.settings.updateOnTouch = false
-        starView.settings.starSize = 15
+        starView.settings.starSize = 17
+        starView.settings.starMargin = 1
         return starView
     }()
     
+    lazy var ratingCountLabel = UILabel().then {
+        $0.textColor = .white
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+    }
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        let starStackView = UIStackView().then {
+            $0.addArrangedSubview(starRating)
+            $0.addArrangedSubview(ratingCountLabel)
+            
+            $0.axis = .horizontal
+            $0.distribution = .fill
+            $0.alignment = .fill
+            $0.spacing = 10
+        }
+        
         let infoStackView = UIStackView().then {
+    
+            let emptyView = UIView()
+            emptyView.heightAnchor.constraint(equalToConstant: 3).isActive = true
+            
             $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(genreLabel)
             $0.addArrangedSubview(releaseDateLabel)
-            $0.addArrangedSubview(starRating)
+            $0.addArrangedSubview(starStackView)
+            $0.addArrangedSubview(emptyView)
             
             $0.axis = .vertical
             $0.distribution = .fill
@@ -83,8 +103,6 @@ class ChartTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(-margin)
-            
-            make.width.equalTo(30)
         }
         
         posterImage.snp.makeConstraints { make in
@@ -119,8 +137,9 @@ extension ChartTableViewCell {
     func setSampleData(rank: Int) {
         rankLabel.text = "\(rank+1)"
         titleLabel.text = "Title"
-        genreLabel.text = "Comdey"
-        releaseDateLabel.text = "2022.00.00"
-        starRating.rating = 3.0
+        genreLabel.text = "Genre"
+        releaseDateLabel.text = "yyyy.mm.dd"
+        starRating.rating = 2.5
+        ratingCountLabel.text = "(134)"
     }
 }

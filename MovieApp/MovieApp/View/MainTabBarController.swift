@@ -34,7 +34,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         chartItem.tabBarItem = UITabBarItem(title: "Charts", image: UIImage(systemName: "list.number"), selectedImage: UIImage(systemName: "list.number"))
         
         let elseItem = UIViewController()
-        elseItem.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "ellipsis"), selectedImage: UIImage(systemName: "Credits"))
+        elseItem.tabBarItem = UITabBarItem(title: "Credit", image: UIImage(systemName: "ellipsis"), selectedImage: UIImage(systemName: "Credits"))
         
         
         self.viewControllers = [discoverItem, chartItem, elseItem]
