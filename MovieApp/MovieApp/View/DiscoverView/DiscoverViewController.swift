@@ -10,6 +10,14 @@ import SnapKit
 
 class DiscoverViewController: UIViewController {
     
+    // Sample Data
+    let movies = [
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 8.4, ratingCount: 3955),
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 8.4, ratingCount: 3955),
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 8.4, ratingCount: 3955),
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 8.4, ratingCount: 3955)
+    ]
+    
     lazy var collectionView = { () -> UICollectionView in
         
         // FlowLayout
@@ -52,7 +60,7 @@ class DiscoverViewController: UIViewController {
 extension DiscoverViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 3
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -60,7 +68,17 @@ extension DiscoverViewController: UICollectionViewDataSource {
         // Sample Cell
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return DiscoverCollectionViewCell() }
         
-        cell.movieTitle.text = "Holy Moly Movie"
+        let movie = movies[indexPath.row]
+        
+        cell.movieTitle.text = movie.title
+        DispatchQueue.global().async {
+            guard let imageURL = URL(string: "https://image.tmdb.org/t/p/original/\(movie.posterPath)") else { return }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+            DispatchQueue.main.sync {
+                cell.posterImage.image = UIImage(data: imageData)
+            }
+        }
         
         return cell
     }
@@ -91,29 +109,3 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDele
     
 }
 
-
-
-//#if DEBUG
-//import SwiftUI
-//struct ViewControllerRepresentable: UIViewControllerRepresentable {
-//    
-//func updateUIViewController(_ uiView: UIViewController,context: Context) {
-//        // leave this empty
-//}
-//@available(iOS 13.0.0, *)
-//func makeUIViewController(context: Context) -> UIViewController{
-//    DiscoverViewController()
-//    }
-//}
-//@available(iOS 13.0, *)
-//struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            ViewControllerRepresentable()
-//                .ignoresSafeArea()
-//                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Mini"))
-//        }
-//        
-//    }
-//} #endif

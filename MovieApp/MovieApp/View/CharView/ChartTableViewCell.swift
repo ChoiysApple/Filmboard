@@ -30,6 +30,8 @@ class ChartTableViewCell: UITableViewCell {
         $0.textColor = .white
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        $0.numberOfLines = 2
+        $0.minimumScaleFactor = 10
     }
     
     lazy var genreLabel = UILabel().then {
@@ -134,12 +136,12 @@ extension ChartTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setSampleData(rank: Int) {
+    func setSampleData(rank: Int, movie: MovieFront) {
         rankLabel.text = "\(rank+1)"
-        titleLabel.text = "Title"
+        titleLabel.text = movie.title
         genreLabel.text = "Genre"
-        releaseDateLabel.text = "yyyy.mm.dd"
-        starRating.rating = 2.5
-        ratingCountLabel.text = "(134)"
+        releaseDateLabel.text = movie.releaseDate
+        starRating.rating = movie.ratingScore
+        ratingCountLabel.text = "(\(movie.ratingCount))"
     }
 }

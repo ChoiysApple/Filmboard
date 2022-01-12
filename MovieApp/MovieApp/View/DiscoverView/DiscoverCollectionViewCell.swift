@@ -20,6 +20,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textColor = .white
         $0.numberOfLines = 2
+        $0.minimumScaleFactor = 10
     }
         
     override init(frame: CGRect) {
