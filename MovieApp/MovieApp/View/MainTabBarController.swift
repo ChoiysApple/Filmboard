@@ -18,7 +18,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
                
         self.tabBar.standardAppearance = appearance
-        self.tabBar.scrollEdgeAppearance = appearance
+        
+        if #available(iOS 15.0, *) {
+            self.tabBar.scrollEdgeAppearance = appearance
+        }
+        
         self.tabBar.tintColor = .white
 
         self.delegate = self

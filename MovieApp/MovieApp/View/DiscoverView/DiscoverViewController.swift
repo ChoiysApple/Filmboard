@@ -34,7 +34,6 @@ class DiscoverViewController: UIViewController {
         
         self.title = "Discover"
         
-
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -43,33 +42,30 @@ class DiscoverViewController: UIViewController {
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
         
-
-        
     }
 
 
 }
-
-//MARK: -Draw UI
 
 //MARK: - Collection View Configuration
 //TODO: Will be deleted when RxCocoa added
 extension DiscoverViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 41
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Sample Cell
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
-                
-        cell.insertData(imageURLString: "", title: "SpiderMan: No Way Home")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return DiscoverCollectionViewCell() }
+        
+        cell.movieTitle.text = "Holy Moly Movie"
         
         return cell
     }
     
+    // Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind,withReuseIdentifier: identifiers.discover_collection_header,
@@ -90,6 +86,8 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDele
         
         return CGSize(width: itemWidth, height: itemWidth * 1.7)
     }
+    
+
     
 }
 

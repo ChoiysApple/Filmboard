@@ -47,21 +47,20 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
 }
 
+
 //MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
-    func insertData(imageURLString: String, title: String) {
+    func insertData(movie: MovieFront) {
         
-        movieTitle.text = title
+        movieTitle.text = movie.title
         
         DispatchQueue.global().async {
-            guard let imageURL = URL(string: imageURLString) else { return }
+            guard let imageURL = URL(string: "https://image.tmdb.org/t/p/original/\(movie.posterPath)") else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
             DispatchQueue.main.sync {
                 self.posterImage.image = UIImage(data: imageData)
             }
         }
-
     }
-
 }
