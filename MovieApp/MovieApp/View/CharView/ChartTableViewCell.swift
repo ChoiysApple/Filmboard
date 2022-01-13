@@ -12,7 +12,7 @@ import Cosmos
 
 class ChartTableViewCell: UITableViewCell {
     
-    let margin = 10
+    let margin = 10.0
 
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
@@ -118,7 +118,7 @@ class ChartTableViewCell: UITableViewCell {
             make.left.equalTo(posterImage.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-1))
-            make.right.lessThanOrEqualToSuperview().offset(margin*(-1))
+            make.right.lessThanOrEqualToSuperview().offset(margin*(-1.5))
         }
         
     }
@@ -142,7 +142,7 @@ extension ChartTableViewCell {
         titleLabel.text = movie.title
         genreLabel.text = "Genre"
         releaseDateLabel.text = movie.releaseDate
-        starRating.rating = movie.ratingScore
+        starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
         
         DispatchQueue.global().async {

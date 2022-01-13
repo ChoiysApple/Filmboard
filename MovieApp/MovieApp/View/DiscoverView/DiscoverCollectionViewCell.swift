@@ -14,6 +14,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     lazy var posterImage = UIImageView().then {
         $0.image = UIImage(named: "img_placeholder")
         $0.contentMode = .scaleAspectFit
+
     }
     
     lazy var movieTitle = UILabel().then {
@@ -47,7 +48,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         posterImage.snp.makeConstraints { make in
             make.left.right.greaterThanOrEqualToSuperview()
             make.width.lessThanOrEqualToSuperview()
-//            make.height.lessThanOrEqualToSuperview().offset(-40)
+            make.height.lessThanOrEqualToSuperview().offset(-40)
         }
 
         movieTitle.snp.makeConstraints { make in
