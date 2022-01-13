@@ -54,10 +54,10 @@ extension ChartViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // create a new cell if needed or reuse an old one
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.chart_table_cell, for: indexPath) as? ChartTableViewCell else { fatalError("Unable to dequeue ReminderCell") }
-        // set the text from the data model
-        cell.setSampleData(rank: indexPath.row, movie: movies[indexPath.row])
+        
+        cell.setData(rank: indexPath.row, movie: movies[indexPath.row])
+        
         return cell
     }
     

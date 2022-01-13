@@ -111,6 +111,7 @@ class ChartTableViewCell: UITableViewCell {
             make.left.equalTo(rankLabel.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-1))
+            make.width.equalTo(100)
         }
         
         infoStackView.snp.makeConstraints { make in
@@ -136,12 +137,21 @@ extension ChartTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setSampleData(rank: Int, movie: MovieFront) {
+    func setData(rank: Int, movie: MovieFront) {
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
         genreLabel.text = "Genre"
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore
         ratingCountLabel.text = "(\(movie.ratingCount))"
+        
+        DispatchQueue.global().async {
+            guard let imageURL = URL(string: "https://image.tmdb.org/t/p/original/\(movie.posterPath)") else { return }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.sync {
+                self.posterImage.image = UIImage(data: imageData)
+            }
+        }
     }
 }
