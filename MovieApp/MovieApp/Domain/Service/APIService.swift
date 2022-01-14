@@ -14,7 +14,7 @@ class APIService {
     
     func fetchData() {
         
-        var completeURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=9c070ed6542142b55eb044440c144360&language=en-US&page=1"
+        var completeURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(APIKey)&language=en-US&page=1"
         let retryLimit = 2
         
         performRequest(url: completeURL, retries: retryLimit)
