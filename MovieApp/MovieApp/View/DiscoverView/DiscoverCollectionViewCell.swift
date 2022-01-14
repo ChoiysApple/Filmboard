@@ -47,13 +47,13 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         
         posterImage.snp.makeConstraints { make in
             make.left.right.greaterThanOrEqualToSuperview()
-            make.width.lessThanOrEqualToSuperview()
-            make.height.lessThanOrEqualToSuperview().offset(-40)
+            make.bottom.lessThanOrEqualToSuperview()
+
         }
 
-        movieTitle.snp.makeConstraints { make in
-            make.height.greaterThanOrEqualTo(40)
-        }
+        movieTitle.setContentHuggingPriority(.required, for: .vertical)                 // prevent stretching vertically
+        movieTitle.setContentCompressionResistancePriority(.required, for: .vertical)   // prevent compressing vertically
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
