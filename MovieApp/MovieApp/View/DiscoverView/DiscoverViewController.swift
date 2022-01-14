@@ -10,6 +10,13 @@ import SnapKit
 
 class DiscoverViewController: UIViewController {
     
+    // Sample Data
+    let movies = [
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 8.4, ratingCount: 3955),
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 7, ratingCount: 3955),
+        MovieFront(title: "The Matrix Resurrections", posterPath: "/gZlZLxJMfnSeS60abFZMh1IvODQ.jpg", genre: "Genre", releaseDate: "2021-12-16", ratingScore: 7, ratingCount: 2056)
+    ]
+    
     lazy var collectionView = { () -> UICollectionView in
         
         // FlowLayout
@@ -34,7 +41,6 @@ class DiscoverViewController: UIViewController {
         
         self.title = "Discover"
         
-
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -43,33 +49,30 @@ class DiscoverViewController: UIViewController {
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
         
-
-        
     }
 
 
 }
-
-//MARK: -Draw UI
 
 //MARK: - Collection View Configuration
 //TODO: Will be deleted when RxCocoa added
 extension DiscoverViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 41
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // Sample Cell
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
-                
-        cell.insertData(imageURLString: "", title: "SpiderMan: No Way Home")
+        let movie = movies[indexPath.row]
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return DiscoverCollectionViewCell() }
+        cell.setData(movie: movie)
         
         return cell
     }
     
+    // Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         return collectionView.dequeueReusableSupplementaryView(ofKind: kind,withReuseIdentifier: identifiers.discover_collection_header,
@@ -81,41 +84,17 @@ extension DiscoverViewController: UICollectionViewDataSource {
 extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemWidth = (collectionView.frame.size.width - 60)/2
         
-        return CGSize(width: itemWidth, height: itemWidth * 1.7)
+        return CGSize(width: itemWidth, height: itemWidth * 1.75)
     }
+    
+
     
 }
 
-
-
-//#if DEBUG
-//import SwiftUI
-//struct ViewControllerRepresentable: UIViewControllerRepresentable {
-//    
-//func updateUIViewController(_ uiView: UIViewController,context: Context) {
-//        // leave this empty
-//}
-//@available(iOS 13.0.0, *)
-//func makeUIViewController(context: Context) -> UIViewController{
-//    DiscoverViewController()
-//    }
-//}
-//@available(iOS 13.0, *)
-//struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            ViewControllerRepresentable()
-//                .ignoresSafeArea()
-//                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-//                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Mini"))
-//        }
-//        
-//    }
-//} #endif

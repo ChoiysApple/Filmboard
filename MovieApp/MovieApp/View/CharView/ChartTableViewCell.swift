@@ -12,7 +12,7 @@ import Cosmos
 
 class ChartTableViewCell: UITableViewCell {
     
-    let margin = 10
+    let margin = 10.0
 
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
@@ -30,6 +30,8 @@ class ChartTableViewCell: UITableViewCell {
         $0.textColor = .white
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        $0.numberOfLines = 2
+        $0.minimumScaleFactor = 10
     }
     
     lazy var genreLabel = UILabel().then {
@@ -109,13 +111,14 @@ class ChartTableViewCell: UITableViewCell {
             make.left.equalTo(rankLabel.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-1))
+            make.width.equalTo(100)
         }
         
         infoStackView.snp.makeConstraints { make in
             make.left.equalTo(posterImage.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-1))
-            make.right.lessThanOrEqualToSuperview().offset(margin*(-1))
+            make.right.lessThanOrEqualToSuperview().offset(margin*(-1.5))
         }
         
     }
@@ -134,12 +137,21 @@ extension ChartTableViewCell {
         // Configure the view for the selected state
     }
     
-    func setSampleData(rank: Int) {
+    func setData(rank: Int, movie: MovieFront) {
         rankLabel.text = "\(rank+1)"
-        titleLabel.text = "Title"
+        titleLabel.text = movie.title
         genreLabel.text = "Genre"
-        releaseDateLabel.text = "yyyy.mm.dd"
-        starRating.rating = 2.5
-        ratingCountLabel.text = "(134)"
+        releaseDateLabel.text = movie.releaseDate
+        starRating.rating = movie.ratingScore/2
+        ratingCountLabel.text = "(\(movie.ratingCount))"
+        
+        DispatchQueue.global().async {
+            guard let imageURL = URL(string: "https://image.tmdb.org/t/p/original/\(movie.posterPath)") else { return }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.sync {
+                self.posterImage.image = UIImage(data: imageData)
+            }
+        }
     }
 }

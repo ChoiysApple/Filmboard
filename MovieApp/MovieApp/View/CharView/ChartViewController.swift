@@ -10,6 +10,13 @@ import SnapKit
 
 class ChartViewController: UIViewController {
     
+    // Sample Data
+    let movies = [
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 8.4, ratingCount: 3955),
+        MovieFront(title: "Spider-Man: No Way Home", posterPath: "1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", genre: "Genre", releaseDate: "2021-12-15", ratingScore: 7, ratingCount: 3955),
+        MovieFront(title: "The Matrix Resurrections", posterPath: "/gZlZLxJMfnSeS60abFZMh1IvODQ.jpg", genre: "Genre", releaseDate: "2021-12-16", ratingScore: 7, ratingCount: 2056)
+    ]
+    
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
         $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
@@ -22,7 +29,7 @@ class ChartViewController: UIViewController {
         self.title = "Charts"
         self.view.backgroundColor = UIColor(named: Colors.background)
         
-        tableView.delegate = self
+//        tableView.delegate = self
         tableView.dataSource = self
         
         
@@ -40,25 +47,18 @@ class ChartViewController: UIViewController {
 extension ChartViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 40
+        return movies.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // create a new cell if needed or reuse an old one
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.chart_table_cell, for: indexPath) as? ChartTableViewCell else { fatalError("Unable to dequeue ReminderCell") }
-        // set the text from the data model
-        cell.setSampleData(rank: indexPath.row)
+        
+        cell.setData(rank: indexPath.row, movie: movies[indexPath.row])
+        
         return cell
     }
     
     
 }
-
-extension ChartViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-}
-

@@ -14,32 +14,45 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     lazy var posterImage = UIImageView().then {
         $0.image = UIImage(named: "img_placeholder")
         $0.contentMode = .scaleAspectFit
+
     }
     
     lazy var movieTitle = UILabel().then {
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textColor = .white
         $0.numberOfLines = 2
+        $0.minimumScaleFactor = 10
     }
         
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        let stackView = UIStackView().then {
+            $0.addArrangedSubview(posterImage)
+            $0.addArrangedSubview(movieTitle)
+            
+            $0.axis = .vertical
+            $0.distribution = .fill
+            $0.alignment = .fill
+            $0.spacing = 0
+        }
+        
         // add to view
-        self.addSubview(posterImage)
-        self.addSubview(movieTitle)
+        self.contentView.addSubview(stackView)
         
         //MARK: Add Constraints
-        posterImage.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-        movieTitle.snp.makeConstraints { make in
-            make.top.equalTo(posterImage.snp.bottom).offset(5)
-            make.bottom.greaterThanOrEqualToSuperview()
-            make.leading.equalTo(posterImage.snp.leading)
-            make.trailing.equalTo(posterImage.snp.trailing)
+        posterImage.snp.makeConstraints { make in
+            make.left.right.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
+
         }
+
+        movieTitle.setContentHuggingPriority(.required, for: .vertical)                 // prevent stretching vertically
+        movieTitle.setContentCompressionResistancePriority(.required, for: .vertical)   // prevent compressing vertically
         
     }
     required init?(coder: NSCoder) {
@@ -47,21 +60,21 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
 }
 
+
 //MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
-    func insertData(imageURLString: String, title: String) {
+    func setData(movie: MovieFront) {
         
-        movieTitle.text = title
+        self.movieTitle.text = movie.title
         
         DispatchQueue.global().async {
-            guard let imageURL = URL(string: imageURLString) else { return }
+            guard let imageURL = URL(string: "https://image.tmdb.org/t/p/original/\(movie.posterPath)") else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
             DispatchQueue.main.sync {
                 self.posterImage.image = UIImage(data: imageData)
             }
         }
-
+        
     }
-
 }
