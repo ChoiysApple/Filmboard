@@ -20,6 +20,8 @@
 		7D8740F527841F5600E92C72 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8740F427841F5600E92C72 /* Constant.swift */; };
 		7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D947CA8278C03E00031C7C9 /* CreditViewController.swift */; };
 		7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D9F49278E928C0098FEA3 /* MovieFront.swift */; };
+		7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */; };
+		7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */; };
 		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
 		7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2F2787E0C700938996 /* ChartViewController.swift */; };
 		7DDE9C322788045B00938996 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C312788045B00938996 /* ChartTableViewCell.swift */; };
@@ -45,6 +47,8 @@
 		7D8740F427841F5600E92C72 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		7D947CA8278C03E00031C7C9 /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		7D9D9F49278E928C0098FEA3 /* MovieFront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFront.swift; sourceTree = "<group>"; };
+		7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
+		7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7DDE9C2F2787E0C700938996 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7DDE9C312788045B00938996 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -85,15 +89,14 @@
 		7D1982EC2782D77500F2E745 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				7DC7D34B27915399005C3D9C /* Base */,
+				7DC7D34427913C56005C3D9C /* Presentation */,
 				7D37ADA5278D5D3D004BBFF9 /* Domain */,
-				7DDE9C3327880A8700938996 /* View */,
+				7D8740F427841F5600E92C72 /* Constant.swift */,
 				7D1982ED2782D77500F2E745 /* AppDelegate.swift */,
 				7D1982EF2782D77500F2E745 /* SceneDelegate.swift */,
-				7D1982F32782D77500F2E745 /* Main.storyboard */,
 				7D1982F62782D77600F2E745 /* Assets.xcassets */,
-				7D1982F82782D77600F2E745 /* LaunchScreen.storyboard */,
 				7D1982FB2782D77600F2E745 /* Info.plist */,
-				7D8740F427841F5600E92C72 /* Constant.swift */,
 			);
 			path = MovieApp;
 			sourceTree = "<group>";
@@ -101,9 +104,8 @@
 		7D2DD61F278537A7000EBDE0 /* DiscoverView */ = {
 			isa = PBXGroup;
 			children = (
-				7D1982F12782D77500F2E745 /* DiscoverViewController.swift */,
-				7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */,
-				7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */,
+				7DC7D34527913C73005C3D9C /* View */,
+				7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */,
 			);
 			path = DiscoverView;
 			sourceTree = "<group>";
@@ -143,16 +145,7 @@
 			path = CreditView;
 			sourceTree = "<group>";
 		};
-		7DDE9C2E2787E0A800938996 /* CharView */ = {
-			isa = PBXGroup;
-			children = (
-				7DDE9C2F2787E0C700938996 /* ChartViewController.swift */,
-				7DDE9C312788045B00938996 /* ChartTableViewCell.swift */,
-			);
-			path = CharView;
-			sourceTree = "<group>";
-		};
-		7DDE9C3327880A8700938996 /* View */ = {
+		7DC7D34427913C56005C3D9C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */,
@@ -160,7 +153,44 @@
 				7DDE9C2E2787E0A800938996 /* CharView */,
 				7D947CA7278C03B70031C7C9 /* CreditView */,
 			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7DC7D34527913C73005C3D9C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D1982F12782D77500F2E745 /* DiscoverViewController.swift */,
+				7D2DD62427855A30000EBDE0 /* DiscoverCollectionHeaderView.swift */,
+				7D26C14527867D8E005B122D /* DiscoverCollectionViewCell.swift */,
+			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7DC7D34827913E71005C3D9C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7DDE9C2F2787E0C700938996 /* ChartViewController.swift */,
+				7DDE9C312788045B00938996 /* ChartTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7DC7D34B27915399005C3D9C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7D1982F32782D77500F2E745 /* Main.storyboard */,
+				7D1982F82782D77600F2E745 /* LaunchScreen.storyboard */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		7DDE9C2E2787E0A800938996 /* CharView */ = {
+			isa = PBXGroup;
+			children = (
+				7DC7D34827913E71005C3D9C /* View */,
+				7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */,
+			);
+			path = CharView;
 			sourceTree = "<group>";
 		};
 		90CE6836E1FA0F00C1A26590 /* Frameworks */ = {
@@ -307,6 +337,8 @@
 				7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */,
 				7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */,
 				7DE8154327910DDC00726799 /* Keys.swift in Sources */,
+				7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */,
+				7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */,
 				7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */,
 				7D8740F527841F5600E92C72 /* Constant.swift in Sources */,
 			);
@@ -461,10 +493,11 @@
 				DEVELOPMENT_TEAM = ZW6466CHF4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Movie Discovery";
+				INFOPLIST_KEY_CFBundleDisplayName = MovieApp;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,10 +524,11 @@
 				DEVELOPMENT_TEAM = ZW6466CHF4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Movie Discovery";
+				INFOPLIST_KEY_CFBundleDisplayName = MovieApp;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
