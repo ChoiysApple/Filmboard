@@ -140,7 +140,7 @@ extension ChartTableViewCell {
     func setData(rank: Int, movie: MovieFront) {
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
-        genreLabel.text = "Genre"
+        genreLabel.text = movie.genre
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
