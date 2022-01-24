@@ -40,15 +40,16 @@ class DiscoverViewController: UIViewController {
         self.title = "Discover"
         
         collectionView.delegate = self
+        viewModel.requestData()
         
         self.view.backgroundColor = UIColor(named: Colors.background)
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
         
         viewModel.movieFrontObservable
+            .debug()
             .bind(to: collectionView.rx.items(cellIdentifier: identifiers.discover_collection_cell, cellType: DiscoverCollectionViewCell.self)) { index, movie, cell in
                 cell.setData(movie: movie)
-                print(movie.title)
             }
             .disposed(by: disposeBag)
         

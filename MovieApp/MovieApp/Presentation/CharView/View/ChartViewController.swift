@@ -24,6 +24,7 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.requestData()
         self.title = "Charts"
         self.view.backgroundColor = UIColor(named: Colors.background)
         
@@ -35,6 +36,7 @@ class ChartViewController: UIViewController {
 
         //MARK: Data Binding
         viewModel.movieFrontObservable
+            .debug()
             .bind(to: tableView.rx.items(cellIdentifier: identifiers.chart_table_cell, cellType: ChartTableViewCell.self)) { index, movie, cell in
                 cell.setData(rank: index, movie: movie)
             }
