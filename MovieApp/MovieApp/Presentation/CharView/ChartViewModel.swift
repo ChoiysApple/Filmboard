@@ -17,7 +17,7 @@ class ChartViewModel {
     }
     
     func requestData() {
-        let url = APIService.configureUrlString(category: .NowPlaying, language: .English, page: 1)
+        let url = APIService.configureUrlString(category: .Popular, language: .English, page: 1)
         _ = APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> [MovieListResult] in
                 
