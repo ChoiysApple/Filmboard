@@ -7,5 +7,5 @@ Movie App with MVVM, RxSwift, SnapKit
 - Then
 - RxSwift
 - RxCocoa
-- Alamofire
+- RxDataSources
 - Cosmos
