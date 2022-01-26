@@ -14,7 +14,20 @@ class DiscoverViewController: UIViewController {
     
     let viewModel = DiscoverViewModel()
     let disposeBag = DisposeBag()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        collectionView.delegate = self
+        
+        bindData()
+        addConstraint()
+        
+        viewModel.requestData()
+
+    }
+    
+    //MARK: - Properties
     lazy var collectionView = { () -> UICollectionView in
         
         // FlowLayout
@@ -33,26 +46,19 @@ class DiscoverViewController: UIViewController {
         return collectionView
     }()
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.title = "Discover"
-        
-        collectionView.delegate = self
-        viewModel.requestData()
-        
-        self.view.backgroundColor = UIColor(named: Colors.background)
-        self.view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
-        
+    private func bindData() {
         viewModel.movieFrontObservable
-            .debug()
             .bind(to: collectionView.rx.items(cellIdentifier: identifiers.discover_collection_cell, cellType: DiscoverCollectionViewCell.self)) { index, movie, cell in
                 cell.setData(movie: movie)
             }
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func addConstraint() {
+        self.title = "Discover"
+        self.view.backgroundColor = UIColor(named: Colors.background)
+        self.view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
 
     }
 
