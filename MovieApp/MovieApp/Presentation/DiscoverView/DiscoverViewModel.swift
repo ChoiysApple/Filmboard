@@ -26,13 +26,7 @@ class DiscoverViewModel {
                 return [DiscoverCollectionViewSection(items: items)]
             })
             .take(1)
-            .debug()
             .bind(to: movieFrontObservable)
-//            }.map { return $0.map { return DiscoverCollectionViewItem(movie: MovieFront.convertFromMovieInfo(movie: $0)) } }
-//            .debug()
-//            .take(1)
-//            .debug()
-//            .bind(to: movieFrontObservable)
     }
     
 
