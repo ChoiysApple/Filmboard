@@ -11,11 +11,8 @@ import RxSwift
 
 class DiscoverViewModel {
     
-    let movieFrontObservable = BehaviorSubject<[MovieFront]>(value: [])
-
-    init () {
-        
-    }
+    var movieFrontObservable = BehaviorSubject<[DiscoverCollectionViewSection]>(value: [])
+    let dataSource = DiscoverCollectionViewDataSource.dataSource()
     
     func requestData() {
         let url = APIService.configureUrlString(category: .NowPlaying, language: .English, page: 1)
@@ -23,11 +20,19 @@ class DiscoverViewModel {
             .map { data -> [MovieListResult] in
                 
                 let response = try! JSONDecoder().decode(MovieList.self, from: data)
-                
                 return response.results
-            }.map { return $0.map { return MovieFront.convertFromMovieInfo(movie: $0) } }
+            }.map({ movieList in
+                let items = movieList.map { DiscoverCollectionViewItem(movie: MovieFront.convertFromMovieInfo(movie: $0))}
+                return [DiscoverCollectionViewSection(items: items)]
+            })
             .take(1)
+            .debug()
             .bind(to: movieFrontObservable)
+//            }.map { return $0.map { return DiscoverCollectionViewItem(movie: MovieFront.convertFromMovieInfo(movie: $0)) } }
+//            .debug()
+//            .take(1)
+//            .debug()
+//            .bind(to: movieFrontObservable)
     }
     
 

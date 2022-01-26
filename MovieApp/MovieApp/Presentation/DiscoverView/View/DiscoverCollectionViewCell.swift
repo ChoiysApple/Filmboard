@@ -23,6 +23,8 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         $0.numberOfLines = 2
         $0.minimumScaleFactor = 10
     }
+    
+    
         
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class DiscoverViewController: UIViewController {
     
@@ -18,10 +19,12 @@ class DiscoverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Discover"
+        self.view.backgroundColor = UIColor(named: Colors.background)
         collectionView.delegate = self
         
         bindData()
-        addConstraint()
+        applyConstraint()
         
         viewModel.requestData()
 
@@ -47,19 +50,20 @@ class DiscoverViewController: UIViewController {
     }()
     
     private func bindData() {
+//        viewModel.movieFrontObservable
+//            .bind(to: collectionView.rx.items(cellIdentifier: identifiers.discover_collection_cell, cellType: DiscoverCollectionViewCell.self)) { index, movie, cell in
+//                cell.setData(movie: movie)
+//            }
+//            .disposed(by: disposeBag)
+        
         viewModel.movieFrontObservable
-            .bind(to: collectionView.rx.items(cellIdentifier: identifiers.discover_collection_cell, cellType: DiscoverCollectionViewCell.self)) { index, movie, cell in
-                cell.setData(movie: movie)
-            }
+            .bind(to: collectionView.rx.items(dataSource: viewModel.dataSource))
             .disposed(by: disposeBag)
     }
     
-    private func addConstraint() {
-        self.title = "Discover"
-        self.view.backgroundColor = UIColor(named: Colors.background)
+    private func applyConstraint() {
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
-
     }
 
 
@@ -67,20 +71,6 @@ class DiscoverViewController: UIViewController {
 
 //MARK: - Collection View Configuration
 extension DiscoverViewController {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//
-//        return viewModel.movies.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        let movie = viewModel.movies[indexPath.row]
-//
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return DiscoverCollectionViewCell() }
-//        cell.setData(movie: movie)
-//
-//        return cell
-//    }
     
     // Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
