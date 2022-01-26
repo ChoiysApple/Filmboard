@@ -50,12 +50,6 @@ class DiscoverViewController: UIViewController {
     }()
     
     private func bindData() {
-//        viewModel.movieFrontObservable
-//            .bind(to: collectionView.rx.items(cellIdentifier: identifiers.discover_collection_cell, cellType: DiscoverCollectionViewCell.self)) { index, movie, cell in
-//                cell.setData(movie: movie)
-//            }
-//            .disposed(by: disposeBag)
-        
         viewModel.movieFrontObservable
             .bind(to: collectionView.rx.items(dataSource: viewModel.dataSource))
             .disposed(by: disposeBag)
@@ -69,32 +63,13 @@ class DiscoverViewController: UIViewController {
 
 }
 
-//MARK: - Collection View Configuration
-extension DiscoverViewController {
-    
-    // Header
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind,withReuseIdentifier: identifiers.discover_collection_header,
-              for: indexPath)
-    }
-    
-}
-
 extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
-    }
-    
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemWidth = (collectionView.frame.size.width - 60)/2
         
         return CGSize(width: itemWidth, height: itemWidth * 1.75)
     }
-    
-
-    
 }
 
