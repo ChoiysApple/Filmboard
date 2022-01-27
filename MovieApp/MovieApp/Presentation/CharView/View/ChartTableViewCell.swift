@@ -78,15 +78,11 @@ class ChartTableViewCell: UITableViewCell {
         }
         
         let infoStackView = UIStackView().then {
-    
-            let emptyView = UIView()
-            emptyView.heightAnchor.constraint(equalToConstant: 3).isActive = true
             
             $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(genreLabel)
             $0.addArrangedSubview(releaseDateLabel)
             $0.addArrangedSubview(starStackView)
-            $0.addArrangedSubview(emptyView)
             
             $0.axis = .vertical
             $0.distribution = .fill
@@ -117,7 +113,7 @@ class ChartTableViewCell: UITableViewCell {
         infoStackView.snp.makeConstraints { make in
             make.left.equalTo(posterImage.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
-            make.bottom.equalToSuperview().offset(margin*(-1))
+            make.bottom.equalToSuperview().offset(margin*(-2))
             make.right.lessThanOrEqualToSuperview().offset(margin*(-1.5))
         }
         
@@ -134,7 +130,7 @@ extension ChartTableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        print(self.contentView.bounds.height)
     }
     
     func setData(rank: Int, movie: MovieFront) {

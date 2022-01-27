@@ -42,7 +42,6 @@ class ChartViewController: UIViewController {
                 cell.setData(rank: index, movie: movie)
             }
             .disposed(by: disposeBag)
-
     }
     
     private func addConstraint() {
