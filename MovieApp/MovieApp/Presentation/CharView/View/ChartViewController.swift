@@ -22,6 +22,7 @@ class ChartViewController: UIViewController {
         self.title = "Charts"
         self.view.backgroundColor = UIColor(named: Colors.background)
         self.view.addSubview(tableView)
+        self.tableView.delegate = self
         
         bindData()
         addConstraint()
@@ -49,3 +50,8 @@ class ChartViewController: UIViewController {
     }
 }
 
+extension ChartViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
+    }
+}

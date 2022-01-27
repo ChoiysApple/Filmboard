@@ -14,6 +14,7 @@ class ChartTableViewCell: UITableViewCell {
     
     let margin = 10.0
 
+    //MARK: Properties
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
@@ -64,6 +65,7 @@ class ChartTableViewCell: UITableViewCell {
     }
 
     
+    //MARK: initialize
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -118,21 +120,12 @@ class ChartTableViewCell: UITableViewCell {
         }
         
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-}
-
-extension ChartTableViewCell {
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        print(self.contentView.bounds.height)
-    }
-    
+    //MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
@@ -150,4 +143,15 @@ extension ChartTableViewCell {
             }
         }
     }
+
+}
+
+extension ChartTableViewCell {
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+//        print(self.contentView.bounds.height)
+    }
+    
 }

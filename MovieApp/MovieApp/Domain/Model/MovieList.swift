@@ -10,7 +10,7 @@ import Foundation
 // MARK: - MovieList
 struct MovieList: Codable {
     let dates: Dates?
-    let page: Int
+    let page: Int?
     let results: [MovieListResult]
     let totalPages, totalResults: Int?
 
