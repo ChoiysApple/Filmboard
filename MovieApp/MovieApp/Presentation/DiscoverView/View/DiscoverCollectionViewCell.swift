@@ -14,15 +14,16 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     lazy var posterImage = UIImageView().then {
         $0.image = UIImage(named: "img_placeholder")
         $0.contentMode = .scaleAspectFit
-
     }
     
     lazy var movieTitle = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         $0.textColor = .white
-        $0.numberOfLines = 2
-        $0.minimumScaleFactor = 10
+        $0.numberOfLines = 3
+        $0.minimumScaleFactor = 5
     }
+    
+    
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +69,7 @@ extension DiscoverCollectionViewCell {
         self.movieTitle.text = movie.title
         
         DispatchQueue.global().async {
-            guard let imageURL = URL(string: "https://image.tmdb.org/t/p/original/\(movie.posterPath)") else { return }
+            guard let imageURL = URL(string: movie.posterPath) else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
             DispatchQueue.main.sync {

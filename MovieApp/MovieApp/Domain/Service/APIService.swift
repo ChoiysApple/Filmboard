@@ -10,48 +10,74 @@ import RxSwift
 
 class APIService {
     
-    let session = URLSession(configuration: .default)
-    
-    func fetchData() {
-        
-        var completeURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(APIKey)&language=en-US&page=1"
-        let retryLimit = 2
-        
-        performRequest(url: completeURL, retries: retryLimit)
+    static func configureUrlString(category: MovieListCategory, language: Language, page: Int) -> String {
+        return "https://api.themoviedb.org/3/movie/\(category.key)?api_key=\(APIKey)&language=\(language.key)&page=\(page)"
     }
     
-    private func performRequest(url: String, retries: Int) {
+    static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
         guard let Url = URL(string: url) else { return }
         
-        let task = session.dataTask(with: Url) { [self] (data, response, error) in
-            if error != nil {
-                print(error!)
+        let task = URLSession(configuration: .default).dataTask(with: Url) { (data, response, error) in
+            if let error = error {
+                onComplete(.failure(error))
                 return
             }
             
-            guard let safeData = data else { return }
-            
-            // Decode JSON
-            do{
-                let result = try JSONDecoder().decode(MovieList.self, from: safeData)
-                //TODO: Task
-            } catch {
-                print(error)
-                if retries > 0 {
-                    print("\(retries) retries remaining. RETRYING VIA RECURSIVE CALL.")
-                    performRequest(url: url, retries: retries-1)
-                } else {
-                    print("\(retries) retries remaining. EXIT WITH FAILURE.")
-                    return
-                }
-                                
+            guard let safeData = data else {
+                let httpResponse = response as! HTTPURLResponse
+                onComplete(.failure(NSError(domain: "no data", code: httpResponse.statusCode, userInfo: nil)))
+                return
             }
-
+            onComplete(.success(safeData))
         }
-        
         task.resume()
     }
 }
 
+//MARK: Rx
+extension APIService {
+    
+    static func fetchWithRx(url: String, retries: Int) -> Observable<Data> {
+        return Observable.create { emitter in
+            
+            fetchRequest(url: url, retries: retries) { result in
+                switch result {
+                case .success(let data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case .failure(let error):
+                    emitter.onError(error)
+                }
+            }
+            
+            return Disposables.create()
+        }
+    }
+}
 
+
+//MARK: - Enumerations for API url configuration
+enum MovieListCategory {
+    case Popular, Upcomming, TopRated, NowPlaying
+    
+    var key: String {
+        switch self{
+        case .Popular: return "popular"
+        case .Upcomming: return "upcomming"
+        case .TopRated: return "top_rated"
+        case .NowPlaying: return "now_playing"
+        }
+    }
+}
+
+enum Language {
+    case Korean, English
+    
+    var key: String {
+        switch self{
+        case .Korean: return "ko-KR"
+        case .English: return "en-US"
+        }
+    }
+}
