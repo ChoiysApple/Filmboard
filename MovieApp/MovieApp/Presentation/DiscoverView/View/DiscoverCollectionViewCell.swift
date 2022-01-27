@@ -14,14 +14,13 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     lazy var posterImage = UIImageView().then {
         $0.image = UIImage(named: "img_placeholder")
         $0.contentMode = .scaleAspectFit
-
     }
     
     lazy var movieTitle = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         $0.textColor = .white
-        $0.numberOfLines = 2
-        $0.minimumScaleFactor = 10
+        $0.numberOfLines = 3
+        $0.minimumScaleFactor = 5
     }
     
     

@@ -18,8 +18,11 @@ class ChartTableViewCell: UITableViewCell {
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 25, weight: .medium)
+        $0.font = UIFont.systemFont(ofSize: 25, weight: .regular)
         $0.sizeToFit()
+        
+        $0.setContentHuggingPriority(.required, for: .horizontal)                 // prevent stretching horizontally
+        $0.setContentCompressionResistancePriority(.required, for: .horizontal)   // prevent compressing horizontally
     }
     
     lazy var posterImage = UIImageView().then {
@@ -30,8 +33,8 @@ class ChartTableViewCell: UITableViewCell {
     lazy var titleLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)
-        $0.numberOfLines = 2
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.numberOfLines = 3
         $0.minimumScaleFactor = 10
     }
     
@@ -69,14 +72,16 @@ class ChartTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //MARK: Group views into stack views
         let starStackView = UIStackView().then {
             $0.addArrangedSubview(starRating)
             $0.addArrangedSubview(ratingCountLabel)
+            $0.addArrangedSubview(UIView())
             
             $0.axis = .horizontal
             $0.distribution = .fill
             $0.alignment = .fill
-            $0.spacing = 10
+            $0.spacing = 5
         }
         
         let infoStackView = UIStackView().then {
@@ -89,7 +94,7 @@ class ChartTableViewCell: UITableViewCell {
             $0.axis = .vertical
             $0.distribution = .fill
             $0.alignment = .fill
-            $0.spacing = 10
+            $0.spacing = 5
         }
 
         self.backgroundColor = UIColor(named: Colors.background)
@@ -116,7 +121,7 @@ class ChartTableViewCell: UITableViewCell {
             make.left.equalTo(posterImage.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-2))
-            make.right.lessThanOrEqualToSuperview().offset(margin*(-1.5))
+            make.right.equalToSuperview().offset(margin*(-1))
         }
         
     }
