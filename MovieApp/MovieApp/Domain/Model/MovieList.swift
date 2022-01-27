@@ -12,7 +12,7 @@ struct MovieList: Codable {
     let dates: Dates?
     let page: Int
     let results: [MovieListResult]
-    let totalPages, totalResults: Int
+    let totalPages, totalResults: Int?
 
     enum CodingKeys: String, CodingKey {
         case dates, page, results
@@ -29,7 +29,7 @@ struct Dates: Codable {
 // MARK: - MovieListResult
 struct MovieListResult: Codable {
     let adult: Bool
-    let backdropPath: String
+    let backdropPath: String?
     let genreIDS: [Int]
     let id: Int
     let originalLanguage: String

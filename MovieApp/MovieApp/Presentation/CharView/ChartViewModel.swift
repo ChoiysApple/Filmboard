@@ -11,10 +11,6 @@ import RxSwift
 class ChartViewModel {
     
     let movieFrontObservable = BehaviorSubject<[MovieFront]>(value: [])
-
-    init () {
-
-    }
     
     func requestData() {
         let url = APIService.configureUrlString(category: .Popular, language: .English, page: 1)

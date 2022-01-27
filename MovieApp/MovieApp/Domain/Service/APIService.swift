@@ -57,7 +57,7 @@ extension APIService {
 }
 
 
-//MARK: - Enumerations for API key-value
+//MARK: - Enumerations for API url configuration
 enum MovieListCategory {
     case Popular, Upcomming, TopRated, NowPlaying
     
