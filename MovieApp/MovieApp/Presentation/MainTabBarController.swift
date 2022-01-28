@@ -16,15 +16,14 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-               
-        self.tabBar.standardAppearance = appearance
         
+        self.tabBar.tintColor = .white
+
+        self.tabBar.standardAppearance = appearance
         if #available(iOS 15.0, *) {
             self.tabBar.scrollEdgeAppearance = appearance
         }
         
-        self.tabBar.tintColor = .white
-
         self.delegate = self
     }
     
@@ -36,12 +35,13 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
                 
         let chartItem = ChartViewController()
         chartItem.tabBarItem = UITabBarItem(title: "Charts", image: UIImage(systemName: "list.number"), selectedImage: UIImage(systemName: "list.number"))
+        let chartNavigationItem = UINavigationController(rootViewController: chartItem)
         
         let elseItem = UIViewController()
         elseItem.tabBarItem = UITabBarItem(title: "Credit", image: UIImage(systemName: "ellipsis"), selectedImage: UIImage(systemName: "Credits"))
         
-        
-        self.viewControllers = [discoverItem, chartItem, elseItem]
+
+        self.viewControllers = [discoverItem, chartNavigationItem, elseItem]
     }
 
     //Delegate methods
@@ -49,5 +49,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         print("Should select viewController: \(viewController.title ?? "") ?")
         return true;
     }
+    
+    
 
 }

@@ -153,7 +153,7 @@
 			children = (
 				7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */,
 				7D2DD61F278537A7000EBDE0 /* DiscoverView */,
-				7DDE9C2E2787E0A800938996 /* CharView */,
+				7DDE9C2E2787E0A800938996 /* ChartView */,
 				7D947CA7278C03B70031C7C9 /* CreditView */,
 			);
 			path = Presentation;
@@ -187,13 +187,13 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		7DDE9C2E2787E0A800938996 /* CharView */ = {
+		7DDE9C2E2787E0A800938996 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
 				7DC7D34827913E71005C3D9C /* View */,
 				7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */,
 			);
-			path = CharView;
+			path = ChartView;
 			sourceTree = "<group>";
 		};
 		90CE6836E1FA0F00C1A26590 /* Frameworks */ = {

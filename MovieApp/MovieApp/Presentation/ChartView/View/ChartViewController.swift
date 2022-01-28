@@ -14,7 +14,6 @@ class ChartViewController: UIViewController {
     
     let viewModel = ChartViewModel()
     let disposeBag = DisposeBag()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,16 +23,45 @@ class ChartViewController: UIViewController {
         self.view.addSubview(tableView)
         self.tableView.delegate = self
         
-        bindData()
-        addConstraint()
         
+        configureNavigation()
+        applyConstraint()
+        bindData()
+
         viewModel.requestData()
+    }
+    
+    @objc func addTapped() {
+        print(#function)
     }
     
     //MARK: UI Properties
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
+        $0.allowsSelection = false
         $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
+    }
+    
+    let navigationAppearance = UINavigationBarAppearance().then {
+        $0.titleTextAttributes = [.foregroundColor: UIColor.white]
+        $0.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        $0.backgroundColor = UIColor(named: Colors.background)
+    }
+    
+    private func configureNavigation() {
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
+        navigationController?.navigationBar.standardAppearance = navigationAppearance
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem?.tintColor = .white
+        navigationItem.title = "Popular"
+        
+        let categoryButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet.circle"), style: .plain, target: self, action: #selector(addTapped))
+        categoryButton.tintColor = .white
+        navigationItem.rightBarButtonItem = categoryButton
+    }
+    
+    private func applyConstraint() {
+        tableView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
     }
     
     //MARK: Data Binding
@@ -45,9 +73,8 @@ class ChartViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func addConstraint() {
-        tableView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
-    }
+    
+
 }
 
 extension ChartViewController: UITableViewDelegate {
@@ -55,3 +82,4 @@ extension ChartViewController: UITableViewDelegate {
         return 160
     }
 }
+
