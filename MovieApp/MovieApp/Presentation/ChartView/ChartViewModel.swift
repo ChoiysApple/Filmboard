@@ -12,8 +12,8 @@ class ChartViewModel {
     
     let movieFrontObservable = BehaviorSubject<[MovieFront]>(value: [])
     
-    func requestData() {
-        let url = APIService.configureUrlString(category: .Popular, language: .English, page: 1)
+    func requestData(category: MovieListCategory) {
+        let url = APIService.configureUrlString(category: category, language: .English, page: 1)
         _ = APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> [MovieListResult] in
                 

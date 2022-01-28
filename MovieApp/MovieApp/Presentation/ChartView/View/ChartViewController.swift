@@ -23,19 +23,15 @@ class ChartViewController: UIViewController {
         self.view.addSubview(tableView)
         self.tableView.delegate = self
         
-        
         configureNavigation()
         applyConstraint()
         bindData()
 
-        viewModel.requestData()
+        viewModel.requestData(category: .Popular)
     }
     
-    @objc func addTapped() {
-        print(#function)
-    }
     
-    //MARK: UI Properties
+    //MARK: Instances
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
         $0.allowsSelection = false
@@ -48,6 +44,13 @@ class ChartViewController: UIViewController {
         $0.backgroundColor = UIColor(named: Colors.background)
     }
     
+    
+
+}
+
+//MARK: Tasks in viewDidLoad
+extension ChartViewController {
+    
     private func configureNavigation() {
         navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
         navigationController?.navigationBar.standardAppearance = navigationAppearance
@@ -55,7 +58,15 @@ class ChartViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         navigationItem.title = "Popular"
         
-        let categoryButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet.circle"), style: .plain, target: self, action: #selector(addTapped))
+        let categoryMenuItem = [
+                UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in }),
+                UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in }),
+                UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in })
+        ]
+        let categoryMenu = UIMenu(title: "", image: nil, identifier: nil, options: [], children: categoryMenuItem)
+        
+        // NavigationBatItem
+        let categoryButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet.circle"), primaryAction: nil, menu: categoryMenu)
         categoryButton.tintColor = .white
         navigationItem.rightBarButtonItem = categoryButton
     }
@@ -72,8 +83,6 @@ class ChartViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
-    
-    
 
 }
 
@@ -81,5 +90,6 @@ extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+
 }
 
