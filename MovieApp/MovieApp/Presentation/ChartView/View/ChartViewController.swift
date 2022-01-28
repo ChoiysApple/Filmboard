@@ -56,7 +56,7 @@ extension ChartViewController {
         navigationController?.navigationBar.standardAppearance = navigationAppearance
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem?.tintColor = .white
-        navigationItem.title = "Popular"
+        
         
         let categoryMenuItem = [
                 UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in }),
@@ -69,7 +69,9 @@ extension ChartViewController {
         let categoryButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet.circle"), primaryAction: nil, menu: categoryMenu)
         categoryButton.tintColor = .white
         navigationItem.rightBarButtonItem = categoryButton
+        
     }
+    
     
     private func applyConstraint() {
         tableView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
@@ -82,6 +84,10 @@ extension ChartViewController {
                 cell.setData(rank: index, movie: movie)
             }
             .disposed(by: disposeBag)
+        
+        _ = viewModel.listTitleObaservable
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { self.navigationItem.title = $0 })
     }
 
 }

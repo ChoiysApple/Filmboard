@@ -11,6 +11,7 @@ import RxSwift
 class ChartViewModel {
     
     let movieFrontObservable = BehaviorSubject<[MovieFront]>(value: [])
+    let listTitleObaservable = BehaviorSubject<String>(value: MovieListCategory.Popular.title)
     
     func requestData(category: MovieListCategory) {
         let url = APIService.configureUrlString(category: category, language: .English, page: 1)
@@ -18,6 +19,8 @@ class ChartViewModel {
             .map { data -> [MovieListResult] in
                 
                 let response = try! JSONDecoder().decode(MovieList.self, from: data)
+                
+                self.listTitleObaservable.onNext(category.title)
                 
                 return response.results
             }.map { return $0.map { return MovieFront.convertFromMovieInfo(movie: $0) } }
