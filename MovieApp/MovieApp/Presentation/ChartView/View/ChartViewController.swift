@@ -29,8 +29,7 @@ class ChartViewController: UIViewController {
 
         viewModel.requestData(category: .Popular)
     }
-    
-    
+        
     //MARK: Instances
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
@@ -59,9 +58,9 @@ extension ChartViewController {
         
         
         let categoryMenuItem = [
-                UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in }),
-                UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in }),
-                UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in })
+            UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .Popular) }),
+            UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .TopRated) }),
+            UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in self.viewModel.requestData(category: .NowPlaying) })
         ]
         let categoryMenu = UIMenu(title: "", image: nil, identifier: nil, options: [], children: categoryMenuItem)
         
@@ -80,6 +79,7 @@ extension ChartViewController {
     //MARK: Data Binding
     private func bindData() {
         viewModel.movieFrontObservable
+            .debug()
             .bind(to: tableView.rx.items(cellIdentifier: identifiers.chart_table_cell, cellType: ChartTableViewCell.self)) { index, movie, cell in
                 cell.setData(rank: index, movie: movie)
             }

@@ -7,10 +7,11 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class ChartViewModel {
     
-    let movieFrontObservable = BehaviorSubject<[MovieFront]>(value: [])
+    let movieFrontObservable = BehaviorRelay<[MovieFront]>(value: [])
     let listTitleObaservable = BehaviorSubject<String>(value: MovieListCategory.Popular.title)
     
     func requestData(category: MovieListCategory) {
