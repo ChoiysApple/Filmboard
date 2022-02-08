@@ -21,6 +21,7 @@ class DiscoverViewController: UIViewController {
         
         self.title = "Discover"
         self.view.backgroundColor = UIColor(named: Colors.background)
+        self.dismissKeyboard()
         collectionView.delegate = self
         
         bindData()
@@ -49,6 +50,7 @@ class DiscoverViewController: UIViewController {
         return collectionView
     }()
     
+    
     private func bindData() {
         viewModel.movieFrontObservable
             .bind(to: collectionView.rx.items(dataSource: viewModel.dataSource))
@@ -63,7 +65,8 @@ class DiscoverViewController: UIViewController {
 
 }
 
-extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//MARK: UICollectionViewDelegateFlowLayout
+extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -73,3 +76,15 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDele
     }
 }
 
+//MARK: Dismiss Keyaord
+extension DiscoverViewController {
+    func dismissKeyboard() {
+           let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
+           tap.cancelsTouchesInView = false
+           view.addGestureRecognizer(tap)
+        }
+        
+        @objc private func dismissKeyboardTouchOutside() {
+           view.endEditing(true)
+        }
+}
