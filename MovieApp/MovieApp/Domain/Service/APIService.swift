@@ -69,6 +69,15 @@ enum MovieListCategory {
         case .NowPlaying: return "now_playing"
         }
     }
+    
+    var title: String {
+        switch self{
+        case .Popular: return "Popular"
+        case .Upcomming: return "Upcomming"
+        case .TopRated: return "Top Rated"
+        case .NowPlaying: return "Now Playing"
+        }
+    }
 }
 
 enum Language {
