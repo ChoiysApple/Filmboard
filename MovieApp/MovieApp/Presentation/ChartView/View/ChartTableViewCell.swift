@@ -12,6 +12,8 @@ import Cosmos
 
 class ChartTableViewCell: UITableViewCell {
     
+    var contentId: Int?
+    
     let margin = 10.0
 
     //MARK: Properties
@@ -132,6 +134,8 @@ class ChartTableViewCell: UITableViewCell {
     
     //MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
+        contentId = movie.id
+        
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
         genreLabel.text = movie.genre
@@ -149,14 +153,4 @@ class ChartTableViewCell: UITableViewCell {
         }
     }
 
-}
-
-extension ChartTableViewCell {
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-//        print(self.contentView.bounds.height)
-    }
-    
 }
