@@ -100,6 +100,7 @@ class ChartTableViewCell: UITableViewCell {
         }
 
         self.backgroundColor = UIColor(named: Colors.background)
+        self.selectionStyle = .none
         
         //MARK: Set Constraints
         self.addSubview(rankLabel)

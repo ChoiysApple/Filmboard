@@ -50,6 +50,7 @@ class ChartViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         
         
+        //MARK: Category Menu
         let categoryMenuItem = [
             UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .Popular) }),
             UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .TopRated) }),
@@ -90,8 +91,6 @@ extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
         print(cell.contentId)
-        
-        cell.isSelected = false
     }
 
 }
