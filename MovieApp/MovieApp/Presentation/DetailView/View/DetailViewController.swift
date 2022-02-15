@@ -11,6 +11,8 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+
+    
     //MARK: BackDrop
     lazy var backDropImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -138,16 +140,8 @@ class DetailViewController: UIViewController {
     
     //MARK: Constraints
     private func applyConstraint() {
-        
-        let dividerView = UIView().then {
-            
-            $0.backgroundColor = .gray
-            $0.snp.makeConstraints { make in
-                make.height.equalTo(0.5)
-            }
-        
-        }
-        let dividerArray = Array(repeating: dividerView, count: 4)
+    
+        let dividerArray = Array(repeating: DetailViewController.dividerView, count: 4)
         
         // Add to Subview
         self.view.addSubview(backDropImage)
@@ -166,13 +160,28 @@ class DetailViewController: UIViewController {
             make.left.right.equalToSuperview()
         }
         
-        dividerArray[0].snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.centerY.equalTo(mainInfoStackView.snp.bottom)
-        }
-                
+        placeToBottomOfView(placer: dividerArray[0], target: mainInfoStackView)
+                        
     }
     
+}
+
+//MARK: Divider
+extension DetailViewController {
+    
+    // Divider View
+    static let dividerView = UIView().then {
+        $0.backgroundColor = .gray
+        $0.snp.makeConstraints { $0.height.equalTo(0.5) }
+    }
+    
+    // Place UIView to bottom anchor of target
+    private func placeToBottomOfView(placer: UIView, target: UIView) {
+        placer.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.centerY.equalTo(target.snp.bottom)
+        }
+    }
 }
 
 
