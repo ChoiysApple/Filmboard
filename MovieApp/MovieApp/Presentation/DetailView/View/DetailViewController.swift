@@ -174,6 +174,7 @@ class DetailViewController: UIViewController {
         mainInfoStackView.snp.makeConstraints { make in
             make.top.equalTo(backDropImage.snp.bottom)
             make.left.right.equalToSuperview()
+            make.height.equalTo(self.view.snp.width).multipliedBy(0.45)
         }
         
         placeToBottomOfView(placer: dividerArray[0], target: mainInfoStackView)
