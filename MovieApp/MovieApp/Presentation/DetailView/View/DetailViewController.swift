@@ -139,9 +139,20 @@ class DetailViewController: UIViewController {
     //MARK: Constraints
     private func applyConstraint() {
         
+        let dividerView = UIView().then {
+            
+            $0.backgroundColor = .gray
+            $0.snp.makeConstraints { make in
+                make.height.equalTo(0.5)
+            }
+        
+        }
+        let dividerArray = Array(repeating: dividerView, count: 4)
+        
         // Add to Subview
         self.view.addSubview(backDropImage)
         self.view.addSubview(mainInfoStackView)
+        dividerArray.forEach{ self.view.addSubview($0) }
         
         // Set Constraint
         backDropImage.snp.makeConstraints { make in
@@ -153,6 +164,11 @@ class DetailViewController: UIViewController {
         mainInfoStackView.snp.makeConstraints { make in
             make.top.equalTo(backDropImage.snp.bottom)
             make.left.right.equalToSuperview()
+        }
+        
+        dividerArray[0].snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.centerY.equalTo(mainInfoStackView.snp.bottom)
         }
                 
     }
