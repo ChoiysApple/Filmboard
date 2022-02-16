@@ -130,18 +130,18 @@ class DetailViewController: UIViewController {
             make.height.equalTo(self.view.snp.width).multipliedBy(0.45)
         }
         
-        placeToBottomOfView(placer: overviewStack, target: mainInfoStackView)
+        appendView(view: overviewStack, target: mainInfoStackView)
         
     }
     
 }
 
-//MARK: Divider
+
 extension DetailViewController {
         
     // Place UIView to bottom anchor of target
-    private func placeToBottomOfView(placer: UIView, target: UIView) {
-        placer.snp.makeConstraints { make in
+    private func appendView(view: UIView, target: UIView) {
+        view.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.top.equalTo(target.snp.bottom)
         }
