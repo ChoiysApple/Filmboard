@@ -33,33 +33,32 @@ class DetailViewController: UIViewController {
         $0.textColor = .white
         $0.textAlignment = .left
         
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.font = UIFont.systemFont(ofSize: 25, weight: .medium)
         $0.numberOfLines = 0
         $0.minimumScaleFactor = 10
         
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
     
+    //MARK: - Runtime
     lazy var runtimeIcon = UIImageView().then {
         $0.image = UIImage(systemName: "clock")
         $0.tintColor = .lightGray
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
-    
     lazy var runtimeLabel = UILabel().then {
         $0.text = "000"         // placeholder
         $0.textColor = .lightGray
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 12, weight: .regular)
     }
-    
     lazy var runtimeStack = UIStackView().then {
         
         $0.addArrangedSubview(runtimeIcon)
         $0.addArrangedSubview(runtimeLabel)
 
         runtimeIcon.snp.makeConstraints { make in
-            make.height.equalTo(runtimeLabel.snp.height)
+            make.height.equalTo(15)
             make.width.equalTo(runtimeIcon.snp.height)
         }
         
@@ -69,27 +68,25 @@ class DetailViewController: UIViewController {
         $0.spacing = 3
     }
     
+    //MARK: - Rating
     lazy var ratingIcon = UIImageView().then {
         $0.image = UIImage(systemName: "star.fill")
         $0.tintColor = .orange
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
-    
     lazy var ratingLabel = UILabel().then {
         $0.text = "0.0"         // placeholder
         $0.textColor = .lightGray
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        
     }
-    
     lazy var ratingStack = UIStackView().then {
         
         $0.addArrangedSubview(ratingIcon)
         $0.addArrangedSubview(ratingLabel)
         
         ratingIcon.snp.makeConstraints { make in
-            make.height.equalTo(ratingLabel.snp.height)
+            make.height.equalTo(15)
             make.width.equalTo(ratingIcon.snp.height)
         }
 
@@ -99,10 +96,11 @@ class DetailViewController: UIViewController {
         $0.spacing = 3
     }
     
+    //MARK: -
     lazy var mainInfoLabelStack = UIStackView().then {
         $0.addArrangedSubview(titleLabel)
-        $0.addArrangedSubview(UIView())
         $0.addArrangedSubview(runtimeStack)
+        $0.addArrangedSubview(UIView())
         $0.addArrangedSubview(ratingStack)
         
         $0.axis = .vertical
@@ -120,15 +118,43 @@ class DetailViewController: UIViewController {
         $0.alignment = .fill
         $0.spacing = 10
         $0.isLayoutMarginsRelativeArrangement = true
-        $0.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        $0.layoutMargins = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: 20)
     }
     
-    
+    //MARK: - Overview
+    lazy var overviewLabel = UILabel().then {
+        $0.text = "OverView"
+        $0.textColor = .white
+        $0.textAlignment = .left
+        
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.numberOfLines = 0
+        $0.minimumScaleFactor = 10
+        
+        $0.setContentHuggingPriority(.required, for: .vertical)
+    }
+    lazy var overviewContentLabel = UILabel().then {
+        $0.text = "This is Overview of movie"   // placeholder
+        $0.textColor = .lightGray
+        $0.textAlignment = .left
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+    }
+    lazy var overviewStack = UIStackView().then {
+        
+        $0.addArrangedSubview(overviewLabel)
+        $0.addArrangedSubview(overviewContentLabel)
+        
+        $0.axis = .vertical
+        $0.distribution = .fill
+        $0.alignment = .fill
+        $0.spacing = 3
+        $0.isLayoutMarginsRelativeArrangement = true
+        $0.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+    }
     
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         self.view.backgroundColor = UIColor(named: Colors.background)
         
@@ -157,11 +183,10 @@ class DetailViewController: UIViewController {
             make.width.equalToSuperview()
         }
         
-        
-        
         // Add Sub View
         contentView.addSubview(backDropImage)
         contentView.addSubview(mainInfoStackView)
+        contentView.addSubview(overviewStack)
         dividerArray.forEach{ self.scrollView.addSubview($0) }
         
         // Set Constraint
@@ -176,6 +201,9 @@ class DetailViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(self.view.snp.width).multipliedBy(0.45)
         }
+        
+        placeToBottomOfView(placer: overviewStack, target: mainInfoStackView)
+        
         
         placeToBottomOfView(placer: dividerArray[0], target: mainInfoStackView)
                 
@@ -196,7 +224,7 @@ extension DetailViewController {
     private func placeToBottomOfView(placer: UIView, target: UIView) {
         placer.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.centerY.equalTo(target.snp.bottom)
+            make.top.equalTo(target.snp.bottom)
         }
     }
 }
