@@ -40,6 +40,14 @@ class DetailViewController: UIViewController {
         $0.setContentHuggingPriority(.required, for: .vertical)
     }
     
+    lazy var taglineLabel = UILabel().then {
+        $0.text = "tagline teehee"
+        $0.numberOfLines = 0
+        $0.textColor = .lightGray
+        $0.textAlignment = .left
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+    }
+    
     lazy var runtimeIconLabel = IconLabel().then {
         $0.icon.image = UIImage(systemName: "clock")
         $0.label.text = "000"
@@ -51,11 +59,21 @@ class DetailViewController: UIViewController {
         $0.label.text = "0.0"
     }
     
+    lazy var iconLabels = UIStackView().then {
+        $0.addArrangedSubview(runtimeIconLabel)
+        $0.addArrangedSubview(ratingIconLabel)
+        
+        $0.axis = .horizontal
+        $0.distribution = .fill
+        $0.alignment = .leading
+        $0.spacing = 5
+    }
+    
     lazy var mainInfoLabelStack = UIStackView().then {
         $0.addArrangedSubview(titleLabel)
-        $0.addArrangedSubview(runtimeIconLabel)
+        $0.addArrangedSubview(taglineLabel)
         $0.addArrangedSubview(UIView())
-        $0.addArrangedSubview(ratingIconLabel)
+        $0.addArrangedSubview(iconLabels)
         
         $0.axis = .vertical
         $0.distribution = .fill
