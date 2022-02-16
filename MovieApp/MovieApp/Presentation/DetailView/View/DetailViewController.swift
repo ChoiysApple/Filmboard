@@ -76,9 +76,18 @@ class DetailViewController: UIViewController {
     }
     
     //MARK: - Overview
-    lazy var overviewStack = DescriptionView().then {
+    lazy var overview = DescriptionView().then {
         $0.label.text = "Overview"
         $0.contentLabel.text = "The only difference between a problem and a solution is that people understand the solution" //placeholder
+    }
+    
+    //MARK: Date & Genre
+    lazy var dateGenre = DoubleColumDescriptionView().then {
+        $0.leftDescription.label.text = "Release Date"
+        $0.leftDescription.contentLabel.text = "2022.01.03"
+        
+        $0.rightDescription.label.text = "Genre"
+        $0.rightDescription.contentLabel.text = "Action, Comedy, SF"
     }
     
     
@@ -115,8 +124,9 @@ class DetailViewController: UIViewController {
         // Add Sub View
         contentView.addSubview(backDropImage)
         contentView.addSubview(mainInfoStackView)
-        contentView.addSubview(overviewStack)
-                
+        contentView.addSubview(overview)
+        contentView.addSubview(dateGenre)
+        
         // Set Constraint
         backDropImage.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -130,8 +140,8 @@ class DetailViewController: UIViewController {
             make.height.equalTo(self.view.snp.width).multipliedBy(0.45)
         }
         
-        appendView(view: overviewStack, target: mainInfoStackView)
-        
+        appendView(view: overview, target: mainInfoStackView)
+        appendView(view: dateGenre, target: overview)
     }
     
 }
@@ -139,7 +149,7 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController {
         
-    // Place UIView to bottom anchor of target
+    // Add Constrant to put new-UIView below target-UIView
     private func appendView(view: UIView, target: UIView) {
         view.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
