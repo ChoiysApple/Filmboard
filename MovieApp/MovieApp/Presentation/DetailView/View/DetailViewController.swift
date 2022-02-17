@@ -90,7 +90,7 @@ class DetailViewController: UIViewController {
         $0.alignment = .fill
         $0.spacing = 10
         $0.isLayoutMarginsRelativeArrangement = true
-        $0.layoutMargins = UIEdgeInsets(top: 20, left: 15, bottom: 20, right: 20)
+        $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
     }
     
     //MARK: - Overview
@@ -107,7 +107,6 @@ class DetailViewController: UIViewController {
         $0.rightDescription.label.text = "Genre"
         $0.rightDescription.contentLabel.text = "Action, Comedy, SF"
     }
-    
     
     //MARK: ViewDidLoad
     override func viewDidLoad() {

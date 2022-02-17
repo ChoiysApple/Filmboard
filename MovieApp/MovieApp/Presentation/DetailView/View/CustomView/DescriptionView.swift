@@ -41,7 +41,7 @@ class DescriptionView: UIView {
         $0.alignment = .fill
         $0.spacing = 3
         $0.isLayoutMarginsRelativeArrangement = true
-        $0.layoutMargins = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
     }
 
     override init(frame: CGRect) {
