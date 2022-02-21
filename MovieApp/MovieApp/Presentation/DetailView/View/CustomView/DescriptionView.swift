@@ -14,7 +14,7 @@ class DescriptionView: UIView {
         $0.isHidden = false
     }
 
-    lazy var label = UILabel().then {
+    lazy var titleLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -33,7 +33,7 @@ class DescriptionView: UIView {
     
     lazy var stack = UIStackView().then {
         
-        $0.addArrangedSubview(label)
+        $0.addArrangedSubview(titleLabel)
         $0.addArrangedSubview(contentLabel)
         
         $0.axis = .vertical

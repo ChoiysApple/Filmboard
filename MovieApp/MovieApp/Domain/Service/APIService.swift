@@ -18,7 +18,9 @@ class APIService {
         return "https://api.themoviedb.org/3/movie/\(id)?api_key=\(APIKey)&language=\(language)"
     }
     
-    
+    static func configureUrlString(imagePath: String) -> String{
+        return "https://image.tmdb.org/t/p/original/\(imagePath)"
+    }
     
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
@@ -59,6 +61,12 @@ extension APIService {
             
             return Disposables.create()
         }
+    }
+}
+
+extension String {
+    var fullImagePath: String {
+        return "https://image.tmdb.org/t/p/original/\(self)"
     }
 }
 

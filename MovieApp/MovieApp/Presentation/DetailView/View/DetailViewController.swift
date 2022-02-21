@@ -8,10 +8,12 @@
 import SnapKit
 import Foundation
 import UIKit
+import RxSwift
 
 class DetailViewController: UIViewController {
     
     let viewModel: DetailViewModel
+    let disposeBag = DisposeBag()
     
     init (id: Int) {
         self.viewModel = DetailViewModel(contentId: id)
@@ -37,7 +39,9 @@ class DetailViewController: UIViewController {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")    // placeholder image
         
+        $0.backgroundColor = .orange
         $0.setContentHuggingPriority(.required, for: .horizontal)
+        $0.setContentHuggingPriority(.required, for: .vertical)
     }
     
     lazy var titleLabel = UILabel().then {
@@ -99,7 +103,7 @@ class DetailViewController: UIViewController {
         
         $0.axis = .horizontal
         $0.distribution = .fill
-        $0.alignment = .fill
+        $0.alignment = .leading
         $0.spacing = 10
         $0.isLayoutMarginsRelativeArrangement = true
         $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
@@ -107,16 +111,16 @@ class DetailViewController: UIViewController {
     
     //MARK: - Overview
     lazy var overview = DescriptionView().then {
-        $0.label.text = "Overview"
+        $0.titleLabel.text = "Overview"
         $0.contentLabel.text = "The only difference between a problem and a solution is that people understand the solution" //placeholder
     }
     
     //MARK: Date & Genre
     lazy var dateGenre = DoubleColumDescriptionView().then {
-        $0.leftDescription.label.text = "Release Date"
+        $0.leftDescription.titleLabel.text = "Release Date"
         $0.leftDescription.contentLabel.text = "2022.01.03"
         
-        $0.rightDescription.label.text = "Genre"
+        $0.rightDescription.titleLabel.text = "Genre"
         $0.rightDescription.contentLabel.text = "Action, Comedy, SF"
     }
     
@@ -132,6 +136,15 @@ class DetailViewController: UIViewController {
     
     
     private func bindData() {
+        
+        _ = viewModel.movieDetailObservable.observe(on: MainScheduler.instance)
+            .subscribe(onNext: { data in
+                
+                guard let movieDetail = data else { return }
+                self.applyMovieDetailData(data: movieDetail)
+            })
+        
+
         
     }
     
@@ -177,8 +190,43 @@ class DetailViewController: UIViewController {
 }
 
 
+
+
 //MARK: Constraint Funciton
 extension DetailViewController {
+    
+    private func applyMovieDetailData(data: MovieDetail) {
+        
+        DispatchQueue.global().async {
+            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: data.backdropPath)) else { return }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.sync {
+                self.backDropImage.image = UIImage(data: imageData)
+            }
+        }
+        
+        DispatchQueue.global().async {
+            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: data.posterPath)) else { return }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.sync {
+                self.posterImage.image = UIImage(data: imageData)
+            }
+        }
+        
+        self.titleLabel.text = data.title
+        self.taglineLabel.text = data.tagline
+        
+        self.runtimeIconLabel.label.text = String(data.runtime)
+        self.ratingIconLabel.label.text = String(data.voteAverage)
+        
+        self.overview.contentLabel.text = data.overview
+        self.dateGenre.leftDescription.contentLabel.text = data.releaseDate
+        
+        let genres = data.genres.map { $0.name }.joined(separator: ",")
+        self.dateGenre.rightDescription.contentLabel.text = genres
+    }
         
     // Add Constrant to put new-UIView below target-UIView
     private func appendView(view: UIView, target: UIView) {
