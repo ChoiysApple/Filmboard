@@ -11,9 +11,21 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    let viewModel: DetailViewModel
+    
+    init (id: Int) {
+        self.viewModel = DetailViewModel(contentId: id)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
     let scrollView = UIScrollView()
     let contentView = UIView()
-
+    
     //MARK: BackDrop
     lazy var backDropImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -118,6 +130,7 @@ class DetailViewController: UIViewController {
         applyConstraint()
     }
     
+    
     private func bindData() {
         
     }
@@ -160,10 +173,11 @@ class DetailViewController: UIViewController {
         appendView(view: overview, target: mainInfoStackView)
         appendView(view: dateGenre, target: overview)
     }
-    
+        
 }
 
 
+//MARK: Constraint Funciton
 extension DetailViewController {
         
     // Add Constrant to put new-UIView below target-UIView
@@ -185,7 +199,7 @@ func updateUIViewController(_ uiView: UIViewController,context: Context) {
 }
 @available(iOS 13.0.0, *)
 func makeUIViewController(context: Context) -> UIViewController{
-    DetailViewController()
+    DetailViewController(id: 634649)
     }
 }
 @available(iOS 13.0, *)

@@ -90,7 +90,11 @@ class ChartViewController: UIViewController {
 extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
-        print(cell.contentId)
+        guard let id = cell.contentId else { return }
+        
+        let vc = DetailViewController(id: id)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
