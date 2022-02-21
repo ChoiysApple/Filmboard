@@ -15,6 +15,7 @@ class DetailViewController: UIViewController {
     let viewModel: DetailViewModel
     let disposeBag = DisposeBag()
     
+    //MARK: Initializer
     init (id: Int) {
         self.viewModel = DetailViewModel(contentId: id)
         super.init(nibName: nil, bundle: nil)
@@ -25,8 +26,19 @@ class DetailViewController: UIViewController {
     }
     
 
+    //MARK: UI Componemts
     let scrollView = UIScrollView()
     let contentView = UIView()
+    
+    lazy var backButton = UIButton().then {
+        $0.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        $0.imageView?.image = UIImage(systemName: "chevron.backward.circle")
+        $0.imageView?.tintColor = .white
+    }
+    
+    @objc private func backButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
     
     //MARK: BackDrop
     lazy var backDropImage = UIImageView().then {
@@ -41,11 +53,9 @@ class DetailViewController: UIViewController {
         
         $0.backgroundColor = .orange
         $0.setContentHuggingPriority(.required, for: .horizontal)
-        $0.setContentHuggingPriority(.required, for: .vertical)
     }
     
     lazy var titleLabel = UILabel().then {
-        $0.text = "Title"
         $0.textColor = .white
         $0.textAlignment = .left
         
@@ -57,7 +67,6 @@ class DetailViewController: UIViewController {
     }
     
     lazy var taglineLabel = UILabel().then {
-        $0.text = "tagline teehee"
         $0.numberOfLines = 0
         $0.textColor = .lightGray
         $0.textAlignment = .left
@@ -66,13 +75,11 @@ class DetailViewController: UIViewController {
     
     lazy var runtimeIconLabel = IconLabel().then {
         $0.icon.image = UIImage(systemName: "clock")
-        $0.label.text = "000"
     }
     
     lazy var ratingIconLabel = IconLabel().then {
         $0.icon.image = UIImage(systemName: "star.fill")
         $0.icon.tintColor = .orange
-        $0.label.text = "0.0"
     }
     
     lazy var iconLabels = UIStackView().then {
@@ -128,6 +135,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = UIColor(named: Colors.background)
         
         bindData()
@@ -143,9 +151,6 @@ class DetailViewController: UIViewController {
                 guard let movieDetail = data else { return }
                 self.applyMovieDetailData(data: movieDetail)
             })
-        
-
-        
     }
     
     //MARK: Constraints
@@ -165,6 +170,7 @@ class DetailViewController: UIViewController {
         
         //MARK: Setup ContentView
         // Add Sub View
+        contentView.addSubview(backButton)
         contentView.addSubview(backDropImage)
         contentView.addSubview(mainInfoStackView)
         contentView.addSubview(overview)
@@ -172,9 +178,17 @@ class DetailViewController: UIViewController {
         
         // Set Constraint
         backDropImage.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.width.equalToSuperview()
             make.height.equalTo(backDropImage.snp.width).multipliedBy(0.5)
+        }
+        
+        backButton.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().offset(20)
+            
+            make.height.equalTo(backDropImage.snp.height).multipliedBy(0.15)
+            make.width.equalTo(backButton.snp.height)
         }
         
         mainInfoStackView.snp.makeConstraints { make in
@@ -186,15 +200,8 @@ class DetailViewController: UIViewController {
         appendView(view: overview, target: mainInfoStackView)
         appendView(view: dateGenre, target: overview)
     }
-        
-}
-
-
-
-
-//MARK: Constraint Funciton
-extension DetailViewController {
     
+    //MARK: Binding
     private func applyMovieDetailData(data: MovieDetail) {
         
         DispatchQueue.global().async {
@@ -227,6 +234,15 @@ extension DetailViewController {
         let genres = data.genres.map { $0.name }.joined(separator: ",")
         self.dateGenre.rightDescription.contentLabel.text = genres
     }
+        
+}
+
+
+
+
+
+//MARK: Constraint Funciton
+extension DetailViewController {
         
     // Add Constrant to put new-UIView below target-UIView
     private func appendView(view: UIView, target: UIView) {
