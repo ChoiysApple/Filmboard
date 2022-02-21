@@ -110,7 +110,7 @@ class DetailViewController: UIViewController {
         
         $0.axis = .horizontal
         $0.distribution = .fill
-        $0.alignment = .leading
+        $0.alignment = .fill
         $0.spacing = 10
         $0.isLayoutMarginsRelativeArrangement = true
         $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
@@ -136,6 +136,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.preferredContentSize.height = 0.0
         self.view.backgroundColor = UIColor(named: Colors.background)
         
         bindData()
@@ -179,9 +180,9 @@ class DetailViewController: UIViewController {
         // Set Constraint
         backDropImage.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(self.view.snp.top)
             make.width.equalToSuperview()
-            make.height.equalTo(backDropImage.snp.width).multipliedBy(0.5)
+            make.height.lessThanOrEqualTo(backDropImage.snp.width).multipliedBy(0.7)
         }
         
         backButton.snp.makeConstraints { make in
