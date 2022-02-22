@@ -240,10 +240,11 @@ class DetailViewController: UIViewController {
         self.ratingIconLabel.label.text = String(data.voteAverage)
         
         self.overview.contentLabel.text = data.overview
-        self.dateGenre.leftDescription.contentLabel.text = data.releaseDate
+        self.dateGenre.leftDescription.contentLabel.text = data.releaseDate.replacingOccurrences(of: "-", with: ".")
         
         let genres = data.genres.map { $0.name }.joined(separator: ",")
         self.dateGenre.rightDescription.contentLabel.text = genres
+        
     }
         
 }
