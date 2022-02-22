@@ -53,6 +53,7 @@ class DetailViewController: UIViewController {
         
         $0.backgroundColor = .orange
         $0.setContentHuggingPriority(.required, for: .horizontal)
+        $0.sizeToFit()
     }
     
     lazy var titleLabel = UILabel().then {
@@ -111,9 +112,13 @@ class DetailViewController: UIViewController {
         $0.axis = .horizontal
         $0.distribution = .fill
         $0.alignment = .fill
+//        $0.semanticContentAttribute = .forceLeftToRight
         $0.spacing = 10
         $0.isLayoutMarginsRelativeArrangement = true
         $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
+        
+        posterImage.setContentHuggingPriority(.required, for: .horizontal)
+        mainInfoLabelStack.setContentHuggingPriority(.defaultLow, for: .horizontal)
     }
     
     //MARK: - Overview
@@ -154,12 +159,13 @@ class DetailViewController: UIViewController {
             })
     }
     
-    //MARK: Constraints
     private func applyConstraint() {
         
         //MARK: Setup Scrollview
         self.view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.bounces = false
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -168,6 +174,8 @@ class DetailViewController: UIViewController {
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
         }
+        
+        
         
         //MARK: Setup ContentView
         // Add Sub View
@@ -179,8 +187,7 @@ class DetailViewController: UIViewController {
         
         // Set Constraint
         backDropImage.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(self.view.snp.top)
+            make.top.left.right.equalToSuperview()
             make.width.equalToSuperview()
             make.height.lessThanOrEqualTo(backDropImage.snp.width).multipliedBy(0.7)
         }
@@ -200,6 +207,9 @@ class DetailViewController: UIViewController {
         
         appendView(view: overview, target: mainInfoStackView)
         appendView(view: dateGenre, target: overview)
+        
+        dateGenre.snp.makeConstraints{ $0.bottom.equalToSuperview() }
+        
     }
     
     //MARK: Binding
@@ -237,10 +247,6 @@ class DetailViewController: UIViewController {
     }
         
 }
-
-
-
-
 
 //MARK: Constraint Funciton
 extension DetailViewController {
