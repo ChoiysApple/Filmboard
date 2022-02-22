@@ -18,7 +18,10 @@ let APIKey = "your key here"
 ## API
 - [The Movie DB API](https://developers.themoviedb.org/3/getting-started) (version 3)
 
-
+## Requirements 
+- iOS 15.0+
+- Swift 5
+- Cocoapods
 
 ## Libraries
 - SnapKit
