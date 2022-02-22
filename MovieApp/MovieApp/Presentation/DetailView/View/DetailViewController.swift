@@ -47,14 +47,6 @@ class DetailViewController: UIViewController {
     }
     
     //MARK: Main Info
-    lazy var posterImage = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "img_placeholder")    // placeholder image
-        
-        $0.backgroundColor = .orange
-        $0.setContentHuggingPriority(.required, for: .horizontal)
-        $0.sizeToFit()
-    }
     
     lazy var titleLabel = UILabel().then {
         $0.textColor = .white
@@ -103,38 +95,25 @@ class DetailViewController: UIViewController {
         $0.distribution = .fill
         $0.alignment = .leading
         $0.spacing = 5
-    }
-        
-    lazy var mainInfoStackView = UIStackView().then {
-        $0.addArrangedSubview(posterImage)
-        $0.addArrangedSubview(mainInfoLabelStack)
-        
-        $0.axis = .horizontal
-        $0.distribution = .fill
-        $0.alignment = .fill
-//        $0.semanticContentAttribute = .forceLeftToRight
-        $0.spacing = 10
         $0.isLayoutMarginsRelativeArrangement = true
         $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
-        
-        posterImage.setContentHuggingPriority(.required, for: .horizontal)
-        mainInfoLabelStack.setContentHuggingPriority(.defaultLow, for: .horizontal)
     }
     
     //MARK: - Overview
-    lazy var overview = DescriptionView().then {
-        $0.titleLabel.text = "Overview"
-        $0.contentLabel.text = "The only difference between a problem and a solution is that people understand the solution" //placeholder
-    }
+    lazy var overview = DescriptionView().then { $0.titleLabel.text = "Overview" }
     
     //MARK: Date & Genre
     lazy var dateGenre = DoubleColumDescriptionView().then {
         $0.leftDescription.titleLabel.text = "Release Date"
-        $0.leftDescription.contentLabel.text = "2022.01.03"
-        
         $0.rightDescription.titleLabel.text = "Genre"
-        $0.rightDescription.contentLabel.text = "Action, Comedy, SF"
     }
+    
+    let layout = UICollectionViewFlowLayout().then{
+        $0.sectionInset = UIEdgeInsets.detailViewComponentInset
+        $0.itemSize = CGSize(width: 60, height: 60)
+        $0.scrollDirection = .horizontal
+    }
+
     
     //MARK: ViewDidLoad
     override func viewDidLoad() {
@@ -149,14 +128,16 @@ class DetailViewController: UIViewController {
     }
     
     
+    //MARK: Bind Data
     private func bindData() {
         
+        // main
         _ = viewModel.movieDetailObservable.observe(on: MainScheduler.instance)
             .subscribe(onNext: { data in
                 
                 guard let movieDetail = data else { return }
                 self.applyMovieDetailData(data: movieDetail)
-            })
+            }).disposed(by: disposeBag)
     }
     
     private func applyConstraint() {
@@ -175,13 +156,11 @@ class DetailViewController: UIViewController {
             make.width.equalToSuperview()
         }
         
-        
-        
         //MARK: Setup ContentView
         // Add Sub View
         contentView.addSubview(backButton)
         contentView.addSubview(backDropImage)
-        contentView.addSubview(mainInfoStackView)
+        contentView.addSubview(mainInfoLabelStack)
         contentView.addSubview(overview)
         contentView.addSubview(dateGenre)
         
@@ -189,7 +168,7 @@ class DetailViewController: UIViewController {
         backDropImage.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.lessThanOrEqualTo(backDropImage.snp.width).multipliedBy(0.7)
+            make.height.equalTo(backDropImage.snp.width).multipliedBy(0.7)
         }
         
         backButton.snp.makeConstraints { make in
@@ -199,20 +178,19 @@ class DetailViewController: UIViewController {
             make.width.equalTo(backButton.snp.height)
         }
         
-        mainInfoStackView.snp.makeConstraints { make in
+        mainInfoLabelStack.snp.makeConstraints { make in
             make.top.equalTo(backDropImage.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(self.view.snp.width).multipliedBy(0.45)
+            make.height.equalTo(self.view.snp.width).multipliedBy(0.325)
         }
         
-        appendView(view: overview, target: mainInfoStackView)
+        appendView(view: overview, target: mainInfoLabelStack)
         appendView(view: dateGenre, target: overview)
         
         dateGenre.snp.makeConstraints{ $0.bottom.equalToSuperview() }
-        
     }
     
-    //MARK: Binding
+    //MARK: Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
         
         DispatchQueue.global().async {
@@ -224,25 +202,16 @@ class DetailViewController: UIViewController {
             }
         }
         
-        DispatchQueue.global().async {
-            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: data.posterPath)) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.sync {
-                self.posterImage.image = UIImage(data: imageData)
-            }
-        }
-        
         self.titleLabel.text = data.title
         self.taglineLabel.text = data.tagline
         
-        self.runtimeIconLabel.label.text = String(data.runtime)
+        self.runtimeIconLabel.label.text = "\(data.runtime) min"
         self.ratingIconLabel.label.text = String(data.voteAverage)
         
         self.overview.contentLabel.text = data.overview
         self.dateGenre.leftDescription.contentLabel.text = data.releaseDate.replacingOccurrences(of: "-", with: ".")
         
-        let genres = data.genres.map { $0.name }.joined(separator: ",")
+        let genres = data.genres.map { $0.name }.joined(separator: ", ")
         self.dateGenre.rightDescription.contentLabel.text = genres
         
     }
@@ -260,7 +229,6 @@ extension DetailViewController {
         }
     }
 }
-
 
 #if DEBUG
 import SwiftUI

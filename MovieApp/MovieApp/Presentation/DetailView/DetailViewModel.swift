@@ -13,6 +13,7 @@ import RxDataSources
 class DetailViewModel {
     
     let movieDetailObservable = BehaviorRelay<MovieDetail?>(value: nil)
+    let trailerObservable = BehaviorRelay<[String]>(value: ["1", "2", "3", "4"])
 
     
     init(contentId: Int) {
@@ -29,6 +30,7 @@ class DetailViewModel {
             }
             .take(1)
             .bind(to: movieDetailObservable)
+        
     }
 
                                                  
