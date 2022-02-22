@@ -10,6 +10,8 @@ import SnapKit
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
+    var contentId: Int?
+    
     //MARK: Create properties
     lazy var posterImage = UIImageView().then {
         $0.image = UIImage(named: "img_placeholder")
@@ -45,7 +47,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+    
         posterImage.snp.makeConstraints { make in
             make.left.right.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
@@ -56,6 +58,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         movieTitle.setContentCompressionResistancePriority(.required, for: .vertical)   // prevent compressing vertically
         
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -67,9 +70,10 @@ extension DiscoverCollectionViewCell {
     func setData(movie: MovieFront) {
         
         self.movieTitle.text = movie.title
+        self.contentId = movie.id
         
         DispatchQueue.global().async {
-            guard let imageURL = URL(string: movie.posterPath) else { return }
+            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: movie.posterPath)) else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
             DispatchQueue.main.sync {

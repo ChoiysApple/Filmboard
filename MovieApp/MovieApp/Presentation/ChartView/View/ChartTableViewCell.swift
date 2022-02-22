@@ -12,6 +12,8 @@ import Cosmos
 
 class ChartTableViewCell: UITableViewCell {
     
+    var contentId: Int?
+    
     let margin = 10.0
 
     //MARK: Properties
@@ -98,6 +100,7 @@ class ChartTableViewCell: UITableViewCell {
         }
 
         self.backgroundColor = UIColor(named: Colors.background)
+        self.selectionStyle = .none
         
         //MARK: Set Constraints
         self.addSubview(rankLabel)
@@ -132,6 +135,8 @@ class ChartTableViewCell: UITableViewCell {
     
     //MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
+        contentId = movie.id
+        
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
         genreLabel.text = movie.genre
@@ -140,7 +145,7 @@ class ChartTableViewCell: UITableViewCell {
         ratingCountLabel.text = "(\(movie.ratingCount))"
         
         DispatchQueue.global().async {
-            guard let imageURL = URL(string: movie.posterPath) else { return }
+            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: movie.posterPath)) else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
             DispatchQueue.main.sync {
@@ -149,14 +154,4 @@ class ChartTableViewCell: UITableViewCell {
         }
     }
 
-}
-
-extension ChartTableViewCell {
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-//        print(self.contentView.bounds.height)
-    }
-    
 }

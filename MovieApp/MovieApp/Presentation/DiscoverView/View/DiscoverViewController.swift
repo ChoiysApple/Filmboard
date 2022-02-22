@@ -15,14 +15,19 @@ class DiscoverViewController: UIViewController {
     
     let viewModel = DiscoverViewModel()
     let disposeBag = DisposeBag()
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Discover"
         self.view.backgroundColor = UIColor(named: Colors.background)
+        self.dismissKeyboard()
         collectionView.delegate = self
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         bindData()
         applyConstraint()
         
@@ -49,6 +54,7 @@ class DiscoverViewController: UIViewController {
         return collectionView
     }()
     
+    
     private func bindData() {
         viewModel.movieFrontObservable
             .bind(to: collectionView.rx.items(dataSource: viewModel.dataSource))
@@ -63,7 +69,8 @@ class DiscoverViewController: UIViewController {
 
 }
 
-extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//MARK: UICollectionViewDelegateFlowLayout
+extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -73,3 +80,27 @@ extension DiscoverViewController: UICollectionViewDelegate, UICollectionViewDele
     }
 }
 
+extension DiscoverViewController {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DiscoverCollectionViewCell else { return }
+        
+        guard let id = cell.contentId else { return }
+        
+        let vc = DetailViewController(id: id)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+//MARK: Dismiss Keyaord
+extension DiscoverViewController {
+    func dismissKeyboard() {
+           let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
+           tap.cancelsTouchesInView = false
+           view.addGestureRecognizer(tap)
+        }
+        
+        @objc private func dismissKeyboardTouchOutside() {
+           view.endEditing(true)
+        }
+}

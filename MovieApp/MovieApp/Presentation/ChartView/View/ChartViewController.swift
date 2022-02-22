@@ -33,7 +33,7 @@ class ChartViewController: UIViewController {
     //MARK: Instances
     let tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
-        $0.allowsSelection = false
+        $0.allowsSelection = true
         $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
     }
     
@@ -43,13 +43,6 @@ class ChartViewController: UIViewController {
         $0.backgroundColor = UIColor(named: Colors.background)
     }
     
-    
-
-}
-
-//MARK: Tasks in viewDidLoad
-extension ChartViewController {
-    
     private func configureNavigation() {
         navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
         navigationController?.navigationBar.standardAppearance = navigationAppearance
@@ -57,6 +50,7 @@ extension ChartViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         
         
+        //MARK: Category Menu
         let categoryMenuItem = [
             UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .Popular) }),
             UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .TopRated) }),
@@ -79,7 +73,6 @@ extension ChartViewController {
     //MARK: Data Binding
     private func bindData() {
         viewModel.movieFrontObservable
-            .debug()
             .bind(to: tableView.rx.items(cellIdentifier: identifiers.chart_table_cell, cellType: ChartTableViewCell.self)) { index, movie, cell in
                 cell.setData(rank: index, movie: movie)
             }
@@ -90,12 +83,26 @@ extension ChartViewController {
             .subscribe(onNext: { self.navigationItem.title = $0 })
     }
 
+
 }
 
+//MARK: Cell Selection
 extension ChartViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
+        guard let id = cell.contentId else { return }
+        
+        let vc = DetailViewController(id: id)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+}
+
+//MARK: Cell Height
+extension ChartViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
-
 }
 
