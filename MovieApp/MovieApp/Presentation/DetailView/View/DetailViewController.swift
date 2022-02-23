@@ -37,7 +37,8 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func backButtonAction() {
-        navigationController?.popViewController(animated: true)
+        print(#function)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: BackDrop
@@ -119,8 +120,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.preferredContentSize.height = 0.0
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         self.view.backgroundColor = UIColor(named: Colors.background)
         
         bindData()

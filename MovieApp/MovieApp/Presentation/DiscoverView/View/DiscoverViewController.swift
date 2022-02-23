@@ -26,8 +26,10 @@ class DiscoverViewController: UIViewController {
         self.dismissKeyboard()
         collectionView.delegate = self
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
 
+        
         bindData()
         applyConstraint()
         

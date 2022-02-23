@@ -29,6 +29,12 @@ class ChartViewController: UIViewController {
 
         viewModel.requestData(category: .Popular)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
         
     //MARK: Instances
     let tableView = UITableView().then {
@@ -47,6 +53,8 @@ class ChartViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
         navigationController?.navigationBar.standardAppearance = navigationAppearance
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.rightBarButtonItem?.tintColor = .white
         
         
