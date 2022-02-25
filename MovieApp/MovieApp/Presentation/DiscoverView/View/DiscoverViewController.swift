@@ -13,7 +13,7 @@ import RxDataSources
 
 class DiscoverViewController: UIViewController {
     
-    let viewModel = DiscoverViewModel()
+    let viewModel = DiscoverViewModel.shared
     let disposeBag = DisposeBag()
     
 
@@ -28,13 +28,10 @@ class DiscoverViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-
-        
         bindData()
         applyConstraint()
         
-        viewModel.requestData()
-
+        viewModel.requestData(page: 1)
     }
     
     //MARK: - Properties
@@ -83,14 +80,13 @@ extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension DiscoverViewController {
+    
+    //MARK: Cell Selection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DiscoverCollectionViewCell else { return }
-        
         guard let id = cell.contentId else { return }
         
-        let vc = DetailViewController(id: id)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(DetailViewController(id: id), animated: true)
     }
 }
 

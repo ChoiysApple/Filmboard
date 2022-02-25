@@ -188,7 +188,7 @@ class DetailViewController: UIViewController {
         mainInfoLabelStack.snp.makeConstraints { make in
             make.top.equalTo(backDropImage.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(self.view.snp.width).multipliedBy(0.325)
+            make.height.greaterThanOrEqualTo(self.view.snp.width).multipliedBy(0.325)
         }
         
         appendView(view: overview, target: mainInfoLabelStack)
@@ -204,7 +204,7 @@ class DetailViewController: UIViewController {
             guard let imageURL = URL(string: APIService.configureUrlString(imagePath: data.backdropPath)) else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self.backDropImage.image = UIImage(data: imageData)
             }
         }
