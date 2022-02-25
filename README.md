@@ -1,5 +1,12 @@
+
+<img src="https://user-images.githubusercontent.com/43776784/155681882-dbac37d9-062f-49ba-87b6-a702675a048b.png" width="10%" alt="this was image">
+
+
 # MovieApp-MVVM
 Movie App with MVVM, RxSwift, SnapKit
+
+<img src="https://user-images.githubusercontent.com/43776784/155681798-54d1d49e-2adf-4315-ab50-ff6a32aba738.png" width="25%" alt="this was image"> <img src="https://user-images.githubusercontent.com/43776784/155681833-59e68046-8d6f-4a64-9716-f50c5df04b70.gif" width="25%" alt="this was image">
+<img src="https://user-images.githubusercontent.com/43776784/155681875-9104f9d4-38ee-48af-bb5c-5032b7d79462.png" width="25%" alt="this was image">
 
 </br>
 
@@ -12,8 +19,6 @@ Because of Security reason, `Keys.swift` is not included
 ```swift
 let APIKey = "your key here"
 ```
-
-
 
 ## API
 - [The Movie DB API](https://developers.themoviedb.org/3/getting-started) (version 3)
