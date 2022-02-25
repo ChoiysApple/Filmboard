@@ -73,10 +73,12 @@ extension DiscoverCollectionViewCell {
         self.contentId = movie.id
         
         DispatchQueue.global().async {
-            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: movie.posterPath)) else { return }
+            
+            guard let imagePath = movie.posterPath else { return }
+            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self.posterImage.image = UIImage(data: imageData)
             }
         }

@@ -22,6 +22,11 @@ class APIService {
         return "https://image.tmdb.org/t/p/original/\(imagePath)"
     }
     
+    static func configureUrlString(keyword: String, language: Language, page: Int) -> String {
+        return "https://api.themoviedb.org/3/search/movie?query=\(keyword)&api_key=\(APIKey)&language=\(language.key)&page=\(page)"
+    }
+    
+    
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
         guard let Url = URL(string: url) else { return }

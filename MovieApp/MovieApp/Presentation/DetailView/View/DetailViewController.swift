@@ -32,12 +32,16 @@ class DetailViewController: UIViewController {
     
     lazy var backButton = UIButton().then {
         $0.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        $0.imageView?.image = UIImage(systemName: "chevron.backward.circle")
-        $0.imageView?.tintColor = .white
+        $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        $0.tintColor = .white
+        $0.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
+
+        
     }
     
     @objc private func backButtonAction() {
-        navigationController?.popViewController(animated: true)
+        print(#function)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: BackDrop
@@ -119,8 +123,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationController?.preferredContentSize.height = 0.0
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
         self.view.backgroundColor = UIColor(named: Colors.background)
         
         bindData()
@@ -158,30 +162,33 @@ class DetailViewController: UIViewController {
         
         //MARK: Setup ContentView
         // Add Sub View
-        contentView.addSubview(backButton)
         contentView.addSubview(backDropImage)
+        contentView.addSubview(backButton)
         contentView.addSubview(mainInfoLabelStack)
         contentView.addSubview(overview)
         contentView.addSubview(dateGenre)
         
         // Set Constraint
+        
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
+            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
+
+            
+            make.height.equalTo(50)
+            make.width.equalTo(backButton.snp.height)
+        }
+
         backDropImage.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
             make.width.equalToSuperview()
             make.height.equalTo(backDropImage.snp.width).multipliedBy(0.7)
         }
-        
-        backButton.snp.makeConstraints { make in
-            make.top.left.equalToSuperview().offset(20)
-            
-            make.height.equalTo(backDropImage.snp.height).multipliedBy(0.15)
-            make.width.equalTo(backButton.snp.height)
-        }
-        
+                
         mainInfoLabelStack.snp.makeConstraints { make in
             make.top.equalTo(backDropImage.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(self.view.snp.width).multipliedBy(0.325)
+            make.height.greaterThanOrEqualTo(self.view.snp.width).multipliedBy(0.325)
         }
         
         appendView(view: overview, target: mainInfoLabelStack)
@@ -197,7 +204,7 @@ class DetailViewController: UIViewController {
             guard let imageURL = URL(string: APIService.configureUrlString(imagePath: data.backdropPath)) else { return }
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
             
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 self.backDropImage.image = UIImage(data: imageData)
             }
         }
