@@ -23,6 +23,11 @@ class ChartViewController: UIViewController {
         self.view.addSubview(tableView)
         self.tableView.delegate = self
         
+        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
+        tableView.refreshControl = customRefreshControl
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+
+        
         configureNavigation()
         applyConstraint()
         bindData()
@@ -112,5 +117,25 @@ extension ChartViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+}
+
+//MARK: Refresh Control
+extension ChartViewController {
+    @objc private func refreshData() {
+        
+        var category: MovieListCategory? {
+            switch (self.navigationItem.title){
+            case MovieListCategory.Popular.title: return MovieListCategory.Popular
+            case MovieListCategory.TopRated.title: return MovieListCategory.TopRated
+            case MovieListCategory.NowPlaying.title: return MovieListCategory.NowPlaying
+            default: return nil
+            }
+        }
+        
+        if let safeCategory = category { self.viewModel.requestData(category: safeCategory) }
+        self.tableView.refreshControl?.endRefreshing()
+        
+    }
+
 }
 
