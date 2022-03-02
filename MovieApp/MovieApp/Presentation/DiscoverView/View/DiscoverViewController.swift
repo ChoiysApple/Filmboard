@@ -15,8 +15,6 @@ class DiscoverViewController: UIViewController {
     
     let viewModel = DiscoverViewModel.shared
     let disposeBag = DisposeBag()
-    
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +23,10 @@ class DiscoverViewController: UIViewController {
         self.view.backgroundColor = UIColor(named: Colors.background)
         self.dismissKeyboard()
         collectionView.delegate = self
+        
+        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
+        collectionView.refreshControl = customRefreshControl
+        collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
@@ -101,4 +103,13 @@ extension DiscoverViewController {
         @objc private func dismissKeyboardTouchOutside() {
            view.endEditing(true)
         }
+}
+
+extension DiscoverViewController {
+    @objc private func refreshData() {
+        
+        self.viewModel.requestData(page: 1)
+        self.collectionView.refreshControl?.endRefreshing()
+        
+    }
 }
