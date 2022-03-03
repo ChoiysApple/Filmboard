@@ -5,8 +5,9 @@
 # MVVMovie
 Movie App with MVVM, RxSwift, SnapKit
 
-<img src="https://user-images.githubusercontent.com/43776784/155681798-54d1d49e-2adf-4315-ab50-ff6a32aba738.png" width="25%" alt="this was image"> <img src="https://user-images.githubusercontent.com/43776784/155681833-59e68046-8d6f-4a64-9716-f50c5df04b70.gif" width="25%" alt="this was image">
-<img src="https://user-images.githubusercontent.com/43776784/155681875-9104f9d4-38ee-48af-bb5c-5032b7d79462.png" width="25%" alt="this was image">
+<img src="https://user-images.githubusercontent.com/43776784/156508152-3e630596-5aaa-4d39-a5cb-21363d3315db.png" width="25%" alt="this was image"> <img src="https://user-images.githubusercontent.com/43776784/156508123-afec14b1-1132-4afa-a867-ff8ddfc19832.gif" width="25%" alt="this was image">
+<img src="https://user-images.githubusercontent.com/43776784/156508150-fe7c5ef7-7aba-4eaa-a80d-484649f16653.png" width="25%" alt="this was image">
+
 
 </br>
 
