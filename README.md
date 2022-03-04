@@ -22,7 +22,7 @@ let APIKey = "your key here"
 ```
 
 ## Design
-Inspired by [Movie Streaming App](https://www.figma.com/community/file/1006119758184707289/Movie-Streaming-App) from figma community
+Inspired by [Movie Streaming App](https://www.figma.com/community/file/1006119758184707289/Movie-Streaming-App)(figma community) and iTunes Store
 
 ## API
 - [The Movie DB API](https://developers.themoviedb.org/3/getting-started) (version 3)
