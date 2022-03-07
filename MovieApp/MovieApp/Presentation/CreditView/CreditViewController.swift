@@ -18,19 +18,13 @@ class CreditViewController: UIViewController {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: identifiers.credit_table_cell)
     }
     
-//    lazy var appIconImage = UIImageView().then {
-//        $0.image = UIImage.appIcon
-//        $0.layer.cornerRadius = 10
-//        $0.clipsToBounds = true
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: Colors.background)
         
         
         tableView.dataSource = self
-//        tableView.delegate = self
+        tableView.delegate = self
         
         
         applyConstraint()
@@ -51,7 +45,7 @@ class CreditViewController: UIViewController {
 extension CreditViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return Credit.data.count
     }
     
     
@@ -59,12 +53,26 @@ extension CreditViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.credit_table_cell, for: indexPath) as UITableViewCell
         
-        cell.textLabel?.text = "\(indexPath.row)"
-//        cell.imageView?.image = UIImage.appIcon
-//        cell.textLabel?.text = "text"
-//        cell.detailTextLabel?.text = "detail"
-                
+        cell.backgroundColor = UIColor(named: Colors.background)
+        
+        let data = Credit.data[indexPath.row]
+        cell.imageView?.image = UIImage(named: data.imageName)
+        cell.imageView?.clipsToBounds = true
+        cell.imageView?.layer.cornerRadius = 10
+        
+        cell.textLabel?.text = data.titleText
+        cell.textLabel?.textColor = .white
+        
+        cell.detailTextLabel?.text = data.detailText
+        
         return cell
     }
     
+}
+
+extension CreditViewController: UITableViewDelegate {
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
 }
