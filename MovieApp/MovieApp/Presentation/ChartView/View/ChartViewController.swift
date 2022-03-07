@@ -62,7 +62,6 @@ class ChartViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.rightBarButtonItem?.tintColor = .white
         
-        
         //MARK: Category Menu
         let categoryMenuItem = [
             UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .Popular) }),

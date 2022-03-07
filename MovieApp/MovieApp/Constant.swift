@@ -20,6 +20,11 @@ struct identifiers {
     
     static let chart_table_cell = "ChartTableCell"
     static let chart_table_header = "ChartTableHeader"
+    
+    static let credit_table_cell = "CreditTableCell"
+    
+    static let detail_trailer_collection_Cell = "DetailTrailerCollectionCell"
+    static let detail_cast_collection_Cell = "DetailCastCollectionCell"
 }
 
 

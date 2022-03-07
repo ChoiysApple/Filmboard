@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxRelay
 
-
 class DiscoverViewModel {
     
     static let shared = DiscoverViewModel()
@@ -51,7 +50,6 @@ class DiscoverViewModel {
             })
             .take(1)
             .bind(to: movieFrontObservable)
-
     }
     
 
