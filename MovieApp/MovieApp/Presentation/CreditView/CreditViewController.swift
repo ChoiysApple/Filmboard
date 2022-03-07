@@ -75,4 +75,8 @@ extension CreditViewController: UITableViewDelegate {
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 100
 //    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return CreditHeaderView()
+    }
 }
