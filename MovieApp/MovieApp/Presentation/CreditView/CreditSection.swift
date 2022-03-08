@@ -42,7 +42,7 @@ enum CreditSection: Int {
                                  - UIKit(Snapkit)
                                  - RxDataSources
                                  """]
-        case .DataSource: return ["Movie Data": "The Movie DB API v3"]
+        case .DataSource: return ["Movie Data", "The Movie DB API v3"]
         }
     }
     

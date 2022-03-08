@@ -54,8 +54,6 @@ extension CreditViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("Seciton: \(indexPath.section)")
-        print(CreditSection(rawValue: indexPath.section))
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.credit_table_cell, for: indexPath) as UITableViewCell
             
@@ -70,7 +68,11 @@ extension CreditViewController: UITableViewDataSource {
             
             return cell
         } else {
-            guard let data = CreditSection(rawValue: indexPath.section)?.data as? [String] else { return UITableViewCell() }
+
+            guard let data = CreditSection(rawValue: indexPath.section)?.data as? [String] else {
+                let cell = UITableViewCell().then { $0.isHidden = true }
+                return cell
+            }
             return CreditTableViewDescriptionCell(title: data[0], description: data[1])
         }
             
