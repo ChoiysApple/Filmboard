@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D15F0D727D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */; };
+		7D15F0DA27D726E50029C40F /* CreditFootherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15F0D927D726E50029C40F /* CreditFootherView.swift */; };
 		7D1979E827BE0C9A00CD3DB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1979E727BE0C9A00CD3DB9 /* Extensions.swift */; };
 		7D1982EE2782D77500F2E745 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1982ED2782D77500F2E745 /* AppDelegate.swift */; };
 		7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1982EF2782D77500F2E745 /* SceneDelegate.swift */; };
@@ -44,6 +45,7 @@
 		1333EC5F83FAB13E0CD0D899 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4940141FE31A8FDE1F3A884C /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewDescriptionCell.swift; sourceTree = "<group>"; };
+		7D15F0D927D726E50029C40F /* CreditFootherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditFootherView.swift; sourceTree = "<group>"; };
 		7D1979E727BE0C9A00CD3DB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7D1982EA2782D77500F2E745 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D1982ED2782D77500F2E745 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D15F0D827D726A30029C40F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D947CA8278C03E00031C7C9 /* CreditViewController.swift */,
+				7D90EC1A27D5EC160099B485 /* CreditHeaderView.swift */,
+				7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */,
+				7D15F0D927D726E50029C40F /* CreditFootherView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7D1982E12782D77400F2E745 = {
 			isa = PBXGroup;
 			children = (
@@ -193,10 +206,8 @@
 		7D947CA7278C03B70031C7C9 /* CreditView */ = {
 			isa = PBXGroup;
 			children = (
-				7D947CA8278C03E00031C7C9 /* CreditViewController.swift */,
+				7D15F0D827D726A30029C40F /* View */,
 				7D90EC1827D5DA310099B485 /* CreditSection.swift */,
-				7D90EC1A27D5EC160099B485 /* CreditHeaderView.swift */,
-				7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */,
 			);
 			path = CreditView;
 			sourceTree = "<group>";
@@ -405,6 +416,7 @@
 				7DE8154327910DDC00726799 /* Keys.swift in Sources */,
 				7D90EC1B27D5EC160099B485 /* CreditHeaderView.swift in Sources */,
 				7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */,
+				7D15F0DA27D726E50029C40F /* CreditFootherView.swift in Sources */,
 				7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */,
 				7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */,
 				7D8740F527841F5600E92C72 /* Constant.swift in Sources */,

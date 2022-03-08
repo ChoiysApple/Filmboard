@@ -9,6 +9,8 @@ import UIKit
 import Then
 import SnapKit
 
+// Because this view is not changing, Not using Rx
+
 class CreditViewController: UIViewController {
     
     var tableView = UITableView()
@@ -41,6 +43,7 @@ class CreditViewController: UIViewController {
 
 }
 
+//MARK: DataSource
 extension CreditViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -82,10 +85,17 @@ extension CreditViewController: UITableViewDataSource {
 
 extension CreditViewController: UITableViewDelegate {
         
+    //MARK: Header & Footer
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return section == 0 ? CreditHeaderView() : nil
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return section == CreditSection.allCases.count-1 ? CreditFootherView() : nil
+    }
+    
+    
+    //MARK: Cell Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
@@ -94,11 +104,6 @@ extension CreditViewController: UITableViewDelegate {
         }
 
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return indexPath.section == 0 ? 40 : 100
-//    }
-    
-    
+        
 }
 

@@ -22,7 +22,7 @@ struct ExternalLink {
     let url: String
 }
 
-enum CreditSection: Int {
+enum CreditSection: Int, CaseIterable {
     case Reference, TechStack, DataSource
     
     var numberOfRows: Int {
