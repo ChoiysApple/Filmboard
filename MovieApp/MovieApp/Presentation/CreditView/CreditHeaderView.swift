@@ -20,8 +20,8 @@ class CreditHeaderView: UITableViewHeaderFooterView {
         $0.titleLabel.text = "Filmboard"
         $0.titleLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
 
-        $0.contentLabel.text = "Movie app using MVVM"
-        UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.contentLabel.text = "Open source Movie app using MVVM"
+        UIFont.systemFont(ofSize: 15, weight: .medium)
         $0.topDivider.isHidden = true
     }
     
@@ -46,7 +46,10 @@ class CreditHeaderView: UITableViewHeaderFooterView {
         
         self.addSubview(stack)
         
-        stack.snp.makeConstraints{ $0.edges.equalToSuperview() }
+        stack.snp.makeConstraints{
+            $0.left.right.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-20)
+        }
     }
     
     
