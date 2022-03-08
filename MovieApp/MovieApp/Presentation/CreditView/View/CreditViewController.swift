@@ -94,6 +94,10 @@ extension CreditViewController: UITableViewDelegate {
         return section == CreditSection.allCases.count-1 ? CreditFootherView() : nil
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == CreditSection.allCases.count-1 ? 50 : 0
+    }
+    
     
     //MARK: Cell Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -11,7 +11,7 @@ class CreditFootherView: UITableViewHeaderFooterView {
     
     lazy var label = UILabel().then {
         $0.textColor = .lightGray
-        $0.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        $0.font = UIFont.systemFont(ofSize: 11, weight: .regular)
         $0.text = "MIT License | Copyright (c) 2022 Daegun Choi"
     }
 
