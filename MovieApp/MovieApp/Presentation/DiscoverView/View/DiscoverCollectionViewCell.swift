@@ -14,7 +14,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     
     //MARK: Create properties
     lazy var posterImage = UIImageView().then {
-        $0.image = UIImage(named: "img_placeholder")
         $0.contentMode = .scaleAspectFit
     }
     
@@ -69,6 +68,8 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
 extension DiscoverCollectionViewCell {
     func setData(movie: MovieFront) {
         
+        
+        self.posterImage.image = UIImage(named: "img_placeholder")
         self.movieTitle.text = movie.title
         self.contentId = movie.id
         
