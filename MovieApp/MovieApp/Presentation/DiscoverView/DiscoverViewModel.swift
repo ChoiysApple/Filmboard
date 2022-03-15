@@ -15,7 +15,7 @@ class DiscoverViewModel {
     
     var movieFrontObservable = BehaviorRelay<[DiscoverCollectionViewSection]>(value: [])
     let dataSource = DiscoverCollectionViewDataSource.dataSource()
-    
+        
     func requestData(page: Int) {
         let url = APIService.configureUrlString(category: .NowPlaying, language: .English, page: page)
         _ = APIService.fetchWithRx(url: url, retries: 2)
