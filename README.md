@@ -2,7 +2,7 @@
 <img src="https://user-images.githubusercontent.com/43776784/155681882-dbac37d9-062f-49ba-87b6-a702675a048b.png" width="10%" alt="this was image">
 
 
-# MVVMovie
+# Filmboard
 Movie App with MVVM, RxSwift, SnapKit
 
 <img src="https://user-images.githubusercontent.com/43776784/156508152-3e630596-5aaa-4d39-a5cb-21363d3315db.png" width="25%" alt="this was image"> <img src="https://user-images.githubusercontent.com/43776784/156508123-afec14b1-1132-4afa-a867-ff8ddfc19832.gif" width="25%" alt="this was image">
