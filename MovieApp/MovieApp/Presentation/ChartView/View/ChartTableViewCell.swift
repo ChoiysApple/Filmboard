@@ -29,7 +29,6 @@ class ChartTableViewCell: UITableViewCell {
     
     lazy var posterImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "img_placeholder")    // placeholder image
     }
     
     lazy var titleLabel = UILabel().then {
@@ -135,6 +134,9 @@ class ChartTableViewCell: UITableViewCell {
     
     //MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
+        
+        self.posterImage.image = UIImage(named: "img_placeholder")
+        
         contentId = movie.id
         
         rankLabel.text = "\(rank+1)"

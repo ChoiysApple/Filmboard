@@ -46,6 +46,10 @@ class ChartViewController: UIViewController {
         $0.backgroundColor = UIColor(named: Colors.background)
         $0.allowsSelection = true
         $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
+        
+        let spinner = UIActivityIndicatorView(style: .medium)
+        $0.tableFooterView = spinner
+        $0.tableFooterView?.isHidden = true
     }
     
     let navigationAppearance = UINavigationBarAppearance().then {
@@ -108,7 +112,7 @@ extension ChartViewController: UITableViewDelegate {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
 }
 
 //MARK: Cell Height
@@ -118,8 +122,10 @@ extension ChartViewController {
     }
 }
 
-//MARK: Refresh Control
+//MARK: Scroll Features
 extension ChartViewController {
+    
+    // RefreshControll
     @objc private func refreshData() {
         
         var category: MovieListCategory? {
@@ -131,9 +137,19 @@ extension ChartViewController {
             }
         }
         
-        if let safeCategory = category { self.viewModel.requestData(category: safeCategory) }
+        if let _ = category { self.viewModel.refreshData() }
         self.tableView.refreshControl?.endRefreshing()
         
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            viewModel.requestData(category: .Popular)
+        }
     }
 
 }
