@@ -19,8 +19,34 @@ class ImageCacheManager {
         return cache.object(forKey: itemURL)
     }
     
-    func setCacheData(of image: UIImage, for key: String) {
+    func saveCacheData(of image: UIImage, for key: String) {
         let itemURL = NSString(string: key)
         cache.setObject(image, forKey: itemURL)
+    }
+}
+
+extension UIImageView {
+    
+    /// Set image to UIImageView with Cached Image data or data from URL
+    func setImage(_ urlString: String?) {
+        
+        DispatchQueue.global().async {
+            guard let imagePath = urlString else { return }
+            
+            // Cached Image is available
+            if let cachedData = ImageCacheManager.shared.loadCachedData(for: imagePath) {
+                DispatchQueue.main.async {
+                    self.image = cachedData
+                }
+                
+            // No Image Cached
+            } else {
+                guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
+                guard let imageData = try? Data(contentsOf: imageURL) else { return }
+                DispatchQueue.main.async {
+                    self.image = UIImage(data: imageData)
+                }
+            }
+        }
     }
 }

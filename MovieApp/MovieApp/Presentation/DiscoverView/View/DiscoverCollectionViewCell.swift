@@ -15,6 +15,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     //MARK: Create properties
     lazy var posterImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "img_placeholder")
     }
     
     lazy var movieTitle = UILabel().then {
@@ -67,22 +68,8 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
 //MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
     func setData(movie: MovieFront) {
-        
-        
-        self.posterImage.image = UIImage(named: "img_placeholder")
         self.movieTitle.text = movie.title
         self.contentId = movie.id
-        
-        DispatchQueue.global().async {
-            
-            guard let imagePath = movie.posterPath else { return }
-            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.async {
-                self.posterImage.image = UIImage(data: imageData)
-            }
-        }
-        
+        self.posterImage.setImage(movie.posterPath)
     }
 }
