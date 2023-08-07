@@ -9,11 +9,12 @@ import UIKit
 import Then
 import SnapKit
 import Cosmos
+import RxSwift
 
 class ChartTableViewCell: UITableViewCell {
     
     var contentId: Int?
-    
+    private var disposeBag = DisposeBag()
     let margin = 10.0
 
     //MARK: Properties
@@ -130,6 +131,11 @@ class ChartTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
     }
     
     //MARK: Set Data

@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
     var contentId: Int?
+    private var disposeBag = DisposeBag()
     
     //MARK: Create properties
     lazy var posterImage = UIImageView().then {
@@ -24,8 +26,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         $0.numberOfLines = 3
         $0.minimumScaleFactor = 5
     }
-    
-    
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +51,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         posterImage.snp.makeConstraints { make in
             make.left.right.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
-
         }
 
         movieTitle.setContentHuggingPriority(.required, for: .vertical)                 // prevent stretching vertically
@@ -61,6 +60,11 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
     }
 }
 
