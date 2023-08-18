@@ -139,6 +139,14 @@
 			path = MovieApp;
 			sourceTree = "<group>";
 		};
+		7D1D5DE62A8FB0500007E953 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		7D2DD61F278537A7000EBDE0 /* DiscoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +198,7 @@
 		7D7A7D362A7E731B00E7879A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */,
+				7D1D5DE62A8FB0500007E953 /* Cache */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
