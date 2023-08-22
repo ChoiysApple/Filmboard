@@ -11,7 +11,9 @@ import UIKit
 class ImageCacheManager {
     
     /// Storage to save cached UIImage
-    private let cache = NSCache<NSString, UIImage>()
+    private let cache = Cache<String, UIImage>()
+    
+    /// singleton instance
     static let shared = ImageCacheManager()
     
     /**
@@ -21,7 +23,7 @@ class ImageCacheManager {
     */
     func loadCachedData(for key: String) -> UIImage? {
         let itemURL = NSString(string: key)
-        return cache.object(forKey: itemURL)
+        return cache.value(forKey: key)
     }
     
     /**
@@ -32,7 +34,7 @@ class ImageCacheManager {
      */
     func saveCacheData(of image: UIImage, for key: String) {
         let itemURL = NSString(string: key)
-        cache.setObject(image, forKey: itemURL)
+        cache.insertValue(image, forKey: key)
     }
 }
 
@@ -59,6 +61,9 @@ extension UIImageView {
             } else {
                 guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
                 guard let imageData = try? Data(contentsOf: imageURL) else { return }
+                guard let newImage = UIImage(data: imageData) else { return }
+                
+                ImageCacheManager.shared.saveCacheData(of: newImage, for: imagePath)
                 DispatchQueue.main.async {
                     self.image = UIImage(data: imageData)
                 }

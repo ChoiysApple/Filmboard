@@ -24,6 +24,7 @@ final class Cache<Key: Hashable, Value> {
     func insertValue(_ value: Value, forKey key: Key) {
         let entry = Entry(value)
         data.setObject(entry, forKey: WrappedKey(key))
+        print("\(String(describing: Value.self)) data Cached for key: \(key)")
     }
     
     /**
@@ -33,6 +34,7 @@ final class Cache<Key: Hashable, Value> {
     */
     func value(forKey key: Key) -> Value? {
         let entry = data.object(forKey: WrappedKey(key))
+        print("Get cached data type: \(String(describing: Value.self))\n value: \(entry?.value)")
         return entry?.value
     }
     
@@ -42,6 +44,7 @@ final class Cache<Key: Hashable, Value> {
     */
     func removeValue(forKey key: Key) {
         data.removeObject(forKey: WrappedKey(key))
+        print("\(String(describing: Value.self)) data removed for key: \(key)")
     }
 }
 
