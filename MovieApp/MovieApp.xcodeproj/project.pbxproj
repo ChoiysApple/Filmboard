@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D0408B72A94815200402458 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0408B62A94815200402458 /* Cache.swift */; };
 		7D15F0D727D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */; };
 		7D15F0DA27D726E50029C40F /* CreditFootherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15F0D927D726E50029C40F /* CreditFootherView.swift */; };
 		7D1979E827BE0C9A00CD3DB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1979E727BE0C9A00CD3DB9 /* Extensions.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		1333EC5F83FAB13E0CD0D899 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4940141FE31A8FDE1F3A884C /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
+		7D0408B62A94815200402458 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewDescriptionCell.swift; sourceTree = "<group>"; };
 		7D15F0D927D726E50029C40F /* CreditFootherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditFootherView.swift; sourceTree = "<group>"; };
 		7D1979E727BE0C9A00CD3DB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */,
+				7D0408B62A94815200402458 /* Cache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				7D40A07F27BCC33D002C21FE /* IconLabel.swift in Sources */,
 				7D88534027BA1E7500CC915E /* DetailViewController.swift in Sources */,
 				7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */,
+				7D0408B72A94815200402458 /* Cache.swift in Sources */,
 				7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */,
 				7D7A7D3A2A7E744100E7879A /* ImageCacheManager.swift in Sources */,
 				7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */,
