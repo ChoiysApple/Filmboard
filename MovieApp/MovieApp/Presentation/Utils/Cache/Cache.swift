@@ -77,3 +77,19 @@ private extension Cache {
     }
 }
 
+extension Cache {
+    subscript(key: Key) -> Value? {
+        get {
+            return value(forKey: key)
+        }
+        
+        set {
+            if let value = newValue {
+                insertValue(value, forKey: key)
+            } else {
+                // remove cached data when nil assigned
+                removeValue(forKey: key)
+            }
+        }
+    }
+}
