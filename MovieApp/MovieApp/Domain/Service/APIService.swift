@@ -29,20 +29,26 @@ class APIService {
     
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
-        guard let Url = URL(string: url) else { return }
+        guard let Url = URL(string: url) else {
+            print("Error: invalid url")
+            return
+        }
         
         let task = URLSession(configuration: .default).dataTask(with: Url) { (data, response, error) in
             if let error = error {
+                print("Error: \(error.localizedDescription)")
                 onComplete(.failure(error))
                 return
             }
             
             guard let safeData = data else {
-                let httpResponse = response as! HTTPURLResponse
+                guard let httpResponse = response as? HTTPURLResponse else { return }
+                print("Error: no data")
                 onComplete(.failure(NSError(domain: "no data", code: httpResponse.statusCode, userInfo: nil)))
                 return
             }
             onComplete(.success(safeData))
+            
         }
         task.resume()
     }
