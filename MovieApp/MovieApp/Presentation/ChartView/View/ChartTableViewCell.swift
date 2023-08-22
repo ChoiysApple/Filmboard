@@ -9,11 +9,12 @@ import UIKit
 import Then
 import SnapKit
 import Cosmos
+import RxSwift
 
 class ChartTableViewCell: UITableViewCell {
     
     var contentId: Int?
-    
+    private var disposeBag = DisposeBag()
     let margin = 10.0
 
     //MARK: Properties
@@ -132,6 +133,11 @@ class ChartTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
+    }
+    
     //MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
         
@@ -145,16 +151,7 @@ class ChartTableViewCell: UITableViewCell {
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
-        
-        DispatchQueue.global().async {
-            guard let imagePath = movie.posterPath else { return }
-            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.async {
-                self.posterImage.image = UIImage(data: imageData)
-            }
-        }
+        posterImage.setImage(movie.posterPath)
     }
 
 }
