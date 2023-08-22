@@ -163,6 +163,7 @@
 		7D37ADA5278D5D3D004BBFF9 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				7D7A7D362A7E731B00E7879A /* Utils */,
 				7D37ADA7278D5D50004BBFF9 /* Model */,
 				7D37ADA6278D5D48004BBFF9 /* Service */,
 			);
@@ -241,7 +242,6 @@
 				7DDE9C2E2787E0A800938996 /* ChartView */,
 				7D947CA7278C03B70031C7C9 /* CreditView */,
 				7D88533E27BA1E5200CC915E /* DetailView */,
-				7D7A7D362A7E731B00E7879A /* Utils */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
