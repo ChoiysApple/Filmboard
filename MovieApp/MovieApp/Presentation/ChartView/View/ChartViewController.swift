@@ -88,7 +88,7 @@ class ChartViewController: UIViewController {
     
     //MARK: Data Binding
     private func bindData() {
-        viewModel.movieFrontObservable
+        viewModel.movieListData
             .bind(to: tableView.rx.items(cellIdentifier: identifiers.chart_table_cell, cellType: ChartTableViewCell.self)) { index, movie, cell in
                 cell.setData(rank: index, movie: movie)
             }

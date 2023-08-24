@@ -11,7 +11,7 @@ import RxRelay
 
 class ChartViewModel {
     
-    let movieFrontObservable = BehaviorRelay<[MovieFront]>(value: [])
+    let movieListData = BehaviorRelay<[MovieFront]>(value: [])
     let listTitleObaservable = BehaviorSubject<String>(value: MovieListCategory.Popular.title)
     
     var currentPage = 1
@@ -44,7 +44,7 @@ class ChartViewModel {
                 return response.results
             }.map { return $0.map { return MovieFront.convertFromMovieInfo(movie: $0) } }
             .take(1)
-            .bind(to: movieFrontObservable)
+            .bind(to: movieListData)
     }
 
 }
