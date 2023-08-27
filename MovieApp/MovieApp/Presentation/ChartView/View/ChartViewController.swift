@@ -12,37 +12,8 @@ import RxCocoa
 
 class ChartViewController: UIViewController {
     
-    let viewModel = ChartViewModel()
-    let disposeBag = DisposeBag()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.title = "Charts"
-        self.view.backgroundColor = UIColor(named: Colors.background)
-        self.view.addSubview(tableView)
-        self.tableView.delegate = self
-        
-        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
-        tableView.refreshControl = customRefreshControl
-        tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-
-        
-        configureNavigation()
-        applyConstraint()
-        bindData()
-
-        viewModel.requestData(category: .Popular)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-        
-    //MARK: Instances
-    let tableView = UITableView().then {
+    // MARK: - UI Components
+    lazy var tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: Colors.background)
         $0.allowsSelection = true
         $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
@@ -52,13 +23,45 @@ class ChartViewController: UIViewController {
         $0.tableFooterView?.isHidden = true
     }
     
-    let navigationAppearance = UINavigationBarAppearance().then {
+    lazy var navigationAppearance = UINavigationBarAppearance().then {
         $0.titleTextAttributes = [.foregroundColor: UIColor.white]
         $0.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         $0.backgroundColor = UIColor(named: Colors.background)
     }
     
-    private func configureNavigation() {
+    // MARK: - Instances
+    private let viewModel = ChartViewModel()
+    private let disposeBag = DisposeBag()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Charts"
+
+        setUpView()
+        setUpLayout()
+        bindData()
+
+        viewModel.requestData(category: .Popular)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    private func setUpView() {
+        
+        self.view.backgroundColor = UIColor(named: Colors.background)
+        self.view.addSubview(tableView)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
+        tableView.refreshControl = customRefreshControl
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+        // Navigation
         navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
         navigationController?.navigationBar.standardAppearance = navigationAppearance
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -66,7 +69,7 @@ class ChartViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.rightBarButtonItem?.tintColor = .white
         
-        //MARK: Category Menu
+        // Category Menu
         let categoryMenuItem = [
             UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .Popular) }),
             UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .TopRated) }),
@@ -74,52 +77,64 @@ class ChartViewController: UIViewController {
         ]
         let categoryMenu = UIMenu(title: "", image: nil, identifier: nil, options: [], children: categoryMenuItem)
         
-        // NavigationBatItem
+        // NavigationBarItem
         let categoryButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet.circle"), primaryAction: nil, menu: categoryMenu)
         categoryButton.tintColor = .white
         navigationItem.rightBarButtonItem = categoryButton
         
     }
     
-    
-    private func applyConstraint() {
+    private func setUpLayout() {
         tableView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
     }
     
-    //MARK: Data Binding
+    // MARK: Data Binding
     private func bindData() {
         viewModel.movieListData
-            .bind(to: tableView.rx.items(cellIdentifier: identifiers.chart_table_cell, cellType: ChartTableViewCell.self)) { index, movie, cell in
-                cell.setData(rank: index, movie: movie)
-            }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
             .disposed(by: disposeBag)
         
-        _ = viewModel.listTitleObaservable
+        viewModel.listTitle
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { self.navigationItem.title = $0 })
+            .disposed(by: disposeBag)
     }
-
 
 }
 
-//MARK: Cell Selection
+// MARK: UITableViewDataSource
+extension ChartViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.movieListData.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.chart_table_cell) as? ChartTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setData(rank: indexPath.row, movie: viewModel.movieListData.value[indexPath.row])
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
 extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
-        guard let id = cell.contentId else { return }
         
-        let vc = DetailViewController(id: id)
-        
+        let vc = DetailViewController(id: viewModel.movieListData.value[indexPath.row].id)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-}
-
-//MARK: Cell Height
-extension ChartViewController {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
 }
 
 //MARK: Scroll Features

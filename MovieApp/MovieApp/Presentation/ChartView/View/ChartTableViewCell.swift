@@ -9,14 +9,13 @@ import UIKit
 import Then
 import SnapKit
 import Cosmos
+import RxSwift
 
 class ChartTableViewCell: UITableViewCell {
     
-    var contentId: Int?
-    
-    let margin = 10.0
+    private let margin = 10.0
 
-    //MARK: Properties
+    // MARK: UI Components
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
@@ -29,6 +28,7 @@ class ChartTableViewCell: UITableViewCell {
     
     lazy var posterImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "img_placeholder")
     }
     
     lazy var titleLabel = UILabel().then {
@@ -131,13 +131,16 @@ class ChartTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: Set Data
-    func setData(rank: Int, movie: MovieFront) {
-        
+
+    override func prepareForReuse() {
         self.posterImage.image = UIImage(named: "img_placeholder")
-        
-        contentId = movie.id
+        super.prepareForReuse()
+    }
+}
+
+extension ChartTableViewCell {
+    // MARK: Set Data
+    func setData(rank: Int, movie: MovieFront) {
         
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
@@ -156,5 +159,4 @@ class ChartTableViewCell: UITableViewCell {
             }
         }
     }
-
 }
