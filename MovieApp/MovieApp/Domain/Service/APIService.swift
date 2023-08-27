@@ -18,7 +18,7 @@ class APIService {
         return "https://api.themoviedb.org/3/movie/\(id)?api_key=\(APIKey)&language=\(language)"
     }
     
-    static func configureUrlString(imagePath: String) -> String {
+    static func configureUrlString(imagePath: String) -> String{
         return "https://image.tmdb.org/t/p/original/\(imagePath)"
     }
     
@@ -29,26 +29,20 @@ class APIService {
     
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
-        guard let Url = URL(string: url) else {
-            print("Error: invalid url")
-            return
-        }
+        guard let Url = URL(string: url) else { return }
         
         let task = URLSession(configuration: .default).dataTask(with: Url) { (data, response, error) in
             if let error = error {
-                print("Error: \(error.localizedDescription)")
                 onComplete(.failure(error))
                 return
             }
             
             guard let safeData = data else {
-                guard let httpResponse = response as? HTTPURLResponse else { return }
-                print("Error: no data")
+                let httpResponse = response as! HTTPURLResponse
                 onComplete(.failure(NSError(domain: "no data", code: httpResponse.statusCode, userInfo: nil)))
                 return
             }
             onComplete(.success(safeData))
-            
         }
         task.resume()
     }
