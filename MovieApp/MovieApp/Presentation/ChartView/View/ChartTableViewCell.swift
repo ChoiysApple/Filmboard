@@ -13,7 +13,9 @@ import RxSwift
 
 class ChartTableViewCell: UITableViewCell {
     
-    private let margin = 10.0
+    var contentId: Int?
+    private var disposeBag = DisposeBag()
+    let margin = 10.0
 
     // MARK: UI Components
     lazy var rankLabel = UILabel().then {
@@ -131,10 +133,10 @@ class ChartTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func prepareForReuse() {
-        self.posterImage.image = UIImage(named: "img_placeholder")
         super.prepareForReuse()
+        self.disposeBag = DisposeBag()
     }
 }
 
@@ -148,15 +150,6 @@ extension ChartTableViewCell {
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
-        
-        DispatchQueue.global().async {
-            guard let imagePath = movie.posterPath else { return }
-            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.async {
-                self.posterImage.image = UIImage(data: imageData)
-            }
-        }
+        posterImage.setImage(movie.posterPath)
     }
 }

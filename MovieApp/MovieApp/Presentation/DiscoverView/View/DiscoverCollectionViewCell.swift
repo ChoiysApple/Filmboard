@@ -7,14 +7,17 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
     var contentId: Int?
+    private var disposeBag = DisposeBag()
     
     //MARK: Create properties
     lazy var posterImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "img_placeholder")
     }
     
     lazy var movieTitle = UILabel().then {
@@ -23,8 +26,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         $0.numberOfLines = 3
         $0.minimumScaleFactor = 5
     }
-    
-    
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,7 +51,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         posterImage.snp.makeConstraints { make in
             make.left.right.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
-
         }
 
         movieTitle.setContentHuggingPriority(.required, for: .vertical)                 // prevent stretching vertically
@@ -61,28 +61,19 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
+    }
 }
 
 
 //MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
     func setData(movie: MovieFront) {
-        
-        
-        self.posterImage.image = UIImage(named: "img_placeholder")
         self.movieTitle.text = movie.title
         self.contentId = movie.id
-        
-        DispatchQueue.global().async {
-            
-            guard let imagePath = movie.posterPath else { return }
-            guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-            
-            DispatchQueue.main.async {
-                self.posterImage.image = UIImage(data: imageData)
-            }
-        }
-        
+        self.posterImage.setImage(movie.posterPath)
     }
 }
