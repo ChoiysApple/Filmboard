@@ -125,7 +125,7 @@ extension ChartViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? ChartTableViewCell else { return }
+        guard tableView.cellForRow(at: indexPath) is ChartTableViewCell else { return }
         
         let vc = DetailViewController(id: viewModel.movieListData.value[indexPath.row].id)
         self.navigationController?.pushViewController(vc, animated: true)

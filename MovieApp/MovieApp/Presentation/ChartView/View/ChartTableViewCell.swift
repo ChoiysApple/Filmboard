@@ -13,9 +13,8 @@ import RxSwift
 
 class ChartTableViewCell: UITableViewCell {
     
-    var contentId: Int?
-    private var disposeBag = DisposeBag()
     let margin = 10.0
+    private var disposeBag = DisposeBag()
 
     // MARK: UI Components
     lazy var rankLabel = UILabel().then {
@@ -71,11 +70,11 @@ class ChartTableViewCell: UITableViewCell {
     }
 
     
-    //MARK: initialize
+    // MARK: initialize
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        //MARK: Group views into stack views
+        // MARK: Group views into stack views
         let starStackView = UIStackView().then {
             $0.addArrangedSubview(starRating)
             $0.addArrangedSubview(ratingCountLabel)
@@ -88,7 +87,6 @@ class ChartTableViewCell: UITableViewCell {
         }
         
         let infoStackView = UIStackView().then {
-            
             $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(genreLabel)
             $0.addArrangedSubview(releaseDateLabel)
@@ -137,6 +135,7 @@ class ChartTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.disposeBag = DisposeBag()
+        self.posterImage.image = UIImage(named: "img_placeholder")
     }
 }
 
