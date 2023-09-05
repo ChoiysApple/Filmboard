@@ -11,20 +11,16 @@ import RxRelay
 
 class DiscoverViewModel {
     
-    var movieListData = BehaviorRelay<[DiscoverCollectionViewSection]>(value: [])
+    var movieListData = BehaviorRelay<[MovieFront]>(value: [])
     private var disposeBag = DisposeBag()
         
     func requestData(page: Int) {
         let url = APIService.configureUrlString(category: .NowPlaying, language: .English, page: page)
         APIService.fetchWithRx(url: url, retries: 2)
-            .map { data -> [MovieListResult] in
-                
+            .map { data -> [MovieFront] in
                 guard let response = try? JSONDecoder().decode(MovieList.self, from: data) else { return [] }
-                return response.results
-            }.map({ movieList in
-                let items = movieList.map { DiscoverCollectionViewItem(movie: MovieFront.convertFromMovieInfo(movie: $0))}
-                return [DiscoverCollectionViewSection(items: items)]
-            })
+                return response.results.map { MovieFront.convertFromMovieInfo(movie: $0) }
+            }
             .take(1)
             .bind(to: movieListData)
             .disposed(by: disposeBag)
@@ -39,14 +35,10 @@ class DiscoverViewModel {
         
         let url = APIService.configureUrlString(keyword: keyword, language: .English, page: page)
         APIService.fetchWithRx(url: url, retries: 2)
-            .map { data -> [MovieListResult] in
-                
-                let response = try! JSONDecoder().decode(MovieList.self, from: data)
-                return response.results
-            }.map({ movieList in
-                let items = movieList.map { DiscoverCollectionViewItem(movie: MovieFront.convertFromMovieInfo(movie: $0))}
-                return [DiscoverCollectionViewSection(items: items)]
-            })
+            .map { data -> [MovieFront] in
+                guard let response = try? JSONDecoder().decode(MovieList.self, from: data) else { return [] }
+                return response.results.map { MovieFront.convertFromMovieInfo(movie: $0) }
+            }
             .take(1)
             .bind(to: movieListData)
             .disposed(by: disposeBag)

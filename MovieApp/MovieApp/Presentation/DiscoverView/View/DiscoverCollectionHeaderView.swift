@@ -12,7 +12,7 @@ import RxSwift
 
 class DiscoverCollectionHeaderView: UICollectionReusableView {
     
-    let viewModel = DiscoverViewModel.shared
+    let viewModel = DiscoverViewModel()
     let disposeBag = DisposeBag()
     
     //MARK: UI Properties
