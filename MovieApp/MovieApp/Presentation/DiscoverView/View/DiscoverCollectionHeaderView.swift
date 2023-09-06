@@ -12,8 +12,8 @@ import RxSwift
 
 class DiscoverCollectionHeaderView: UICollectionReusableView {
     
-    let viewModel = DiscoverViewModel()
-    let disposeBag = DisposeBag()
+    var searchFieldCallBack: ((String) -> Void)?
+    private let disposeBag = DisposeBag()
     
     //MARK: UI Properties
     lazy var titleLabel = UILabel().then {
@@ -41,7 +41,6 @@ class DiscoverCollectionHeaderView: UICollectionReusableView {
 
         configure()
         bindSearchField()
-
     }
     
     required init?(coder: NSCoder) {
@@ -75,8 +74,9 @@ extension DiscoverCollectionHeaderView {
         self.searchField.rx.text.orEmpty
             .debounce(RxTimeInterval.microseconds(5), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .default))
             .distinctUntilChanged()
-            .subscribe(onNext: {
-                self.viewModel.requestData(keyword: $0, page: 1) })
+            .subscribe { [weak self] keyword in
+                self?.searchFieldCallBack?(keyword)
+            }
             .disposed(by: disposeBag)
     }
 }

@@ -8,13 +8,12 @@
 import UIKit
 import SnapKit
 import RxSwift
-import RxCocoa
 import RxDataSources
 
 class DiscoverViewController: UIViewController {
     
-    let viewModel = DiscoverViewModel()
-    let disposeBag = DisposeBag()
+    private let viewModel = DiscoverViewModel()
+    private let disposeBag = DisposeBag()
     
     lazy var collectionView = { () -> UICollectionView in
         
@@ -93,6 +92,9 @@ extension DiscoverViewController: UICollectionViewDataSource {
         case UICollectionView.elementKindSectionHeader:
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header, for: indexPath) as? DiscoverCollectionHeaderView else {
                 return UICollectionReusableView()
+            }
+            header.searchFieldCallBack = { [weak self] keyword in
+                self?.viewModel.requestData(keyword: keyword, page: 1)
             }
             return header
         default:
