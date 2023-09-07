@@ -12,21 +12,10 @@ import RxSwift
 
 class DetailViewController: UIViewController {
     
-    let viewModel: DetailViewModel
-    let disposeBag = DisposeBag()
-    
-    //MARK: Initializer
-    init (id: Int) {
-        self.viewModel = DetailViewModel(contentId: id)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    private let viewModel: DetailViewModel
+    private let disposeBag = DisposeBag()
 
-    //MARK: UI Componemts
+    // MARK: UI
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -35,8 +24,6 @@ class DetailViewController: UIViewController {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .white
         $0.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
-
-        
     }
     
     @objc private func backButtonAction() {
@@ -44,14 +31,13 @@ class DetailViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    //MARK: BackDrop
+    // BackDrop
     lazy var backDropImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = .darkGray
     }
     
-    //MARK: Main Info
-    
+    // Main Info
     lazy var titleLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .left
@@ -103,10 +89,10 @@ class DetailViewController: UIViewController {
         $0.layoutMargins = UIEdgeInsets.detailViewComponentInset
     }
     
-    //MARK: - Overview
+    // Overview
     lazy var overview = DescriptionView().then { $0.titleLabel.text = "Overview" }
     
-    //MARK: Date & Genre
+    // Date & Genre
     lazy var dateGenre = DoubleColumDescriptionView().then {
         $0.leftDescription.titleLabel.text = "Release Date"
         $0.rightDescription.titleLabel.text = "Genre"
@@ -118,39 +104,35 @@ class DetailViewController: UIViewController {
         $0.scrollDirection = .horizontal
     }
 
+    // MARK: Initializer
+    init (id: Int) {
+        self.viewModel = DetailViewModel(contentId: id)
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    //MARK: ViewDidLoad
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        self.view.backgroundColor = UIColor(named: Colors.background)
-        
+        setUpView()
+        setUpLayout()
         bindData()
-        applyConstraint()
     }
     
-    
-    //MARK: Bind Data
-    private func bindData() {
-        
-        // main
-        _ = viewModel.movieDetailObservable.observe(on: MainScheduler.instance)
-            .subscribe(onNext: { data in
-                
-                guard let movieDetail = data else { return }
-                self.applyMovieDetailData(data: movieDetail)
-            }).disposed(by: disposeBag)
-    }
-    
-    private func applyConstraint() {
-        
-        //MARK: Setup Scrollview
-        self.view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+    private func setUpView() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.view.backgroundColor = UIColor(named: Colors.background)
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.bounces = false
+    }
+        
+    private func setUpLayout() {
+        
+        self.view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -160,7 +142,6 @@ class DetailViewController: UIViewController {
             make.width.equalToSuperview()
         }
         
-        //MARK: Setup ContentView
         // Add Sub View
         contentView.addSubview(backDropImage)
         contentView.addSubview(backButton)
@@ -169,12 +150,9 @@ class DetailViewController: UIViewController {
         contentView.addSubview(dateGenre)
         
         // Set Constraint
-        
         backButton.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
-
-            
             make.height.equalTo(50)
             make.width.equalTo(backButton.snp.height)
         }
@@ -197,7 +175,17 @@ class DetailViewController: UIViewController {
         dateGenre.snp.makeConstraints{ $0.bottom.equalToSuperview() }
     }
     
-    //MARK: Binding Helper
+    private func bindData() {
+        viewModel.movieDetailData.observe(on: MainScheduler.instance)
+            .subscribe { data in
+                guard let movieDetail = data else { return }
+                self.applyMovieDetailData(data: movieDetail)
+            }
+            .disposed(by: disposeBag)
+    }
+
+    
+    // Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
         
         self.backDropImage.setImage(APIService.configureUrlString(imagePath: APIService.configureUrlString(imagePath: data.backdropPath)))
@@ -213,15 +201,15 @@ class DetailViewController: UIViewController {
         
         let genres = data.genres.map { $0.name }.joined(separator: ", ")
         self.dateGenre.rightDescription.contentLabel.text = genres
-        
     }
         
 }
 
-//MARK: Constraint Funciton
+// MARK: Constraint Funciton
 extension DetailViewController {
-        
-    // Add Constrant to put new-UIView below target-UIView
+    
+    // FIXME: Refactor UI code using stackview and remove this method
+    /// Add Constrant to put new-UIView below target-UIView
     private func appendView(view: UIView, target: UIView) {
         view.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -229,27 +217,3 @@ extension DetailViewController {
         }
     }
 }
-
-#if DEBUG
-import SwiftUI
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    
-func updateUIViewController(_ uiView: UIViewController,context: Context) {
-        // leave this empty
-}
-@available(iOS 13.0.0, *)
-func makeUIViewController(context: Context) -> UIViewController{
-    DetailViewController(id: 634649)
-    }
-}
-@available(iOS 13.0, *)
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ViewControllerRepresentable()
-                .ignoresSafeArea()
-                .previewDisplayName(/*@START_MENU_TOKEN@*/"Preview"/*@END_MENU_TOKEN@*/)
-                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Mini"))
-        }
-    }
-} #endif

@@ -12,9 +12,8 @@ import RxDataSources
 
 class DetailViewModel {
     
-    let movieDetailObservable = BehaviorRelay<MovieDetail?>(value: nil)
-    let trailerObservable = BehaviorRelay<[String]>(value: ["1", "2", "3", "4"])
-
+    let movieDetailData = BehaviorRelay<MovieDetail?>(value: nil)
+    private let disposeBag = DisposeBag()
     
     init(contentId: Int) {
         self.requestData(contentId: contentId)
@@ -22,18 +21,17 @@ class DetailViewModel {
     
     func requestData(contentId: Int) {
         let url = APIService.configureUrlString(id: contentId, language: .English)
-        _ = APIService.fetchWithRx(url: url, retries: 2)
+        APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> MovieDetail in
                 
                 let response = try! JSONDecoder().decode(MovieDetail.self, from: data)
                 return response
             }
             .take(1)
-            .bind(to: movieDetailObservable)
-        
+            .bind(to: movieDetailData)
+            .disposed(by: disposeBag)
     }
-
-                                                 
+                        
 }
     
 
