@@ -33,7 +33,6 @@
 		7D90EC1B27D5EC160099B485 /* CreditHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EC1A27D5EC160099B485 /* CreditHeaderView.swift */; };
 		7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D947CA8278C03E00031C7C9 /* CreditViewController.swift */; };
 		7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D9F49278E928C0098FEA3 /* MovieFront.swift */; };
-		7DA15FC827A0DB8F000B1D49 /* DiscoverCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA15FC727A0DB8F000B1D49 /* DiscoverCollectionViewDataSource.swift */; };
 		7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */; };
 		7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */; };
 		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
@@ -74,7 +73,6 @@
 		7D90EC1A27D5EC160099B485 /* CreditHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditHeaderView.swift; sourceTree = "<group>"; };
 		7D947CA8278C03E00031C7C9 /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		7D9D9F49278E928C0098FEA3 /* MovieFront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFront.swift; sourceTree = "<group>"; };
-		7DA15FC727A0DB8F000B1D49 /* DiscoverCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -150,12 +148,43 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		7D264EDC2A9644960087E95E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7D264EDD2A9644A10087E95E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7D90EC1827D5DA310099B485 /* CreditSection.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7D264EDE2A9644A80087E95E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7D88534227BA371D00CC915E /* DetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7D264EDF2A9645A10087E95E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7D2DD61F278537A7000EBDE0 /* DiscoverView */ = {
 			isa = PBXGroup;
 			children = (
 				7DC7D34527913C73005C3D9C /* View */,
-				7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */,
-				7DA15FC727A0DB8F000B1D49 /* DiscoverCollectionViewDataSource.swift */,
+				7D264EDF2A9645A10087E95E /* ViewModel */,
 			);
 			path = DiscoverView;
 			sourceTree = "<group>";
@@ -211,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				7D88534127BA27E400CC915E /* View */,
-				7D88534227BA371D00CC915E /* DetailViewModel.swift */,
+				7D264EDE2A9644A80087E95E /* ViewModel */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -229,7 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				7D15F0D827D726A30029C40F /* View */,
-				7D90EC1827D5DA310099B485 /* CreditSection.swift */,
+				7D264EDD2A9644A10087E95E /* ViewModel */,
 			);
 			path = CreditView;
 			sourceTree = "<group>";
@@ -278,7 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				7DC7D34827913E71005C3D9C /* View */,
-				7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */,
+				7D264EDC2A9644960087E95E /* ViewModel */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -429,7 +458,6 @@
 				7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */,
 				7D37ADA2278D5CE7004BBFF9 /* MovieList.swift in Sources */,
 				7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */,
-				7DA15FC827A0DB8F000B1D49 /* DiscoverCollectionViewDataSource.swift in Sources */,
 				7D40A07F27BCC33D002C21FE /* IconLabel.swift in Sources */,
 				7D88534027BA1E7500CC915E /* DetailViewController.swift in Sources */,
 				7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */,

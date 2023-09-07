@@ -13,11 +13,10 @@ import RxSwift
 
 class ChartTableViewCell: UITableViewCell {
     
-    var contentId: Int?
-    private var disposeBag = DisposeBag()
     let margin = 10.0
+    private var disposeBag = DisposeBag()
 
-    //MARK: Properties
+    // MARK: UI Components
     lazy var rankLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
@@ -30,6 +29,7 @@ class ChartTableViewCell: UITableViewCell {
     
     lazy var posterImage = UIImageView().then {
         $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "img_placeholder")
     }
     
     lazy var titleLabel = UILabel().then {
@@ -70,11 +70,11 @@ class ChartTableViewCell: UITableViewCell {
     }
 
     
-    //MARK: initialize
+    // MARK: initialize
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        //MARK: Group views into stack views
+        // MARK: Group views into stack views
         let starStackView = UIStackView().then {
             $0.addArrangedSubview(starRating)
             $0.addArrangedSubview(ratingCountLabel)
@@ -87,7 +87,6 @@ class ChartTableViewCell: UITableViewCell {
         }
         
         let infoStackView = UIStackView().then {
-            
             $0.addArrangedSubview(titleLabel)
             $0.addArrangedSubview(genreLabel)
             $0.addArrangedSubview(releaseDateLabel)
@@ -136,14 +135,13 @@ class ChartTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.disposeBag = DisposeBag()
-    }
-    
-    //MARK: Set Data
-    func setData(rank: Int, movie: MovieFront) {
-        
         self.posterImage.image = UIImage(named: "img_placeholder")
-        
-        contentId = movie.id
+    }
+}
+
+extension ChartTableViewCell {
+    // MARK: Set Data
+    func setData(rank: Int, movie: MovieFront) {
         
         rankLabel.text = "\(rank+1)"
         titleLabel.text = movie.title
@@ -153,5 +151,4 @@ class ChartTableViewCell: UITableViewCell {
         ratingCountLabel.text = "(\(movie.ratingCount))"
         posterImage.setImage(movie.posterPath)
     }
-
 }
