@@ -11,7 +11,6 @@ import RxSwift
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
-    var contentId: Int?
     private var disposeBag = DisposeBag()
     
     //MARK: Create properties
