@@ -70,4 +70,8 @@ extension UIImageView {
             }
         }
     }
+    
+    func cancelImageLoading() {
+        
+    }
 }
