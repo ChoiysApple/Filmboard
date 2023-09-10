@@ -149,6 +149,8 @@ extension ChartTableViewCell {
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
-        posterImage.setImage(movie.posterPath)
+        if let imagePath = movie.posterPath {
+            posterImage.setImage(APIService.configureUrlString(imagePath: imagePath))
+        }
     }
 }

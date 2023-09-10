@@ -76,6 +76,8 @@ extension DiscoverCollectionViewCell {
     /// Set movie data to cell
     func setData(movie: MovieFront) {
         self.movieTitle.text = movie.title
-        self.posterImageView.setImage(movie.posterPath)
+        if let imagePath = movie.posterPath {
+            self.posterImageView.setImage(APIService.configureUrlString(imagePath: imagePath))
+        }
     }
 }
