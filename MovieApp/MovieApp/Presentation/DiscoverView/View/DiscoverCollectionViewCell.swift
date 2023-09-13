@@ -12,7 +12,7 @@ import RxSwift
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
     // MARK: Create properties
-    lazy var posterImageView = UIImageView().then {
+    lazy var posterImageView = CancelableImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")
     }
@@ -60,6 +60,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        self.setPosterPlaceholderImage()
         super.prepareForReuse()
     }
 }
@@ -77,7 +78,7 @@ extension DiscoverCollectionViewCell {
     func setData(movie: MovieFront) {
         self.movieTitle.text = movie.title
         if let imagePath = movie.posterPath {
-            self.posterImageView.setImage(APIService.configureUrlString(imagePath: imagePath))
+            self.posterImageView.setNewImage(APIService.configureUrlString(imagePath: imagePath))
         }
     }
 }

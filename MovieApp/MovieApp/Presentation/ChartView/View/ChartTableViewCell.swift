@@ -27,7 +27,7 @@ class ChartTableViewCell: UITableViewCell {
         $0.setContentCompressionResistancePriority(.required, for: .horizontal)   // prevent compressing horizontally
     }
     
-    lazy var posterImageView = UIImageView().then {
+    lazy var posterImageView = CancelableImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")
     }
@@ -133,9 +133,8 @@ class ChartTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        setPosterPlaceholderImage()
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
-        self.posterImageView.image = UIImage(named: "img_placeholder")
     }
 }
 
@@ -156,7 +155,7 @@ extension ChartTableViewCell {
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
         if let imagePath = movie.posterPath {
-            posterImageView.setImage(APIService.configureUrlString(imagePath: imagePath))
+            posterImageView.setNewImage(APIService.configureUrlString(imagePath: imagePath))
         }
     }
 }
