@@ -36,7 +36,7 @@ enum CreditSection: Int, CaseIterable {
     var data: Any {
         switch self {
         case .Reference: return ExternalLink.data
-        case .TechStack: return ["Teck Stack", """
+        case .TechStack: return ["Tech Stack", """
                                  - RxSwift
                                  - MVVM
                                  - UIKit(Snapkit)
