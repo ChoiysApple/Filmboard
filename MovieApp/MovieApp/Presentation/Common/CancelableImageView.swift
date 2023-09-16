@@ -37,14 +37,11 @@ extension CancelableImageView {
         - urlString: String url of image
         - forceOption: Skip getting image from cache data and force to get image from url when true. default false
      */
-    func setNewImage(_ urlString: String?, forceOption: Bool = false, index: Int? = nil) {
+    func setNewImage(_ urlString: String?, forceOption: Bool = false) {
         
         self.cancelLoadingImage()
         self.imageLoadingWorkItem = DispatchWorkItem { super.setImage(urlString, forceOption: forceOption) }
         self.imageLoadingWorkItem?.perform()
-//        if let workItem = imageLoadingWorkItem {
-//            DispatchQueue.global().async(execute: workItem)
-//        }
     }
     
     /// Cancel current image loading work
