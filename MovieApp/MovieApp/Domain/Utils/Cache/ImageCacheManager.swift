@@ -46,27 +46,30 @@ extension UIImageView {
         - urlString: String url of image
         - forceOption: Skip getting image from cache data and force to get image from url when true. default false
      */
-    func setImage(_ urlString: String?, forceOption: Bool = false) {
+    func loadImage(_ urlString: String?, forceOption: Bool = false) -> UIImage? {
+        guard let imagePath = urlString else { return nil }
         
-        DispatchQueue.global().async {
-            guard let imagePath = urlString else { return }
+        // Cached Image is available
+        if let cachedImage = ImageCacheManager.shared.loadCachedData(for: imagePath), forceOption == false {
+            return cachedImage
             
-            // Cached Image is available
-            if let cachedData = ImageCacheManager.shared.loadCachedData(for: imagePath), forceOption == false {
-                DispatchQueue.main.async {
-                    self.image = cachedData
-                }
-                
             // No Image Cached
-            } else {
-                guard let imageURL = URL(string: APIService.configureUrlString(imagePath: imagePath)) else { return }
-                guard let imageData = try? Data(contentsOf: imageURL) else { return }
-                guard let newImage = UIImage(data: imageData) else { return }
-                
-                ImageCacheManager.shared.saveCacheData(of: newImage, for: imagePath)
-                DispatchQueue.main.async {
-                    self.image = UIImage(data: imageData)
-                }
+        } else {
+            guard let imageURL = URL(string: imagePath) else { return nil }
+            guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+            guard let newImage = UIImage(data: imageData) else { return nil }
+            
+            ImageCacheManager.shared.saveCacheData(of: newImage, for: imagePath)
+            return newImage
+        }
+    }
+    
+    func setImage(_ urlString: String?, forceOption: Bool = false) {
+        DispatchQueue.global().async {
+            guard let image = self.loadImage(urlString, forceOption: forceOption) else { return }
+            
+            DispatchQueue.main.async {
+                self.image = image
             }
         }
     }

@@ -27,7 +27,7 @@ class ChartTableViewCell: UITableViewCell {
         $0.setContentCompressionResistancePriority(.required, for: .horizontal)   // prevent compressing horizontally
     }
     
-    lazy var posterImage = UIImageView().then {
+    lazy var posterImageView = CancelableImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")
     }
@@ -103,7 +103,7 @@ class ChartTableViewCell: UITableViewCell {
         
         //MARK: Set Constraints
         self.addSubview(rankLabel)
-        self.addSubview(posterImage)
+        self.addSubview(posterImageView)
         self.addSubview(infoStackView)
         
         rankLabel.snp.makeConstraints { make in
@@ -112,7 +112,7 @@ class ChartTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().offset(-margin)
         }
         
-        posterImage.snp.makeConstraints { make in
+        posterImageView.snp.makeConstraints { make in
             make.left.equalTo(rankLabel.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-1))
@@ -120,7 +120,7 @@ class ChartTableViewCell: UITableViewCell {
         }
         
         infoStackView.snp.makeConstraints { make in
-            make.left.equalTo(posterImage.snp.right).offset(margin)
+            make.left.equalTo(posterImageView.snp.right).offset(margin)
             make.top.equalToSuperview().offset(margin)
             make.bottom.equalToSuperview().offset(margin*(-2))
             make.right.equalToSuperview().offset(margin*(-1))
@@ -133,13 +133,18 @@ class ChartTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        setPosterPlaceholderImage()
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
-        self.posterImage.image = UIImage(named: "img_placeholder")
     }
 }
 
 extension ChartTableViewCell {
+    
+    /// Set poster imageView placeholder Image
+    private func setPosterPlaceholderImage() {
+        self.posterImageView.image = UIImage(named: "img_placeholder")
+    }
+    
     // MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
         
@@ -149,6 +154,8 @@ extension ChartTableViewCell {
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
-        posterImage.setImage(movie.posterPath)
+        if let imagePath = movie.posterPath {
+            posterImageView.setNewImage(APIService.configureUrlString(imagePath: imagePath))
+        }
     }
 }

@@ -11,11 +11,8 @@ import RxSwift
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
-    var contentId: Int?
-    private var disposeBag = DisposeBag()
-    
-    //MARK: Create properties
-    lazy var posterImage = UIImageView().then {
+    // MARK: Create properties
+    lazy var posterImageView = CancelableImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")
     }
@@ -31,7 +28,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         let stackView = UIStackView().then {
-            $0.addArrangedSubview(posterImage)
+            $0.addArrangedSubview(posterImageView)
             $0.addArrangedSubview(movieTitle)
             
             $0.axis = .vertical
@@ -43,12 +40,12 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         // add to view
         self.contentView.addSubview(stackView)
         
-        //MARK: Add Constraints
+        // MARK: Add Constraints
         stackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     
-        posterImage.snp.makeConstraints { make in
+        posterImageView.snp.makeConstraints { make in
             make.left.right.greaterThanOrEqualToSuperview()
             make.bottom.lessThanOrEqualToSuperview()
         }
@@ -63,17 +60,25 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        self.setPosterPlaceholderImage()
         super.prepareForReuse()
-        self.disposeBag = DisposeBag()
     }
 }
 
 
 //MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
+    
+    /// Set poster imageView placeholder Image
+    private func setPosterPlaceholderImage() {
+        self.posterImageView.image = UIImage(named: "img_placeholder")
+    }
+    
+    /// Set movie data to cell
     func setData(movie: MovieFront) {
         self.movieTitle.text = movie.title
-        self.contentId = movie.id
-        self.posterImage.setImage(movie.posterPath)
+        if let imagePath = movie.posterPath {
+            self.posterImageView.setNewImage(APIService.configureUrlString(imagePath: imagePath))
+        }
     }
 }

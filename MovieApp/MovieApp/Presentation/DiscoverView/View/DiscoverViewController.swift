@@ -114,9 +114,7 @@ extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? DiscoverCollectionViewCell else { return }
-        guard let id = cell.contentId else { return }
-        
+        let id = self.viewModel.movieListData.value[indexPath.row].id
         self.navigationController?.pushViewController(DetailViewController(id: id), animated: true)
     }
 }
