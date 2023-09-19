@@ -26,13 +26,11 @@ extension UIImageView {
 extension UIImageView {
     
     func setImage(path: String?, placeholder: UIImage? = nil) {
-        guard let path else {
-            self.savedTask?.cancel()
-            self.savedTask = nil
-            self.image = placeholder
-            return
+        if let path, let url = URL(string: path) {
+            self.setImage(with: URL(string: path), placeholder: placeholder)
+        } else {
+            self.setImage(with: nil, placeholder: placeholder)
         }
-        self.setImage(with: URL(string: path), placeholder: placeholder)
     }
     
     func setImage(with url: URL?, placeholder: UIImage? = nil) {
