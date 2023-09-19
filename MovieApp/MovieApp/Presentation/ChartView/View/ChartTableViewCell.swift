@@ -27,7 +27,7 @@ class ChartTableViewCell: UITableViewCell {
         $0.setContentCompressionResistancePriority(.required, for: .horizontal)   // prevent compressing horizontally
     }
     
-    lazy var posterImageView = CancelableImageView().then {
+    lazy var posterImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")
     }
@@ -131,19 +131,9 @@ class ChartTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func prepareForReuse() {
-        setPosterPlaceholderImage()
-        super.prepareForReuse()
-    }
 }
 
 extension ChartTableViewCell {
-    
-    /// Set poster imageView placeholder Image
-    private func setPosterPlaceholderImage() {
-        self.posterImageView.image = UIImage(named: "img_placeholder")
-    }
     
     // MARK: Set Data
     func setData(rank: Int, movie: MovieFront) {
@@ -154,8 +144,9 @@ extension ChartTableViewCell {
         releaseDateLabel.text = movie.releaseDate
         starRating.rating = movie.ratingScore/2
         ratingCountLabel.text = "(\(movie.ratingCount))"
-        if let imagePath = movie.posterPath {
-            posterImageView.setNewImage(APIService.configureUrlString(imagePath: imagePath))
-        }
+        
+        let imagePath = APIService.configureUrlString(imagePath: movie.posterPath)
+        let placeholder = UIImage(named: "img_placeholder")
+        posterImageView.setImage(path: imagePath, placeholder: placeholder)
     }
 }
