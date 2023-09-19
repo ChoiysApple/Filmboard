@@ -18,7 +18,8 @@ class APIService {
         return "https://api.themoviedb.org/3/movie/\(id)?api_key=\(APIKey)&language=\(language)"
     }
     
-    static func configureUrlString(imagePath: String) -> String {
+    static func configureUrlString(imagePath: String?) -> String? {
+        guard let imagePath else { return nil }
         return "https://image.tmdb.org/t/p/original/\(imagePath)"
     }
     

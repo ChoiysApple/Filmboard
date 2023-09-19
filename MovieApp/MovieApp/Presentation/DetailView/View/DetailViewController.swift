@@ -188,7 +188,7 @@ class DetailViewController: UIViewController {
     // Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
         
-        self.backDropImage.setImage(APIService.configureUrlString(imagePath: APIService.configureUrlString(imagePath: data.backdropPath)))
+        self.backDropImage.setImage(path: APIService.configureUrlString(imagePath: data.backdropPath))
         
         self.titleLabel.text = data.title
         self.taglineLabel.text = data.tagline

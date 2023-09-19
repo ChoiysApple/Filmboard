@@ -75,7 +75,5 @@ extension UIImageView {
             self.savedTask = task
             task.resume()
         }
-
-
     }
 }

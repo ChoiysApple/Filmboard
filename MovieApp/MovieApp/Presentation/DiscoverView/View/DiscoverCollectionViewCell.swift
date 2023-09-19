@@ -12,7 +12,7 @@ import RxSwift
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
     // MARK: Create properties
-    lazy var posterImageView = CancelableImageView().then {
+    lazy var posterImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
         $0.image = UIImage(named: "img_placeholder")
     }
@@ -59,26 +59,18 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        self.setPosterPlaceholderImage()
-        super.prepareForReuse()
-    }
 }
 
 
 //MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
     
-    /// Set poster imageView placeholder Image
-    private func setPosterPlaceholderImage() {
-        self.posterImageView.image = UIImage(named: "img_placeholder")
-    }
-    
     /// Set movie data to cell
     func setData(movie: MovieFront) {
         self.movieTitle.text = movie.title
-        if let imagePath = movie.posterPath {
-            self.posterImageView.setNewImage(APIService.configureUrlString(imagePath: imagePath))
-        }
+        
+        let imagePath = APIService.configureUrlString(imagePath: movie.posterPath)
+        let placeholder = UIImage(named: "img_placeholder")
+        posterImageView.setImage(path: imagePath, placeholder: placeholder)
     }
 }
