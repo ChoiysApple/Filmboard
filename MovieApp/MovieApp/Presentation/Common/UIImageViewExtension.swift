@@ -8,15 +8,20 @@
 import Foundation
 import UIKit
 
+// MARK: UIImageView Extension for setting images from url asynchronously
 extension UIImageView {
+    /// identifer for savedTask
     private static var taskKey = 0
+    /// identifer for savedUrl
     private static var urlKey = 0
     
+    /// associated objects of image downloading task
     private var savedTask: URLSessionTask? {
         get { objc_getAssociatedObject(self, &UIImageView.taskKey) as? URLSessionTask }
         set { objc_setAssociatedObject(self, &UIImageView.taskKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
 
+    /// associated objects of URL used for downloading task
     private var savedUrl: URL? {
         get { objc_getAssociatedObject(self, &UIImageView.urlKey) as? URL }
         set { objc_setAssociatedObject(self, &UIImageView.urlKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
@@ -25,6 +30,12 @@ extension UIImageView {
 
 extension UIImageView {
     
+    /**
+     Load image from url String and change image of UIImageView
+     - Parameters:
+        - path: url string for target Image. If path is nil, return after retrive saved task and set placeholder image
+        - placeholder: placeholder image to set before image loaded
+     */
     func setImage(path: String?, placeholder: UIImage? = nil) {
         if let path, let url = URL(string: path) {
             self.setImage(with: URL(string: path), placeholder: placeholder)
@@ -33,6 +44,12 @@ extension UIImageView {
         }
     }
     
+    /**
+     Load image from url String and change image of UIImageView
+     - Parameters:
+        - with: URL for target Image. If URL is nil, return after retrive saved task and set placeholder image
+        - placeholder: placeholder image to set before image loaded
+     */
     func setImage(with url: URL?, placeholder: UIImage? = nil) {
         
         self.savedTask?.cancel()
