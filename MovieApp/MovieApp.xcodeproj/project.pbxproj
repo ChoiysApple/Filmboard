@@ -27,6 +27,7 @@
 		7D40A08127BCC91E002C21FE /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D40A08027BCC91E002C21FE /* DescriptionView.swift */; };
 		7D40A08327BCD362002C21FE /* DoubleColumDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D40A08227BCD362002C21FE /* DoubleColumDescriptionView.swift */; };
 		7D7A7D3A2A7E744100E7879A /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */; };
+		7D85FCB42AB9B77800570222 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D85FCB32AB9B77800570222 /* UIImageViewExtension.swift */; };
 		7D8740F527841F5600E92C72 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8740F427841F5600E92C72 /* Constant.swift */; };
 		7D88534027BA1E7500CC915E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88533F27BA1E7500CC915E /* DetailViewController.swift */; };
 		7D88534327BA371D00CC915E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88534227BA371D00CC915E /* DetailViewModel.swift */; };
@@ -68,6 +69,7 @@
 		7D40A08027BCC91E002C21FE /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		7D40A08227BCD362002C21FE /* DoubleColumDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleColumDescriptionView.swift; sourceTree = "<group>"; };
 		7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		7D85FCB32AB9B77800570222 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		7D8740F427841F5600E92C72 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		7D88533F27BA1E7500CC915E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7D88534227BA371D00CC915E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				7D2870442AAF1B9D00C1AC94 /* CancelableImageView.swift */,
+				7D85FCB32AB9B77800570222 /* UIImageViewExtension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				7D0408B72A94815200402458 /* Cache.swift in Sources */,
 				7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */,
 				7D7A7D3A2A7E744100E7879A /* ImageCacheManager.swift in Sources */,
+				7D85FCB42AB9B77800570222 /* UIImageViewExtension.swift in Sources */,
 				7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */,
 				7DE8154327910DDC00726799 /* Keys.swift in Sources */,
 				7D90EC1B27D5EC160099B485 /* CreditHeaderView.swift in Sources */,
