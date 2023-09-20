@@ -18,6 +18,10 @@ class ChartViewModel {
     var currentCategory = MovieListCategory.Popular
     var existingData: [MovieFront] = []
     
+    func requestData() {
+        self.requestData(category: self.currentCategory)
+    }
+    
     func requestData(category: MovieListCategory) {
         
         if currentCategory != category { currentPage = 1 }
