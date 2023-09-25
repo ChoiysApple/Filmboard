@@ -37,7 +37,7 @@ class CreditTableViewDescriptionCell: UITableViewCell {
 
     private func setupView() {
         self.addSubview(descriptionView)
-        descriptionView.backgroundColor = UIColor(named: Colors.background)
+        descriptionView.backgroundColor = UIColor(named: UIColor.background)
         
         descriptionView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }

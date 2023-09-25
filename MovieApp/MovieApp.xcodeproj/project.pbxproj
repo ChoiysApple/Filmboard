@@ -37,7 +37,8 @@
 		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
 		7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2F2787E0C700938996 /* ChartViewController.swift */; };
 		7DDE9C322788045B00938996 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C312788045B00938996 /* ChartTableViewCell.swift */; };
-		7DE8154327910DDC00726799 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8154227910DDC00726799 /* Keys.swift */; };
+		945E07952AC1BAF600A54568 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E07942AC1BAF600A54568 /* Keys.swift */; };
+		945E07972AC1BC8900A54568 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945E07962AC1BC8900A54568 /* GenreModel.swift */; };
 		9F38C115EB6AF0EEE6B8E0C5 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1333EC5F83FAB13E0CD0D899 /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +77,8 @@
 		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7DDE9C2F2787E0C700938996 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7DDE9C312788045B00938996 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
-		7DE8154227910DDC00726799 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		945E07942AC1BAF600A54568 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		945E07962AC1BC8900A54568 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		FDA2E981A792A2B7397508AB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				7D37AD9F278D5C97004BBFF9 /* APIService.swift */,
-				7DE8154227910DDC00726799 /* Keys.swift */,
+				945E07942AC1BAF600A54568 /* Keys.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 				7D37ADA1278D5CE7004BBFF9 /* MovieList.swift */,
 				7D9D9F49278E928C0098FEA3 /* MovieFront.swift */,
 				7D202FAD27B262A6008F8051 /* MovieDetail.swift */,
+				945E07962AC1BC8900A54568 /* GenreModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -413,12 +416,13 @@
 				7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */,
 				7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */,
 				7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */,
-				7DE8154327910DDC00726799 /* Keys.swift in Sources */,
 				7D90EC1B27D5EC160099B485 /* CreditHeaderView.swift in Sources */,
 				7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */,
 				7D15F0DA27D726E50029C40F /* CreditFootherView.swift in Sources */,
 				7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */,
+				945E07972AC1BC8900A54568 /* GenreModel.swift in Sources */,
 				7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */,
+				945E07952AC1BAF600A54568 /* Keys.swift in Sources */,
 				7D8740F527841F5600E92C72 /* Constant.swift in Sources */,
 				7D90EC1927D5DA310099B485 /* CreditSection.swift in Sources */,
 			);

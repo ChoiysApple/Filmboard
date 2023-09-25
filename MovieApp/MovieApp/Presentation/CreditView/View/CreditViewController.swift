@@ -17,11 +17,11 @@ class CreditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: Colors.background)
+        self.view.backgroundColor = UIColor(named: UIColor.background)
         
         tableView = UITableView(frame: self.view.frame, style: .insetGrouped)
-        tableView.backgroundColor = UIColor(named: Colors.background)
-        tableView.separatorColor = UIColor(named: Colors.background)
+        tableView.backgroundColor = UIColor(named: UIColor.background)
+        tableView.separatorColor = UIColor(named: UIColor.background)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifiers.credit_table_cell)
         tableView.bounces = false
 
@@ -60,7 +60,7 @@ extension CreditViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.credit_table_cell, for: indexPath) as UITableViewCell
             
-            cell.backgroundColor = UIColor(named: Colors.light_background)
+            cell.backgroundColor = UIColor(named: UIColor.light_background)
             cell.textLabel?.textColor = .white
 
             let data = ExternalLink.data[indexPath.row]
