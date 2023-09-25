@@ -98,7 +98,7 @@ class ChartTableViewCell: UITableViewCell {
             $0.spacing = 5
         }
 
-        self.backgroundColor = UIColor(named: Colors.background)
+        self.backgroundColor = UIColor(named: UIColor.background)
         self.selectionStyle = .none
         
         //MARK: Set Constraints
