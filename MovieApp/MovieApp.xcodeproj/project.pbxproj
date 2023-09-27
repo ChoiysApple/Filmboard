@@ -39,7 +39,8 @@
 		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
 		7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2F2787E0C700938996 /* ChartViewController.swift */; };
 		7DDE9C322788045B00938996 /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C312788045B00938996 /* ChartTableViewCell.swift */; };
-		7DE8154327910DDC00726799 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8154227910DDC00726799 /* Keys.swift */; };
+		9440E7322AC440A1000CE141 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9440E7312AC440A1000CE141 /* GenreModel.swift */; };
+		9440E7342AC44102000CE141 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9440E7332AC44102000CE141 /* Keys.swift */; };
 		9F38C115EB6AF0EEE6B8E0C5 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1333EC5F83FAB13E0CD0D899 /* Pods_MovieApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +81,8 @@
 		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7DDE9C2F2787E0C700938996 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7DDE9C312788045B00938996 /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
-		7DE8154227910DDC00726799 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		9440E7312AC440A1000CE141 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
+		9440E7332AC44102000CE141 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		FDA2E981A792A2B7397508AB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				7D37AD9F278D5C97004BBFF9 /* APIService.swift */,
-				7DE8154227910DDC00726799 /* Keys.swift */,
+				9440E7332AC44102000CE141 /* Keys.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -224,6 +226,7 @@
 				7D37ADA1278D5CE7004BBFF9 /* MovieList.swift */,
 				7D9D9F49278E928C0098FEA3 /* MovieFront.swift */,
 				7D202FAD27B262A6008F8051 /* MovieDetail.swift */,
+				9440E7312AC440A1000CE141 /* GenreModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -468,16 +471,17 @@
 				7D40A08127BCC91E002C21FE /* DescriptionView.swift in Sources */,
 				7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */,
 				7D37ADA2278D5CE7004BBFF9 /* MovieList.swift in Sources */,
+				9440E7342AC44102000CE141 /* Keys.swift in Sources */,
 				7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */,
 				7D40A07F27BCC33D002C21FE /* IconLabel.swift in Sources */,
 				7D88534027BA1E7500CC915E /* DetailViewController.swift in Sources */,
 				7DDE9C302787E0C700938996 /* ChartViewController.swift in Sources */,
+				9440E7322AC440A1000CE141 /* GenreModel.swift in Sources */,
 				7D0408B72A94815200402458 /* Cache.swift in Sources */,
 				7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */,
 				7D7A7D3A2A7E744100E7879A /* ImageCacheManager.swift in Sources */,
 				7D85FCB42AB9B77800570222 /* UIImageViewExtension.swift in Sources */,
 				7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */,
-				7DE8154327910DDC00726799 /* Keys.swift in Sources */,
 				7D90EC1B27D5EC160099B485 /* CreditHeaderView.swift in Sources */,
 				7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */,
 				7D15F0DA27D726E50029C40F /* CreditFootherView.swift in Sources */,

@@ -22,3 +22,9 @@ extension UIImage {
     }
     
 }
+
+extension UIColor {
+    static let background = "BgColor"
+    static let light_background = "LightBgColor"
+    static let placeholder = "PlaceholderTextColor"
+}

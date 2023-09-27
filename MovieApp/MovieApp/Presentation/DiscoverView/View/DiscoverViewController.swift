@@ -28,7 +28,7 @@ class DiscoverViewController: UIViewController {
         var collectionView =  UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
         collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
         collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
-        collectionView.backgroundColor = UIColor(named: Colors.background)
+        collectionView.backgroundColor = UIColor(named: UIColor.background)
         
         return collectionView
     }()
@@ -45,7 +45,7 @@ class DiscoverViewController: UIViewController {
     
     private func setUpView() {
         self.title = "Discover"
-        self.view.backgroundColor = UIColor(named: Colors.background)
+        self.view.backgroundColor = UIColor(named: UIColor.background)
         self.dismissKeyboard()
         
         collectionView.dataSource = self
