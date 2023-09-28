@@ -11,7 +11,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     let appearance = UITabBarAppearance().then {
         $0.configureWithOpaqueBackground()
-        $0.backgroundColor = UIColor(named: Colors.light_background)
+        $0.backgroundColor = UIColor(named: UIColor.light_background)
     }
 
     override func viewDidLoad() {

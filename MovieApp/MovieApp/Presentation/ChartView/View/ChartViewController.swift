@@ -14,7 +14,7 @@ class ChartViewController: UIViewController {
     
     // MARK: - UI Components
     lazy var tableView = UITableView().then {
-        $0.backgroundColor = UIColor(named: Colors.background)
+        $0.backgroundColor = UIColor(named: UIColor.background)
         $0.allowsSelection = true
         $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
         
@@ -26,7 +26,7 @@ class ChartViewController: UIViewController {
     lazy var navigationAppearance = UINavigationBarAppearance().then {
         $0.titleTextAttributes = [.foregroundColor: UIColor.white]
         $0.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        $0.backgroundColor = UIColor(named: Colors.background)
+        $0.backgroundColor = UIColor(named: UIColor.background)
     }
     
     // MARK: - Instances
@@ -52,7 +52,7 @@ class ChartViewController: UIViewController {
     
     private func setUpView() {
         
-        self.view.backgroundColor = UIColor(named: Colors.background)
+        self.view.backgroundColor = UIColor(named: UIColor.background)
         self.view.addSubview(tableView)
         self.tableView.dataSource = self
         self.tableView.delegate = self

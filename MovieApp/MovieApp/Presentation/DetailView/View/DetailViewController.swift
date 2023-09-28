@@ -124,7 +124,7 @@ class DetailViewController: UIViewController {
     
     private func setUpView() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.view.backgroundColor = UIColor(named: Colors.background)
+        self.view.backgroundColor = UIColor(named: UIColor.background)
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.bounces = false
     }
