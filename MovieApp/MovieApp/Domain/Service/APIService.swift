@@ -10,19 +10,23 @@ import RxSwift
 
 class APIService {
     
+    /// Movie list
     static func configureUrlString(category: MovieListCategory, language: Language, page: Int) -> String {
         return "https://api.themoviedb.org/3/movie/\(category.key)?api_key=\(APIKey)&language=\(language.key)&page=\(page)"
     }
     
+    /// Movie detail
     static func configureUrlString(id: Int, language: Language) -> String {
         return "https://api.themoviedb.org/3/movie/\(id)?api_key=\(APIKey)&language=\(language)"
     }
     
+    /// Imagepath
     static func configureUrlString(imagePath: String?) -> String? {
         guard let imagePath else { return nil }
         return "https://image.tmdb.org/t/p/original/\(imagePath)"
     }
     
+    /// Keyword search
     static func configureUrlString(keyword: String, language: Language, page: Int) -> String {
         return "https://api.themoviedb.org/3/search/movie?query=\(keyword)&api_key=\(APIKey)&language=\(language.key)&page=\(page)"
     }
@@ -36,6 +40,8 @@ class APIService {
         }
         
         let task = URLSession(configuration: .default).dataTask(with: Url) { (data, response, error) in
+            
+            print("Request \(Url.absoluteString)")
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 onComplete(.failure(error))
