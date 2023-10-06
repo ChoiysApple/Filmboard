@@ -122,14 +122,14 @@ extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
 // MARK: Dismiss Keyaord
 extension DiscoverViewController {
     func dismissKeyboard() {
-           let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
-           tap.cancelsTouchesInView = false
-           view.addGestureRecognizer(tap)
-        }
-        
-        @objc private func dismissKeyboardTouchOutside() {
-           view.endEditing(true)
-        }
+       let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
+       tap.cancelsTouchesInView = false
+       view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboardTouchOutside() {
+       view.endEditing(true)
+    }
 }
 
 // MARK: Refresh Control
