@@ -15,11 +15,12 @@ class DiscoverViewController: UIViewController {
     private let viewModel = DiscoverViewModel()
     private let disposeBag = DisposeBag()
     
+    lazy var headerView = DiscoverCollectionHeaderView()
+    
     lazy var collectionView = { () -> UICollectionView in
         
         // FlowLayout
         var flowLayout = UICollectionViewFlowLayout()
-        flowLayout.headerReferenceSize = CGSize(width: self.preferredContentSize.width, height: 180)
         flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         flowLayout.minimumInteritemSpacing = 20
         flowLayout.minimumLineSpacing = 20
@@ -27,7 +28,6 @@ class DiscoverViewController: UIViewController {
         // Collection View
         var collectionView =  UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
         collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
-        collectionView.register(DiscoverCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header)
         collectionView.backgroundColor = UIColor(named: UIColor.background)
         
         return collectionView
@@ -59,8 +59,20 @@ class DiscoverViewController: UIViewController {
     }
     
     private func setUpLayout() {
-        self.view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { $0.edges.equalTo(self.view.safeAreaLayoutGuide) }
+        
+        [headerView, collectionView].forEach { self.view.addSubview($0) }
+        
+        headerView.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(180)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(headerView.snp.bottom)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
     private func bindData() {
@@ -70,6 +82,10 @@ class DiscoverViewController: UIViewController {
                 self?.collectionView.reloadData()
             }
             .disposed(by: disposeBag)
+        
+        headerView.searchFieldCallBack = { [weak self] keyword in
+            self?.viewModel.requestData(keyword: keyword, page: 1)
+        }
     }
 
 }
@@ -85,21 +101,6 @@ extension DiscoverViewController: UICollectionViewDataSource {
         
         cell.setData(movie: viewModel.movieListData.value[indexPath.row])
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: identifiers.discover_collection_header, for: indexPath) as? DiscoverCollectionHeaderView else {
-                return UICollectionReusableView()
-            }
-            header.searchFieldCallBack = { [weak self] keyword in
-                self?.viewModel.requestData(keyword: keyword, page: 1)
-            }
-            return header
-        default:
-            return UICollectionReusableView()
-        }
     }
 }
 
@@ -122,14 +123,14 @@ extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
 // MARK: Dismiss Keyaord
 extension DiscoverViewController {
     func dismissKeyboard() {
-           let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
-           tap.cancelsTouchesInView = false
-           view.addGestureRecognizer(tap)
-        }
-        
-        @objc private func dismissKeyboardTouchOutside() {
-           view.endEditing(true)
-        }
+       let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
+       tap.cancelsTouchesInView = false
+       view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboardTouchOutside() {
+       view.endEditing(true)
+    }
 }
 
 // MARK: Refresh Control

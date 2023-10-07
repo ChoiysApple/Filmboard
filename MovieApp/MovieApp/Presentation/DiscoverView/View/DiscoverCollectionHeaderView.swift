@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import RxSwift
 
-class DiscoverCollectionHeaderView: UICollectionReusableView {
+class DiscoverCollectionHeaderView: UIView {
     
     var searchFieldCallBack: ((String) -> Void)?
     private let disposeBag = DisposeBag()
