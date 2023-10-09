@@ -16,7 +16,10 @@ class DetailViewController: UIViewController {
     private let disposeBag = DisposeBag()
 
     // MARK: UI
-    let scrollView = UIScrollView()
+    let scrollView = UIScrollView().then {
+        $0.contentInsetAdjustmentBehavior = .never
+        $0.bounces = false
+    }
     let contentView = UIView()
     
     lazy var backButton = UIButton().then {
@@ -120,8 +123,6 @@ class DetailViewController: UIViewController {
     private func setUpView() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = UIColor(named: UIColor.background)
-        scrollView.contentInsetAdjustmentBehavior = .never
-        scrollView.bounces = false
     }
         
     private func setUpLayout() {
