@@ -16,7 +16,10 @@ class DetailViewController: UIViewController {
     private let disposeBag = DisposeBag()
 
     // MARK: UI
-    let scrollView = UIScrollView()
+    let scrollView = UIScrollView().then {
+        $0.contentInsetAdjustmentBehavior = .never
+        $0.bounces = false
+    }
     let contentView = UIView()
     
     lazy var backButton = UIButton().then {
@@ -24,11 +27,6 @@ class DetailViewController: UIViewController {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .white
         $0.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
-    }
-    
-    @objc private func backButtonAction() {
-        print(#function)
-        self.navigationController?.popViewController(animated: true)
     }
     
     // BackDrop
@@ -123,10 +121,10 @@ class DetailViewController: UIViewController {
     }
     
     private func setUpView() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = UIColor(named: UIColor.background)
-        scrollView.contentInsetAdjustmentBehavior = .never
-        scrollView.bounces = false
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
         
     private func setUpLayout() {
@@ -183,7 +181,9 @@ class DetailViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
+}
 
+extension DetailViewController {
     
     // Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
@@ -202,11 +202,7 @@ class DetailViewController: UIViewController {
         let genres = data.genres.map { $0.name }.joined(separator: ", ")
         self.dateGenre.rightDescription.contentLabel.text = genres
     }
-        
-}
 
-// MARK: Constraint Funciton
-extension DetailViewController {
     
     // FIXME: Refactor UI code using stackview and remove this method
     /// Add Constrant to put new-UIView below target-UIView
@@ -215,5 +211,18 @@ extension DetailViewController {
             make.left.right.equalToSuperview()
             make.top.equalTo(target.snp.bottom)
         }
+    }
+}
+
+// MARK: Navigation
+extension DetailViewController:UIGestureRecognizerDelegate {
+    
+    @objc private func backButtonAction() {
+        print(#function)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
