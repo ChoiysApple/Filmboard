@@ -26,11 +26,6 @@ class DetailViewController: UIViewController {
         $0.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default), forImageIn: .normal)
     }
     
-    @objc private func backButtonAction() {
-        print(#function)
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     // BackDrop
     lazy var backDropImage = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -183,7 +178,9 @@ class DetailViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
+}
 
+extension DetailViewController {
     
     // Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
@@ -202,11 +199,7 @@ class DetailViewController: UIViewController {
         let genres = data.genres.map { $0.name }.joined(separator: ", ")
         self.dateGenre.rightDescription.contentLabel.text = genres
     }
-        
-}
 
-// MARK: Constraint Funciton
-extension DetailViewController {
     
     // FIXME: Refactor UI code using stackview and remove this method
     /// Add Constrant to put new-UIView below target-UIView
@@ -216,4 +209,10 @@ extension DetailViewController {
             make.top.equalTo(target.snp.bottom)
         }
     }
+    
+    @objc private func backButtonAction() {
+        print(#function)
+        self.navigationController?.popViewController(animated: true)
+    }
+
 }
