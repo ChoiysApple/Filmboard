@@ -121,8 +121,10 @@ class DetailViewController: UIViewController {
     }
     
     private func setUpView() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = UIColor(named: UIColor.background)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
         
     private func setUpLayout() {
@@ -210,10 +212,17 @@ extension DetailViewController {
             make.top.equalTo(target.snp.bottom)
         }
     }
+}
+
+// MARK: Navigation
+extension DetailViewController:UIGestureRecognizerDelegate {
     
     @objc private func backButtonAction() {
         print(#function)
         self.navigationController?.popViewController(animated: true)
     }
-
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
