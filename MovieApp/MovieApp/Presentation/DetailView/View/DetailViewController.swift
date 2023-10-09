@@ -185,21 +185,41 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController {
     
+    
     // Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
         
-        self.backDropImage.setImage(path: APIService.configureUrlString(imagePath: data.backdropPath))
+        // FIXME: 
+        if let backdropPath = data.backdropPath {
+            self.backDropImage.setImage(path: APIService.configureUrlString(imagePath: data.backdropPath))
+        } else {
+            self.backDropImage.isHidden = true
+            self.backDropImage.snp.remakeConstraints { make in
+                make.top.left.right.equalToSuperview()
+                make.width.equalToSuperview()
+                make.bottom.equalTo(backButton.snp.bottom)
+            }
+        }
         
         self.titleLabel.text = data.title
         self.taglineLabel.text = data.tagline
         
-        self.runtimeIconLabel.label.text = "\(data.runtime) min"
-        self.ratingIconLabel.label.text = String(data.voteAverage)
+        if let runtime = data.runtime {
+            self.runtimeIconLabel.label.text = "\(runtime) min"
+        } else {
+            self.runtimeIconLabel.isHidden = true
+        }
+        
+        if let voteAverage = data.voteAverage {
+            self.ratingIconLabel.label.text = String(voteAverage)
+        } else {
+            self.ratingIconLabel.isHidden = true
+        }
         
         self.overview.contentLabel.text = data.overview
-        self.dateGenre.leftDescription.contentLabel.text = data.releaseDate.replacingOccurrences(of: "-", with: ".")
+        self.dateGenre.leftDescription.contentLabel.text = data.releaseDate?.replacingOccurrences(of: "-", with: ".")
         
-        let genres = data.genres.map { $0.name }.joined(separator: ", ")
+        let genres = data.genres?.compactMap { $0.name }.joined(separator: ", ")
         self.dateGenre.rightDescription.contentLabel.text = genres
     }
 
