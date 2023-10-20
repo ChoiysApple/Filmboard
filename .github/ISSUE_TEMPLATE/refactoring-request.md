@@ -8,13 +8,13 @@ assignees: ''
 ---
 
 ## Abstract 
-// Short describe about idea
+<!--- Short describe about idea -->
 
 ### Existing Code
-// Describe what code will be changed
+<!--- Describe what code will be changed -->
 
 ### Benefits
-// Describe what will be improved by this change
+<!--- Describe what will be improved by this change -->
 
 ### Reference
-// [Optional] If there's any reference, note here
+<!--- [Optional] If there's any reference, note here -->

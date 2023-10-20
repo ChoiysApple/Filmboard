@@ -8,10 +8,10 @@ assignees: ''
 ---
 
 ### Description
-// Describe about feature or expected changes
+<!--- Describe about feature or expected changes -->
 
 ### Benefit
-// Describe what benefits project can get from this feature
+<!--- Describe what benefits project can get from this feature -->
 
 ### Additional context
-// [Optional] Add any other context or screenshots about the feature request here.
+<!--- [Optional] Add any other context or screenshots about the feature request here. -->
