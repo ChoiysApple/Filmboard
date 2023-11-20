@@ -1,2 +1,6 @@
+disabled_rules:
+- line_length
+- force_try # need to enable force_try after refactoring issue 43 fixed
+
 excluded:
 - Pods
