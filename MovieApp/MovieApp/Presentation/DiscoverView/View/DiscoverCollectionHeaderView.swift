@@ -26,7 +26,7 @@ class DiscoverCollectionHeaderView: UIView {
     
     lazy var searchField = PaddingTextField().then {
         $0.layer.cornerRadius = 20
-        $0.backgroundColor = UIColor(named: UIColor.light_background)
+        $0.backgroundColor = UIColor(named: UIColor.lightBackground)
         $0.textColor = .white
         
         let placeholderColor = UIColor(named: UIColor.placeholder) ?? UIColor.lightGray

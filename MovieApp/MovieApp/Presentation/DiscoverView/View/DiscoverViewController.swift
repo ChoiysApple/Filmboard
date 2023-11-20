@@ -27,7 +27,7 @@ class DiscoverViewController: UIViewController {
 
         // Collection View
         var collectionView =  UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
-        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: identifiers.discover_collection_cell)
+        collectionView.register(DiscoverCollectionViewCell.self, forCellWithReuseIdentifier: Identifiers.discover_collection_cell)
         collectionView.backgroundColor = UIColor(named: UIColor.background)
         
         return collectionView
@@ -97,7 +97,7 @@ extension DiscoverViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.discover_collection_cell, for: indexPath) as? DiscoverCollectionViewCell else { return UICollectionViewCell() }
         
         cell.setData(movie: viewModel.movieListData.value[indexPath.row])
         return cell

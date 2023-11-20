@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct identifiers {
+// swiftlint:disable identifier_name
+struct Identifiers {
     static let discover_collection_cell = "DiscoverCollectionCell"
     
     static let chart_table_cell = "ChartTableCell"

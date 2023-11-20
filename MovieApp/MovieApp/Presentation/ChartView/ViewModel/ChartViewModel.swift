@@ -12,10 +12,10 @@ import RxRelay
 class ChartViewModel {
     
     let movieListData = BehaviorRelay<[MovieFront]>(value: [])
-    let listTitle = BehaviorSubject<String>(value: MovieListCategory.Popular.title)
+    let listTitle = BehaviorSubject<String>(value: MovieListCategory.popular.title)
     
     var currentPage = 1
-    var currentCategory = MovieListCategory.Popular
+    var currentCategory = MovieListCategory.popular
     var existingData: [MovieFront] = []
     
     func requestData() {
@@ -38,7 +38,7 @@ class ChartViewModel {
     
     func fetchData(category: MovieListCategory) {
         
-        let url = APIService.configureUrlString(category: category, language: .English, page: currentPage)
+        let url = APIService.configureUrlString(category: category, language: .english, page: currentPage)
         let data = APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> [MovieListResult] in
                 

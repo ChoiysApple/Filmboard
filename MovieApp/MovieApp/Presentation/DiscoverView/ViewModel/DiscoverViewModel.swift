@@ -15,7 +15,7 @@ class DiscoverViewModel {
     private var disposeBag = DisposeBag()
         
     func requestData(page: Int) {
-        let url = APIService.configureUrlString(category: .NowPlaying, language: .English, page: page)
+        let url = APIService.configureUrlString(category: .nowPlaying, language: .english, page: page)
         APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> [MovieFront] in
                 guard let response = try? JSONDecoder().decode(MovieList.self, from: data) else { return [] }
@@ -33,7 +33,7 @@ class DiscoverViewModel {
             return
         }
         
-        let url = APIService.configureUrlString(keyword: keyword, language: .English, page: page)
+        let url = APIService.configureUrlString(keyword: keyword, language: .english, page: page)
         APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> [MovieFront] in
                 guard let response = try? JSONDecoder().decode(MovieList.self, from: data) else { return [] }
