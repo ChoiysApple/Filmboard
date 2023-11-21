@@ -44,5 +44,4 @@ class DiscoverViewModel {
             .disposed(by: disposeBag)
     }
     
-
 }

@@ -15,7 +15,7 @@ class DiscoverCollectionHeaderView: UIView {
     var searchFieldCallBack: ((String) -> Void)?
     private let disposeBag = DisposeBag()
     
-    //MARK: UI Properties
+    // MARK: UI Properties
     lazy var titleLabel = UILabel().then {
         $0.textColor = .white
         $0.numberOfLines = 0

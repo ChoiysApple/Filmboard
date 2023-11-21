@@ -31,7 +31,6 @@ class APIService {
         return "https://api.themoviedb.org/3/search/movie?query=\(keyword)&api_key=\(APIKey)&language=\(language.key)&page=\(page)"
     }
     
-    
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
         guard let urlString = URL(string: url) else {
@@ -61,7 +60,7 @@ class APIService {
     }
 }
 
-//MARK: Rx
+// MARK: Rx
 extension APIService {
     
     static func fetchWithRx(url: String, retries: Int) -> Observable<Data> {
@@ -88,13 +87,12 @@ extension String {
     }
 }
 
-
-//MARK: - Enumerations for API url configuration
+// MARK: - Enumerations for API url configuration
 enum MovieListCategory {
     case popular, upcomming, topRated, nowPlaying
     
     var key: String {
-        switch self{
+        switch self {
         case .popular: return "popular"
         case .upcomming: return "upcomming"
         case .topRated: return "top_rated"
@@ -103,7 +101,7 @@ enum MovieListCategory {
     }
     
     var title: String {
-        switch self{
+        switch self {
         case .popular: return "Popular"
         case .upcomming: return "Upcomming"
         case .topRated: return "Top Rated"
@@ -116,7 +114,7 @@ enum Language {
     case korean, english
     
     var key: String {
-        switch self{
+        switch self {
         case .korean: return "ko-KR"
         case .english: return "en-US"
         }

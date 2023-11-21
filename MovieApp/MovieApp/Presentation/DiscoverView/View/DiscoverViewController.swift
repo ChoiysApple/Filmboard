@@ -51,7 +51,7 @@ class DiscoverViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
+        let customRefreshControl = UIRefreshControl().then {  $0.tintColor = .white }
         collectionView.refreshControl = customRefreshControl
         collectionView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -123,7 +123,7 @@ extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
 // MARK: Dismiss Keyaord
 extension DiscoverViewController {
     func dismissKeyboard() {
-       let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action:    #selector(DiscoverViewController.dismissKeyboardTouchOutside))
+       let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DiscoverViewController.dismissKeyboardTouchOutside))
        tap.cancelsTouchesInView = false
        view.addGestureRecognizer(tap)
     }

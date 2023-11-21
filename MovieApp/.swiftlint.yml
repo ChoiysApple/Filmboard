@@ -1,5 +1,8 @@
 disabled_rules:
 - line_length
+- trailing_whitespace
+- blanket_disable_command
+- unused_closure_parameter
 - force_try # need to enable force_try after refactoring issue 43 fixed
 
 excluded:

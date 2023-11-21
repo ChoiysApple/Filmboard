@@ -61,8 +61,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     
 }
 
-
-//MARK: Insert data to cell
+// MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
     
     /// Set movie data to cell

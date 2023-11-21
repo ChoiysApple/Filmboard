@@ -42,6 +42,4 @@ class CreditTableViewDescriptionCell: UITableViewCell {
         descriptionView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 
-
-
 }

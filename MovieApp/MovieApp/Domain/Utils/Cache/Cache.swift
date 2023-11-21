@@ -34,7 +34,7 @@ final class Cache<Key: Hashable, Value> {
     */
     func value(forKey key: Key) -> Value? {
         let entry = data.object(forKey: WrappedKey(key))
-        print("Get cached data type: \(String(describing: Value.self))\n value: \(entry?.value)")
+        print("Get cached data type: \(String(describing: Value.self))\n value: \(String(describing: entry?.value))")
         return entry?.value
     }
     

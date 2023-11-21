@@ -41,14 +41,13 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let elseItem = CreditViewController()
         elseItem.tabBarItem = UITabBarItem(title: "Credit", image: UIImage(systemName: "ellipsis"), selectedImage: UIImage(systemName: "Credits"))
         
-
         self.viewControllers = [discoverNavigationItem, chartNavigationItem, elseItem]
     }
 
-    //Delegate methods
+    // Delegate methods
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         print("Should select viewController: \(viewController.title ?? "") ?")
-        return true;
+        return true
     }
     
 }

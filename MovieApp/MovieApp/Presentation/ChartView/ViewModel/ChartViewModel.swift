@@ -39,7 +39,8 @@ class ChartViewModel {
     func fetchData(category: MovieListCategory) {
         
         let url = APIService.configureUrlString(category: category, language: .english, page: currentPage)
-        let data = APIService.fetchWithRx(url: url, retries: 2)
+        
+        _ = APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> [MovieListResult] in
                 
                 let response = try! JSONDecoder().decode(MovieList.self, from: data)

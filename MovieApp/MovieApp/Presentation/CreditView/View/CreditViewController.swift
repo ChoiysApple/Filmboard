@@ -28,7 +28,6 @@ class CreditViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        
         applyConstraint()
     }
     
@@ -40,10 +39,9 @@ class CreditViewController: UIViewController {
         
     }
 
-
 }
 
-//MARK: DataSource
+// MARK: DataSource
 extension CreditViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,7 +51,6 @@ extension CreditViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? ExternalLink.data.count : 1
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -85,7 +82,7 @@ extension CreditViewController: UITableViewDataSource {
 
 extension CreditViewController: UITableViewDelegate {
         
-    //MARK: Header & Footer
+    // MARK: Header & Footer
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return section == 0 ? CreditHeaderView() : nil
     }
@@ -98,8 +95,7 @@ extension CreditViewController: UITableViewDelegate {
         return section == CreditSection.allCases.count-1 ? 50 : 0
     }
     
-    
-    //MARK: Cell Selection
+    // MARK: Cell Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
@@ -110,4 +106,3 @@ extension CreditViewController: UITableViewDelegate {
     }
         
 }
-

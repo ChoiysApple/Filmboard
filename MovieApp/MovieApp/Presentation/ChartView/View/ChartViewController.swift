@@ -57,7 +57,7 @@ class ChartViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
+        let customRefreshControl = UIRefreshControl().then {  $0.tintColor = .white }
         tableView.refreshControl = customRefreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -127,8 +127,8 @@ extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView.cellForRow(at: indexPath) is ChartTableViewCell else { return }
         
-        let vc = DetailViewController(id: viewModel.movieListData.value[indexPath.row].id)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let detailVC = DetailViewController(id: viewModel.movieListData.value[indexPath.row].id)
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -137,14 +137,14 @@ extension ChartViewController: UITableViewDelegate {
     
 }
 
-//MARK: Scroll Features
+// MARK: Scroll Features
 extension ChartViewController {
     
     // RefreshControll
     @objc private func refreshData() {
         
         var category: MovieListCategory? {
-            switch (self.navigationItem.title){
+            switch navigationItem.title {
             case MovieListCategory.popular.title: return MovieListCategory.popular
             case MovieListCategory.topRated.title: return MovieListCategory.topRated
             case MovieListCategory.nowPlaying.title: return MovieListCategory.nowPlaying
@@ -152,11 +152,10 @@ extension ChartViewController {
             }
         }
         
-        if let _ = category { self.viewModel.refreshData() }
+        if category != nil { self.viewModel.refreshData() }
         self.tableView.refreshControl?.endRefreshing()
         
     }
-    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
@@ -168,4 +167,3 @@ extension ChartViewController {
     }
 
 }
-
