@@ -18,7 +18,7 @@ class CreditTableViewDescriptionCell: UITableViewCell {
     }
     
     init (title: String, description: String) {
-        super.init(style: .default, reuseIdentifier: identifiers.chart_table_cell)
+        super.init(style: .default, reuseIdentifier: Identifiers.chart_table_cell)
         
         setupView()
         descriptionView.titleLabel.text = title
@@ -41,7 +41,5 @@ class CreditTableViewDescriptionCell: UITableViewCell {
         
         descriptionView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
-
-
 
 }

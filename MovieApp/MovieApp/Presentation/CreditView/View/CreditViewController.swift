@@ -22,12 +22,11 @@ class CreditViewController: UIViewController {
         tableView = UITableView(frame: self.view.frame, style: .insetGrouped)
         tableView.backgroundColor = UIColor(named: UIColor.background)
         tableView.separatorColor = UIColor(named: UIColor.background)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifiers.credit_table_cell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.credit_table_cell)
         tableView.bounces = false
 
         tableView.dataSource = self
         tableView.delegate = self
-        
         
         applyConstraint()
     }
@@ -40,10 +39,9 @@ class CreditViewController: UIViewController {
         
     }
 
-
 }
 
-//MARK: DataSource
+// MARK: DataSource
 extension CreditViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,13 +52,12 @@ extension CreditViewController: UITableViewDataSource {
         return section == 0 ? ExternalLink.data.count : 1
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.credit_table_cell, for: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.credit_table_cell, for: indexPath) as UITableViewCell
             
-            cell.backgroundColor = UIColor(named: UIColor.light_background)
+            cell.backgroundColor = UIColor(named: UIColor.lightBackground)
             cell.textLabel?.textColor = .white
 
             let data = ExternalLink.data[indexPath.row]
@@ -85,7 +82,7 @@ extension CreditViewController: UITableViewDataSource {
 
 extension CreditViewController: UITableViewDelegate {
         
-    //MARK: Header & Footer
+    // MARK: Header & Footer
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return section == 0 ? CreditHeaderView() : nil
     }
@@ -98,8 +95,7 @@ extension CreditViewController: UITableViewDelegate {
         return section == CreditSection.allCases.count-1 ? 50 : 0
     }
     
-    
-    //MARK: Cell Selection
+    // MARK: Cell Selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
@@ -110,4 +106,3 @@ extension CreditViewController: UITableViewDelegate {
     }
         
 }
-

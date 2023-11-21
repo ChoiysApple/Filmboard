@@ -31,17 +31,16 @@ class APIService {
         return "https://api.themoviedb.org/3/search/movie?query=\(keyword)&api_key=\(APIKey)&language=\(language.key)&page=\(page)"
     }
     
-    
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
-        guard let Url = URL(string: url) else {
+        guard let urlString = URL(string: url) else {
             print("Error: invalid url")
             return
         }
         
-        let task = URLSession(configuration: .default).dataTask(with: Url) { (data, response, error) in
+        let task = URLSession(configuration: .default).dataTask(with: urlString) { (data, response, error) in
             
-            print("Request \(Url.absoluteString)")
+            print("Request \(urlString.absoluteString)")
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 onComplete(.failure(error))
@@ -61,7 +60,7 @@ class APIService {
     }
 }
 
-//MARK: Rx
+// MARK: Rx
 extension APIService {
     
     static func fetchWithRx(url: String, retries: Int) -> Observable<Data> {
@@ -88,37 +87,36 @@ extension String {
     }
 }
 
-
-//MARK: - Enumerations for API url configuration
+// MARK: - Enumerations for API url configuration
 enum MovieListCategory {
-    case Popular, Upcomming, TopRated, NowPlaying
+    case popular, upcomming, topRated, nowPlaying
     
     var key: String {
-        switch self{
-        case .Popular: return "popular"
-        case .Upcomming: return "upcomming"
-        case .TopRated: return "top_rated"
-        case .NowPlaying: return "now_playing"
+        switch self {
+        case .popular: return "popular"
+        case .upcomming: return "upcomming"
+        case .topRated: return "top_rated"
+        case .nowPlaying: return "now_playing"
         }
     }
     
     var title: String {
-        switch self{
-        case .Popular: return "Popular"
-        case .Upcomming: return "Upcomming"
-        case .TopRated: return "Top Rated"
-        case .NowPlaying: return "Now Playing"
+        switch self {
+        case .popular: return "Popular"
+        case .upcomming: return "Upcomming"
+        case .topRated: return "Top Rated"
+        case .nowPlaying: return "Now Playing"
         }
     }
 }
 
 enum Language {
-    case Korean, English
+    case korean, english
     
     var key: String {
-        switch self{
-        case .Korean: return "ko-KR"
-        case .English: return "en-US"
+        switch self {
+        case .korean: return "ko-KR"
+        case .english: return "en-US"
         }
     }
 }

@@ -23,26 +23,26 @@ struct ExternalLink {
 }
 
 enum CreditSection: Int, CaseIterable {
-    case Reference, TechStack, DataSource
+    case reference, techStack, dataSource
     
     var numberOfRows: Int {
         switch self {
-        case .Reference: return ExternalLink.data.count
-        case .TechStack: return 1
-        case .DataSource: return 1
+        case .reference: return ExternalLink.data.count
+        case .techStack: return 1
+        case .dataSource: return 1
         }
     }
     
     var data: Any {
         switch self {
-        case .Reference: return ExternalLink.data
-        case .TechStack: return ["Tech Stack", """
+        case .reference: return ExternalLink.data
+        case .techStack: return ["Tech Stack", """
                                  - RxSwift
                                  - MVVM
                                  - UIKit(Snapkit)
                                  - RxDataSources
                                  """]
-        case .DataSource: return ["Movie Data", "The Movie DB API v3"]
+        case .dataSource: return ["Movie Data", "The Movie DB API v3"]
         }
     }
     

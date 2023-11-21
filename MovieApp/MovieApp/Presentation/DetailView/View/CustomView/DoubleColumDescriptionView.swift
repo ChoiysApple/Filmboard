@@ -22,7 +22,6 @@ class DoubleColumDescriptionView: UIView {
         $0.spacing = 0
     }
     
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()

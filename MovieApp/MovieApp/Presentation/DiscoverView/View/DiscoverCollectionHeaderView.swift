@@ -15,7 +15,7 @@ class DiscoverCollectionHeaderView: UIView {
     var searchFieldCallBack: ((String) -> Void)?
     private let disposeBag = DisposeBag()
     
-    //MARK: UI Properties
+    // MARK: UI Properties
     lazy var titleLabel = UILabel().then {
         $0.textColor = .white
         $0.numberOfLines = 0
@@ -26,7 +26,7 @@ class DiscoverCollectionHeaderView: UIView {
     
     lazy var searchField = PaddingTextField().then {
         $0.layer.cornerRadius = 20
-        $0.backgroundColor = UIColor(named: UIColor.light_background)
+        $0.backgroundColor = UIColor(named: UIColor.lightBackground)
         $0.textColor = .white
         
         let placeholderColor = UIColor(named: UIColor.placeholder) ?? UIColor.lightGray
