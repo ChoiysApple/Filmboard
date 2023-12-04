@@ -36,6 +36,7 @@
 		7D947CA9278C03E00031C7C9 /* CreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D947CA8278C03E00031C7C9 /* CreditViewController.swift */; };
 		7D9D9F4A278E928C0098FEA3 /* MovieFront.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9D9F49278E928C0098FEA3 /* MovieFront.swift */; };
 		7DB2C7792B1DDF6000431EE9 /* UICollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB2C7782B1DDF6000431EE9 /* UICollectionViewHelper.swift */; };
+		7DB2C77B2B1DE83900431EE9 /* CreditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB2C77A2B1DE83900431EE9 /* CreditTableViewCell.swift */; };
 		7DC7D34727913C89005C3D9C /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */; };
 		7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */; };
 		7DDE9C2D2787D6EE00938996 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */; };
@@ -81,6 +82,7 @@
 		7D947CA8278C03E00031C7C9 /* CreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditViewController.swift; sourceTree = "<group>"; };
 		7D9D9F49278E928C0098FEA3 /* MovieFront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFront.swift; sourceTree = "<group>"; };
 		7DB2C7782B1DDF6000431EE9 /* UICollectionViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewHelper.swift; sourceTree = "<group>"; };
+		7DB2C77A2B1DE83900431EE9 /* CreditTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditTableViewCell.swift; sourceTree = "<group>"; };
 		7DC7D34627913C89005C3D9C /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		7DC7D34927913E8F005C3D9C /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7DDE9C2C2787D6EE00938996 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				7D947CA8278C03E00031C7C9 /* CreditViewController.swift */,
 				7D90EC1A27D5EC160099B485 /* CreditHeaderView.swift */,
+				7DB2C77A2B1DE83900431EE9 /* CreditTableViewCell.swift */,
 				7D15F0D627D6F0AE0029C40F /* CreditTableViewDescriptionCell.swift */,
 				7D15F0D927D726E50029C40F /* CreditFootherView.swift */,
 			);
@@ -522,6 +525,7 @@
 				7D1979E827BE0C9A00CD3DB9 /* StyleExtensions.swift in Sources */,
 				7D1982EE2782D77500F2E745 /* AppDelegate.swift in Sources */,
 				7D37ADA0278D5C97004BBFF9 /* APIService.swift in Sources */,
+				7DB2C77B2B1DE83900431EE9 /* CreditTableViewCell.swift in Sources */,
 				7D40A08127BCC91E002C21FE /* DescriptionView.swift in Sources */,
 				7D2DD62527855A30000EBDE0 /* DiscoverCollectionHeaderView.swift in Sources */,
 				7D37ADA2278D5CE7004BBFF9 /* MovieList.swift in Sources */,
