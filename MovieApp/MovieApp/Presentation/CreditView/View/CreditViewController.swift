@@ -22,7 +22,8 @@ class CreditViewController: UIViewController {
         tableView = UITableView(frame: self.view.frame, style: .insetGrouped)
         tableView.backgroundColor = UIColor(named: UIColor.background)
         tableView.separatorColor = UIColor(named: UIColor.background)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.credit_table_cell)
+        tableView.register(CreditTableViewCell.self)
+        tableView.register(CreditTableViewDescriptionCell.self)
         tableView.bounces = false
 
         tableView.dataSource = self
@@ -55,25 +56,26 @@ extension CreditViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.credit_table_cell, for: indexPath) as UITableViewCell
-            
-            cell.backgroundColor = UIColor(named: UIColor.lightBackground)
-            cell.textLabel?.textColor = .white
+            guard let cell = tableView.dequeueReusableCell(CreditTableViewCell.self, for: indexPath) else {
+                return UITableViewCell()
+            }
 
             let data = ExternalLink.data[indexPath.row]
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = data.titleText
-            
             cell.detailTextLabel?.text = data.detailText
             
             return cell
+            
         } else {
 
-            guard let data = CreditSection(rawValue: indexPath.section)?.data as? [String] else {
-                let cell = UITableViewCell().then { $0.isHidden = true }
-                return cell
+            guard let data = CreditSection(rawValue: indexPath.section)?.data as? [String],
+                  let cell = tableView.dequeueReusableCell(CreditTableViewDescriptionCell.self, for: indexPath) else {
+                return UITableViewCell()
             }
-            return CreditTableViewDescriptionCell(title: data[0], description: data[1])
+            
+            cell.setUpData(title: data[0], description: data[1])
+            return cell
         }
             
     }

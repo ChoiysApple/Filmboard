@@ -11,7 +11,7 @@ import SnapKit
 import Cosmos
 import RxSwift
 
-class ChartTableViewCell: UITableViewCell {
+class ChartTableViewCell: UITableViewCell, ReusableCell {
     
     let margin = 10.0
     private var disposeBag = DisposeBag()
