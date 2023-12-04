@@ -28,7 +28,6 @@
 		7D79F7312B0E14C000800EF5 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D79F7302B0E14C000800EF5 /* MovieAPI.swift */; };
 		7D7A7D3A2A7E744100E7879A /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */; };
 		7D85FCB42AB9B77800570222 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D85FCB32AB9B77800570222 /* UIImageViewExtension.swift */; };
-		7D8740F527841F5600E92C72 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8740F427841F5600E92C72 /* Identifiers.swift */; };
 		7D88534027BA1E7500CC915E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88533F27BA1E7500CC915E /* DetailViewController.swift */; };
 		7D88534327BA371D00CC915E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88534227BA371D00CC915E /* DetailViewModel.swift */; };
 		7D90EC1927D5DA310099B485 /* CreditSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D90EC1827D5DA310099B485 /* CreditSection.swift */; };
@@ -74,7 +73,6 @@
 		7D79F7302B0E14C000800EF5 /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		7D7A7D392A7E744100E7879A /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		7D85FCB32AB9B77800570222 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
-		7D8740F427841F5600E92C72 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		7D88533F27BA1E7500CC915E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7D88534227BA371D00CC915E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		7D90EC1827D5DA310099B485 /* CreditSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditSection.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				7DE83DB02B12233A009BDE99 /* ReusableCell.swift */,
-				7D8740F427841F5600E92C72 /* Identifiers.swift */,
 				7D2870432AAF1B8500C1AC94 /* Utils */,
 				7DB2C7782B1DDF6000431EE9 /* UICollectionViewHelper.swift */,
 			);
@@ -546,7 +543,6 @@
 				7D15F0DA27D726E50029C40F /* CreditFootherView.swift in Sources */,
 				7DC7D34A27913E8F005C3D9C /* ChartViewModel.swift in Sources */,
 				7D1982F02782D77500F2E745 /* SceneDelegate.swift in Sources */,
-				7D8740F527841F5600E92C72 /* Identifiers.swift in Sources */,
 				7D90EC1927D5DA310099B485 /* CreditSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
