@@ -16,7 +16,7 @@ class ChartViewController: UIViewController {
     lazy var tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: UIColor.background)
         $0.allowsSelection = true
-        $0.register(ChartTableViewCell.self, forCellReuseIdentifier: Identifiers.chart_table_cell)
+        $0.register(ChartTableViewCell.self)
         
         let spinner = UIActivityIndicatorView(style: .medium)
         $0.tableFooterView = spinner
@@ -113,7 +113,7 @@ extension ChartViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.chart_table_cell) as? ChartTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(ChartTableViewCell.self, for: indexPath) else {
             return UITableViewCell()
         }
         

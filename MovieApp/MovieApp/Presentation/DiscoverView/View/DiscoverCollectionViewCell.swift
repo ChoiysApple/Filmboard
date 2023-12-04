@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class DiscoverCollectionViewCell: UICollectionViewCell {
+class DiscoverCollectionViewCell: UICollectionViewCell, ReusableCell {
     
     // MARK: Create properties
     lazy var posterImageView = UIImageView().then {
