@@ -27,8 +27,6 @@ class ChartViewModel {
         if currentCategory != category { currentPage = 1 }
         currentCategory = category
         fetchData(category: category)
-        
-        currentPage += 1
     }
     
     func refreshData() {
