@@ -14,8 +14,8 @@ extension UIEdgeInsets {
 extension UIImage {
     
     static var appIcon: UIImage? {
-        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: Any],
-              let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String: Any],
+        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String:Any],
+              let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? [String:Any],
               let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? [String],
               let icon = iconFiles.last else { return nil }
         return UIImage(named: icon)
@@ -25,6 +25,6 @@ extension UIImage {
 
 extension UIColor {
     static let background = "BgColor"
-    static let lightBackground = "LightBgColor"
+    static let light_background = "LightBgColor"
     static let placeholder = "PlaceholderTextColor"
 }

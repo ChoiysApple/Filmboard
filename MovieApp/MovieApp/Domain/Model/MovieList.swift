@@ -57,3 +57,4 @@ struct MovieListResult: Codable {
         case voteCount = "vote_count"
     }
 }
+

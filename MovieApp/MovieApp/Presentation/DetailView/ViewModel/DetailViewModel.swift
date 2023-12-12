@@ -20,7 +20,7 @@ class DetailViewModel {
     }
     
     func requestData(contentId: Int) {
-        let url = APIService.configureUrlString(id: contentId, language: .english)
+        let url = APIService.configureUrlString(id: contentId, language: .English)
         APIService.fetchWithRx(url: url, retries: 2)
             .map { data -> MovieDetail in
                 
@@ -33,3 +33,5 @@ class DetailViewModel {
     }
                         
 }
+    
+

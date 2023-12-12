@@ -22,6 +22,7 @@ class ImageCacheManager {
     - Returns: Retrun cached image for url. Retrun nil when cached image is not exist
     */
     func loadCachedData(for key: String) -> UIImage? {
+        let itemURL = NSString(string: key)
         return cache.value(forKey: key)
     }
     
@@ -32,6 +33,7 @@ class ImageCacheManager {
         - key:  String url of UIImage
      */
     func saveCacheData(of image: UIImage, for key: String) {
+        let itemURL = NSString(string: key)
         cache.insertValue(image, forKey: key)
     }
 }

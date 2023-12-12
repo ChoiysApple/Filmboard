@@ -19,7 +19,8 @@ struct MovieFront {
     let ratingCount: Int
 }
 
-extension MovieFront {
+
+extension MovieFront{
     static func convertFromMovieInfo(movie: MovieListResult) -> MovieFront {
         
         let genreValue: String = (movie.genreIDS.count > 0) ? genreCode[movie.genreIDS[0]] ?? "" : ""

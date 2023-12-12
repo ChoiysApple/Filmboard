@@ -40,16 +40,18 @@ class CreditHeaderView: UITableViewHeaderFooterView {
         appIconImageView.snp.makeConstraints { $0.height.equalTo(appIconImageView.snp.width) }
     }
     
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         self.addSubview(stack)
         
-        stack.snp.makeConstraints {
+        stack.snp.makeConstraints{
             $0.left.right.top.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-20)
         }
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

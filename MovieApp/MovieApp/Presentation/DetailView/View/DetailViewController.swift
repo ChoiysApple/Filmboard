@@ -96,7 +96,7 @@ class DetailViewController: UIViewController {
         $0.rightDescription.titleLabel.text = "Genre"
     }
     
-    let layout = UICollectionViewFlowLayout().then {
+    let layout = UICollectionViewFlowLayout().then{
         $0.sectionInset = UIEdgeInsets.detailViewComponentInset
         $0.itemSize = CGSize(width: 60, height: 60)
         $0.scrollDirection = .horizontal
@@ -170,7 +170,7 @@ class DetailViewController: UIViewController {
         appendView(view: overview, target: mainInfoLabelStack)
         appendView(view: dateGenre, target: overview)
         
-        dateGenre.snp.makeConstraints { $0.bottom.equalToSuperview() }
+        dateGenre.snp.makeConstraints{ $0.bottom.equalToSuperview() }
     }
     
     private func bindData() {
@@ -185,11 +185,13 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController {
     
+    
     // Binding Helper
     private func applyMovieDetailData(data: MovieDetail) {
         
+        // FIXME: 
         if let backdropPath = data.backdropPath {
-            self.backDropImage.setImage(path: APIService.configureUrlString(imagePath: backdropPath))
+            self.backDropImage.setImage(path: APIService.configureUrlString(imagePath: data.backdropPath))
         } else {
             self.backDropImage.isHidden = true
             self.backDropImage.snp.remakeConstraints { make in
@@ -221,6 +223,7 @@ extension DetailViewController {
         self.dateGenre.rightDescription.contentLabel.text = genres
     }
 
+    
     // FIXME: Refactor UI code using stackview and remove this method
     /// Add Constrant to put new-UIView below target-UIView
     private func appendView(view: UIView, target: UIView) {
@@ -232,7 +235,7 @@ extension DetailViewController {
 }
 
 // MARK: Navigation
-extension DetailViewController: UIGestureRecognizerDelegate {
+extension DetailViewController:UIGestureRecognizerDelegate {
     
     @objc private func backButtonAction() {
         print(#function)

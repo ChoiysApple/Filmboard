@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class DiscoverCollectionViewCell: UICollectionViewCell, ReusableCell {
+class DiscoverCollectionViewCell: UICollectionViewCell {
     
     // MARK: Create properties
     lazy var posterImageView = UIImageView().then {
@@ -61,7 +61,8 @@ class DiscoverCollectionViewCell: UICollectionViewCell, ReusableCell {
     
 }
 
-// MARK: Insert data to cell
+
+//MARK: Insert data to cell
 extension DiscoverCollectionViewCell {
     
     /// Set movie data to cell
