@@ -11,7 +11,7 @@ import SnapKit
 import Cosmos
 import RxSwift
 
-class ChartTableViewCell: UITableViewCell {
+class ChartTableViewCell: UITableViewCell, ReusableCell {
     
     let margin = 10.0
     private var disposeBag = DisposeBag()
@@ -69,7 +69,6 @@ class ChartTableViewCell: UITableViewCell {
         $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
     }
 
-    
     // MARK: initialize
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -101,7 +100,7 @@ class ChartTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor(named: UIColor.background)
         self.selectionStyle = .none
         
-        //MARK: Set Constraints
+        // MARK: Set Constraints
         self.addSubview(rankLabel)
         self.addSubview(posterImageView)
         self.addSubview(infoStackView)

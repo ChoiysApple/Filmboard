@@ -37,7 +37,7 @@ extension UIImageView {
         - placeholder: placeholder image to set before image loaded
      */
     func setImage(path: String?, placeholder: UIImage? = nil) {
-        if let path, let url = URL(string: path) {
+        if let path {
             self.setImage(with: URL(string: path), placeholder: placeholder)
         } else {
             self.setImage(with: nil, placeholder: placeholder)

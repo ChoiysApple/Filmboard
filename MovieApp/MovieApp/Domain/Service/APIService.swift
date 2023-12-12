@@ -10,38 +10,16 @@ import RxSwift
 
 class APIService {
     
-    /// Movie list
-    static func configureUrlString(category: MovieListCategory, language: Language, page: Int) -> String {
-        return "https://api.themoviedb.org/3/movie/\(category.key)?api_key=\(APIKey)&language=\(language.key)&page=\(page)"
-    }
-    
-    /// Movie detail
-    static func configureUrlString(id: Int, language: Language) -> String {
-        return "https://api.themoviedb.org/3/movie/\(id)?api_key=\(APIKey)&language=\(language)"
-    }
-    
-    /// Imagepath
-    static func configureUrlString(imagePath: String?) -> String? {
-        guard let imagePath else { return nil }
-        return "https://image.tmdb.org/t/p/original/\(imagePath)"
-    }
-    
-    /// Keyword search
-    static func configureUrlString(keyword: String, language: Language, page: Int) -> String {
-        return "https://api.themoviedb.org/3/search/movie?query=\(keyword)&api_key=\(APIKey)&language=\(language.key)&page=\(page)"
-    }
-    
-    
     static func fetchRequest(url: String, retries: Int, onComplete: @escaping (Result<Data, Error>) -> Void) {
         
-        guard let Url = URL(string: url) else {
+        guard let urlString = URL(string: url) else {
             print("Error: invalid url")
             return
         }
         
-        let task = URLSession(configuration: .default).dataTask(with: Url) { (data, response, error) in
+        let task = URLSession(configuration: .default).dataTask(with: urlString) { (data, response, error) in
             
-            print("Request \(Url.absoluteString)")
+            print("Request \(urlString.absoluteString)")
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 onComplete(.failure(error))
@@ -59,10 +37,6 @@ class APIService {
         }
         task.resume()
     }
-}
-
-//MARK: Rx
-extension APIService {
     
     static func fetchWithRx(url: String, retries: Int) -> Observable<Data> {
         return Observable.create { emitter in
@@ -85,40 +59,5 @@ extension APIService {
 extension String {
     var fullImagePath: String {
         return "https://image.tmdb.org/t/p/original/\(self)"
-    }
-}
-
-
-//MARK: - Enumerations for API url configuration
-enum MovieListCategory {
-    case Popular, Upcomming, TopRated, NowPlaying
-    
-    var key: String {
-        switch self{
-        case .Popular: return "popular"
-        case .Upcomming: return "upcomming"
-        case .TopRated: return "top_rated"
-        case .NowPlaying: return "now_playing"
-        }
-    }
-    
-    var title: String {
-        switch self{
-        case .Popular: return "Popular"
-        case .Upcomming: return "Upcomming"
-        case .TopRated: return "Top Rated"
-        case .NowPlaying: return "Now Playing"
-        }
-    }
-}
-
-enum Language {
-    case Korean, English
-    
-    var key: String {
-        switch self{
-        case .Korean: return "ko-KR"
-        case .English: return "en-US"
-        }
     }
 }

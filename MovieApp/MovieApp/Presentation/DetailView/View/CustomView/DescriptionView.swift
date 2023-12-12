@@ -71,6 +71,4 @@ class DescriptionView: UIView {
             make.left.right.equalToSuperview()
         }
     }
-
-
 }

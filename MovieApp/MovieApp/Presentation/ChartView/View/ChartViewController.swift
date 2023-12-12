@@ -16,7 +16,7 @@ class ChartViewController: UIViewController {
     lazy var tableView = UITableView().then {
         $0.backgroundColor = UIColor(named: UIColor.background)
         $0.allowsSelection = true
-        $0.register(ChartTableViewCell.self, forCellReuseIdentifier: identifiers.chart_table_cell)
+        $0.register(ChartTableViewCell.self)
         
         let spinner = UIActivityIndicatorView(style: .medium)
         $0.tableFooterView = spinner
@@ -42,7 +42,7 @@ class ChartViewController: UIViewController {
         setUpLayout()
         bindData()
 
-        viewModel.requestData(category: .Popular)
+        viewModel.requestData(category: .popular)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +57,7 @@ class ChartViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        let customRefreshControl = UIRefreshControl().then{  $0.tintColor = .white }
+        let customRefreshControl = UIRefreshControl().then {  $0.tintColor = .white }
         tableView.refreshControl = customRefreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -71,9 +71,9 @@ class ChartViewController: UIViewController {
         
         // Category Menu
         let categoryMenuItem = [
-            UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .Popular) }),
-            UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .TopRated) }),
-            UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in self.viewModel.requestData(category: .NowPlaying) })
+            UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .popular) }),
+            UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .topRated) }),
+            UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in self.viewModel.requestData(category: .nowPlaying) })
         ]
         let categoryMenu = UIMenu(title: "", image: nil, identifier: nil, options: [], children: categoryMenuItem)
         
@@ -113,7 +113,7 @@ extension ChartViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifiers.chart_table_cell) as? ChartTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(ChartTableViewCell.self, for: indexPath) else {
             return UITableViewCell()
         }
         
@@ -127,8 +127,8 @@ extension ChartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView.cellForRow(at: indexPath) is ChartTableViewCell else { return }
         
-        let vc = DetailViewController(id: viewModel.movieListData.value[indexPath.row].id)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let detailVC = DetailViewController(id: viewModel.movieListData.value[indexPath.row].id)
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -137,35 +137,33 @@ extension ChartViewController: UITableViewDelegate {
     
 }
 
-//MARK: Scroll Features
+// MARK: Scroll Features
 extension ChartViewController {
     
     // RefreshControll
     @objc private func refreshData() {
         
         var category: MovieListCategory? {
-            switch (self.navigationItem.title){
-            case MovieListCategory.Popular.title: return MovieListCategory.Popular
-            case MovieListCategory.TopRated.title: return MovieListCategory.TopRated
-            case MovieListCategory.NowPlaying.title: return MovieListCategory.NowPlaying
+            switch navigationItem.title {
+            case MovieListCategory.popular.title: return MovieListCategory.popular
+            case MovieListCategory.topRated.title: return MovieListCategory.topRated
+            case MovieListCategory.nowPlaying.title: return MovieListCategory.nowPlaying
             default: return nil
             }
         }
         
-        if let _ = category { self.viewModel.refreshData() }
+        if category != nil { self.viewModel.refreshData() }
         self.tableView.refreshControl?.endRefreshing()
         
     }
-    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.height {
-            viewModel.requestData(category: .Popular)
+            viewModel.requestData(category: .popular)
         }
     }
 
 }
-
