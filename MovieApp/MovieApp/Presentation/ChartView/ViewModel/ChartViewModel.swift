@@ -34,6 +34,11 @@ class ChartViewModel {
         fetchData(category: currentCategory)
     }
     
+    func requestMoreData() {
+        currentPage += 1
+        self.requestData()
+    }
+    
     func fetchData(category: MovieListCategory) {
         
         let url = APIService.configureUrlString(category: category, language: .english, page: currentPage)
