@@ -162,7 +162,7 @@ extension ChartViewController {
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.height {
-            viewModel.requestData(category: .popular)
+            viewModel.requestMoreData()
         }
     }
 
