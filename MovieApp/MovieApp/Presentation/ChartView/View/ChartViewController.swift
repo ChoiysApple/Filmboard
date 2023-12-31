@@ -92,7 +92,10 @@ class ChartViewController: UIViewController {
     private func bindData() {
         viewModel.movieListData
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] list in
+                if self?.viewModel.currentPage == 1 {
+                    self?.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                }
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -157,11 +160,6 @@ extension ChartViewController {
         
     }
     
-    private func scrollToTop() {
-        let firstIndex = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: firstIndex, at: .top, animated: false)
-    }
-
 }
 
 // MARK: Scroll Delegate methods
