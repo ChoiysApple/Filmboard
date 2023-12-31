@@ -54,6 +54,7 @@ class ChartViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(named: UIColor.background)
         self.view.addSubview(tableView)
+        self.tableView.separatorStyle = .none
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -94,7 +95,7 @@ class ChartViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] list in
                 if self?.viewModel.currentPage == 1 {
-                    self?.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                    self?.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
                 }
                 self?.tableView.reloadData()
             })
