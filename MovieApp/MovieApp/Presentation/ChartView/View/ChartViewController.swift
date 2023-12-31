@@ -157,6 +157,15 @@ extension ChartViewController {
         
     }
     
+    private func scrollToTop() {
+        let firstIndex = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: firstIndex, at: .top, animated: false)
+    }
+
+}
+
+// MARK: Scroll Delegate methods
+extension ChartViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -165,5 +174,4 @@ extension ChartViewController {
             viewModel.requestMoreData()
         }
     }
-
 }
