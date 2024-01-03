@@ -19,7 +19,7 @@ class APIService {
         
         let task = URLSession(configuration: .default).dataTask(with: urlString) { (data, response, error) in
             
-            print("Request \(urlString.absoluteString)")
+            print("[Request] \(urlString.absoluteString)")
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 onComplete(.failure(error))
@@ -42,11 +42,14 @@ class APIService {
         return Observable.create { emitter in
             
             fetchRequest(url: url, retries: retries) { result in
+                print("---------------------------\n[Response] \(url)")
                 switch result {
                 case .success(let data):
+                    print("Success \(String(decoding: data, as: UTF8.self))")
                     emitter.onNext(data)
                     emitter.onCompleted()
                 case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
                     emitter.onError(error)
                 }
             }

@@ -235,7 +235,6 @@ extension DetailViewController {
 extension DetailViewController: UIGestureRecognizerDelegate {
     
     @objc private func backButtonAction() {
-        print(#function)
         self.navigationController?.popViewController(animated: true)
     }
     

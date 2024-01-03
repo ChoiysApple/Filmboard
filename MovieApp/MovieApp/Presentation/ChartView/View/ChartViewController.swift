@@ -54,12 +54,16 @@ class ChartViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(named: UIColor.background)
         self.view.addSubview(tableView)
+        self.tableView.separatorStyle = .none
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
+        // FIXME: Refresh Control is not woking propery because of Scroll to Top action. Refactoring required
+        /*
         let customRefreshControl = UIRefreshControl().then {  $0.tintColor = .white }
         tableView.refreshControl = customRefreshControl
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        */
         
         // Navigation
         navigationController?.navigationBar.scrollEdgeAppearance = navigationAppearance
@@ -71,9 +75,9 @@ class ChartViewController: UIViewController {
         
         // Category Menu
         let categoryMenuItem = [
-            UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.viewModel.requestData(category: .popular) }),
-            UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.viewModel.requestData(category: .topRated) }),
-            UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in self.viewModel.requestData(category: .nowPlaying) })
+            UIAction(title: "Popular", image: UIImage(systemName: "flame.fill"), handler: { _ in self.onCategoryChanged(.popular) }),
+            UIAction(title: "Top Rated", image: UIImage(systemName: "star.fill"), handler: { _ in self.onCategoryChanged(.topRated) }),
+            UIAction(title: "Now Playing", image: UIImage(systemName: "theatermasks.fill"), handler: { _ in self.onCategoryChanged(.nowPlaying) })
         ]
         let categoryMenu = UIMenu(title: "", image: nil, identifier: nil, options: [], children: categoryMenuItem)
         
@@ -92,7 +96,7 @@ class ChartViewController: UIViewController {
     private func bindData() {
         viewModel.movieListData
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] list in
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
@@ -137,6 +141,16 @@ extension ChartViewController: UITableViewDelegate {
     
 }
 
+// MARK: UIMenu Callback
+extension ChartViewController {
+    private func onCategoryChanged(_ category: MovieListCategory) {
+        guard viewModel.currentCategory != category else { return }
+        
+        self.viewModel.requestData(category: category)
+        self.tableView.setContentOffset(CGPoint.zero, animated: true)
+    }
+}
+
 // MARK: Scroll Features
 extension ChartViewController {
     
@@ -153,17 +167,17 @@ extension ChartViewController {
         }
         
         if category != nil { self.viewModel.refreshData() }
-        self.tableView.refreshControl?.endRefreshing()
-        
     }
-    
+}
+
+// MARK: Scroll Delegate methods
+extension ChartViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
         if offsetY > contentHeight - scrollView.frame.height {
-            viewModel.requestData(category: .popular)
+            viewModel.requestMoreData()
         }
     }
-
 }

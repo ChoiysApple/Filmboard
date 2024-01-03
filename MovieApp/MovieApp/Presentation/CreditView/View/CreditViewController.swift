@@ -61,10 +61,7 @@ extension CreditViewController: UITableViewDataSource {
             }
 
             let data = ExternalLink.data[indexPath.row]
-            cell.accessoryType = .disclosureIndicator
-            cell.textLabel?.text = data.titleText
-            cell.detailTextLabel?.text = data.detailText
-            
+            cell.setData(data)
             return cell
             
         } else {

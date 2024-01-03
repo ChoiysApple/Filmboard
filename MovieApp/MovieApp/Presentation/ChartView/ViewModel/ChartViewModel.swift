@@ -27,13 +27,16 @@ class ChartViewModel {
         if currentCategory != category { currentPage = 1 }
         currentCategory = category
         fetchData(category: category)
-        
-        currentPage += 1
     }
     
     func refreshData() {
         currentPage = 1
         fetchData(category: currentCategory)
+    }
+    
+    func requestMoreData() {
+        currentPage += 1
+        self.requestData()
     }
     
     func fetchData(category: MovieListCategory) {
