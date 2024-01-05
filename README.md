@@ -5,9 +5,8 @@
 # Filmboard
 Movie App with MVVM, RxSwift, SnapKit
 
-<img src="https://user-images.githubusercontent.com/43776784/156508152-3e630596-5aaa-4d39-a5cb-21363d3315db.png" width="25%" alt="this was image"> <img src="https://user-images.githubusercontent.com/43776784/156508123-afec14b1-1132-4afa-a867-ff8ddfc19832.gif" width="25%" alt="this was image">
-<img src="https://user-images.githubusercontent.com/43776784/156508150-fe7c5ef7-7aba-4eaa-a80d-484649f16653.png" width="25%" alt="this was image">
-
+<img src="https://github.com/ChoiysApple/Filmboard/assets/43776784/a2fe7218-d2b0-4d6c-b618-4440afc1b682" width="25%" alt="this was image"> <img src="https://github.com/ChoiysApple/Filmboard/assets/43776784/cbae66a5-1414-4ce4-b717-ad5a85279d0f" width="25%" alt="this was image">
+<img src="https://github.com/ChoiysApple/Filmboard/assets/43776784/8d8cd2c8-8714-4d05-949a-c78ed4e254d4" width="25%" alt="this was image">
 
 </br>
 
